@@ -142,7 +142,7 @@ export const useAmbientWeather = (allUnits = { dist: 'imperial', temp: 'imperial
     const convPressure = (inHg) => {
       const n = safeNum(inHg);
       if (n == null) return null;
-      return isMeticPress ? inHgToHpa(n).toFixed(1) : n.toFixed(3);
+      return isMetricPress ? inHgToHpa(n).toFixed(1) : n.toFixed(3);
     };
 
     return {
