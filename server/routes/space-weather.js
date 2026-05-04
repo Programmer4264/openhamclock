@@ -491,7 +491,7 @@ module.exports = function (app, ctx) {
     const imageUrl = meta?.image?.url;
     if (!imageUrl) throw new Error('No image URL in Dial-A-Moon response');
     if (!isValidNasaImageUrl(imageUrl)) {
-      throw new Error('Rejected non‑NASA URL:', imageUrl);
+      throw new Error(`Rejected non-NASA URL: \'${imageUrl}\'`);
     }
 
     const imgResponse = await fetch(imageUrl);
