@@ -42,7 +42,7 @@ module.exports = function (app, ctx) {
     let remoteAddressLockout = remoteAddresses.has(remoteAddress)
       ? Date.now() < remoteAddresses.get(remoteAddress).createTime + remoteAddress_lockout_period
       : false;
-    if (remoteAddressLockout) return res.status(400).json({ error: 'IP Address lockout until timeout' });
+    if (remoteAddressLockout) return res.status(429).json({ error: 'IP Address lockout until timeout' });
 
     if (!callsign || typeof callsign !== 'string' || callsign.length < 3 || callsign.length > 12) {
       return res.status(400).json({ error: 'Valid callsign required' });
