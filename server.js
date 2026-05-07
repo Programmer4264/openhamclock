@@ -98,6 +98,9 @@ const { endpointStats, writeLimiter, requireWriteAuth } = applyMiddleware(app, {
   CORS_ORIGINS,
 });
 
+// ── Utilities ──
+const { maintainCache } = require('./server/utils/cache');
+
 // ── Build shared context object ──
 const ctx = {
   // Core
@@ -144,6 +147,7 @@ const ctx = {
   requireWriteAuth,
   writeLimiter,
   endpointStats,
+  maintainCache,
 };
 
 // ── Visitor stats service ──

@@ -259,10 +259,10 @@ describe('recency sort', () => {
       NOW.getTime() - 3 * 3600 * 1000,
       NOW.getTime() - 7 * 3600 * 1000,
     ];
-    const items = timestamps.map((ts, i) => ({
+    const items = timestamps.map((timestamp, i) => ({
       id: `dxnews:item${i}`,
       title: `Item ${i}`,
-      publishDate: new Date(ts).toISOString(),
+      publishDate: new Date(timestamp).toISOString(),
       callsign: null,
       source: 'DXNEWS',
       sourceUrl: 'https://dxnews.com/',

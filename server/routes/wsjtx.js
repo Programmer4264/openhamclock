@@ -816,13 +816,13 @@ module.exports = function (app, ctx) {
   function pruneN3fjpQsos() {
     const cutoff = Date.now() - N3FJP_QSO_RETENTION_MINUTES * 60 * 1000;
     n3fjpQsos = n3fjpQsos.filter((q) => {
-      const t = Date.parse(q.ts_utc || q.ts || '');
+      const t = Date.parse(q.ts_utc || q.timestamp || '');
       return !Number.isNaN(t) && t >= cutoff;
     });
   }
 
   // Simple in-memory cache so we don't hammer callsign lookup on every QSO
-  const n3fjpCallCache = new Map(); // key=callsign, val={ts, result}
+  const n3fjpCallCache = new Map(); // key=callsign, val={timestamp, result}
   const N3FJP_CALL_CACHE_TTL_MS = 24 * 60 * 60 * 1000; // 24 hours
 
   async function lookupCallLatLon(callsign) {
@@ -830,7 +830,7 @@ module.exports = function (app, ctx) {
     if (!call) return null;
 
     const cached = n3fjpCallCache.get(call);
-    if (cached && Date.now() - cached.ts < N3FJP_CALL_CACHE_TTL_MS) {
+    if (cached && Date.now() - cached.timestamp < N3FJP_CALL_CACHE_TTL_MS) {
       return cached.result;
     }
 
@@ -841,7 +841,7 @@ module.exports = function (app, ctx) {
 
       const data = await resp.json();
       if (typeof data.lat === 'number' && typeof data.lon === 'number') {
-        n3fjpCallCache.set(call, { ts: Date.now(), result: data });
+        n3fjpCallCache.set(call, { timestamp: Date.now(), result: data });
         return data;
       }
     } catch (e) {

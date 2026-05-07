@@ -19,11 +19,11 @@ module.exports = function (app, ctx) {
   const sourceCaches = new Map();
 
   async function cachedFetch(name, fetcher) {
-    const entry = sourceCaches.get(name) || { data: null, ts: 0 };
-    if (entry.data && Date.now() - entry.ts < SOURCE_TTL) return entry.data;
+    const entry = sourceCaches.get(name) || { data: null, timestamp: 0 };
+    if (entry.data && Date.now() - entry.timestamp < SOURCE_TTL) return entry.data;
     try {
       const fresh = await fetcher();
-      sourceCaches.set(name, { data: fresh, ts: Date.now() });
+      sourceCaches.set(name, { data: fresh, timestamp: Date.now() });
       return fresh;
     } catch (e) {
       logErrorOnce(`dxnews:${name}`, e?.message || 'fetch failed');

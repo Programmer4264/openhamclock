@@ -25,7 +25,7 @@ module.exports = function (app, ctx) {
   const { fetch, WINLINK_API_KEY, logInfo, logWarn, logErrorOnce } = ctx;
 
   // Full gateway list (no grid filter) — shared across all users, refreshed hourly.
-  let fullListCache = { data: null, ts: 0 };
+  let fullListCache = { data: null, timestamp: 0 };
   // Grid-scoped proximity results — keyed by `${grid}|${range}|${mode}`, shorter TTL.
   const proximityCache = new Map();
 
@@ -71,12 +71,12 @@ module.exports = function (app, ctx) {
   }
 
   async function getFullGatewayList() {
-    if (fullListCache.data && Date.now() - fullListCache.ts < CACHE_TTL_MS) {
+    if (fullListCache.data && Date.now() - fullListCache.timestamp < CACHE_TTL_MS) {
       return fullListCache.data;
     }
     const json = await fetchFromWinlink('/gateway/channel/report');
     const list = (json.Channels || []).map(normalizeRow);
-    fullListCache = { data: list, ts: Date.now() };
+    fullListCache = { data: list, timestamp: Date.now() };
     logInfo('[Winlink]', 'cached', list.length, 'gateways (global list)');
     return list;
   }
@@ -84,16 +84,16 @@ module.exports = function (app, ctx) {
   async function getProximity(grid, range) {
     const key = `${grid}|${range || 500}`;
     const hit = proximityCache.get(key);
-    if (hit && Date.now() - hit.ts < PROXIMITY_CACHE_TTL_MS) return hit.data;
+    if (hit && Date.now() - hit.timestamp < PROXIMITY_CACHE_TTL_MS) return hit.data;
     const json = await fetchFromWinlink(
       `/gateway/proximity.json?GridSquare=${encodeURIComponent(grid)}&MaxDistance=${Number(range) || 500}`,
     );
     const list = (json.GatewayList || []).map(normalizeRow);
-    proximityCache.set(key, { data: list, ts: Date.now() });
+    proximityCache.set(key, { data: list, timestamp: Date.now() });
     // Keep the proximity cache bounded — arbitrary 50 distinct queries is
     // plenty for a shared deployment and prevents slow memory growth.
     if (proximityCache.size > 50) {
-      const oldest = [...proximityCache.entries()].sort((a, b) => a[1].ts - b[1].ts)[0];
+      const oldest = [...proximityCache.entries()].sort((a, b) => a[1].timestamp - b[1].timestamp)[0];
       if (oldest) proximityCache.delete(oldest[0]);
     }
     return list;
@@ -105,7 +105,7 @@ module.exports = function (app, ctx) {
       apiKeyConfigured: keyConfigured(),
       cacheTtlSeconds: CACHE_TTL_MS / 1000,
       fullListCached: !!fullListCache.data,
-      fullListAge: fullListCache.ts ? Math.round((Date.now() - fullListCache.ts) / 1000) : null,
+      fullListAge: fullListCache.timestamp ? Math.round((Date.now() - fullListCache.timestamp) / 1000) : null,
       fullListSize: fullListCache.data?.length ?? 0,
     });
   });
