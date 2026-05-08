@@ -784,7 +784,7 @@ export function useLayer({ enabled = false, opacity = 0.9, map = null, lowMemory
           contentClassName: 'lightning-panel-content',
           buttonClassName: 'lightning-minimize-btn',
         });
-        console.ldebugog('[Lightning] Proximity: Panel is now draggable and minimizable');
+        console.debug('[Lightning] Proximity: Panel is now draggable and minimizable');
 
         // IMPORTANT: Set ref AFTER setup is complete
         proximityControlRef.current = control;
