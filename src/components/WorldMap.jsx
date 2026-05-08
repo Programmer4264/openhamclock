@@ -6,7 +6,7 @@ import React, { useRef, useEffect, useState, useMemo, useCallback } from 'react'
 import { useTranslation } from 'react-i18next';
 import { MAP_STYLES } from '../utils/config.js';
 import {
-  calculateGridSquare,
+  latLonToMaidenhead,
   getSunPosition,
   getMoonPosition,
   getGreatCirclePoints,
@@ -353,7 +353,7 @@ export const WorldMap = ({
   // Calculate grid locator from DE location for plugins
   const deLocator = useMemo(() => {
     if (deLocation?.lat == null || deLocation?.lon == null) return '';
-    return calculateGridSquare(deLocation.lat, deLocation.lon);
+    return latLonToMaidenhead({ lat: deLocation.lat, lon: deLocation.lon });
   }, [deLocation?.lat, deLocation?.lon]);
 
   const selectedMapBands = useMemo(() => {
@@ -1250,7 +1250,7 @@ export const WorldMap = ({
         iconSize: [32, 32],
         iconAnchor: [16, 16],
       });
-      const html = `<b>DE - Your Location</b><br>${esc(calculateGridSquare(deLocation.lat, deLocation.lon))}<br>${deLocation.lat.toFixed(4)}°, ${deLocation.lon.toFixed(4)}°`;
+      const html = `<b>DE - Your Location</b><br>${esc(latLonToMaidenhead({ lat: deLocation.lat, lon: deLocation.lon }))}<br>${deLocation.lat.toFixed(4)}°, ${deLocation.lon.toFixed(4)}°`;
       const m = L.marker([lat, lon], { icon: deIcon, zIndexOffset: 20000 }).addTo(map);
       attachPopupWeather(m, lat, lon, html);
       deMarkerRef.current.push(m);
@@ -1264,7 +1264,7 @@ export const WorldMap = ({
         iconSize: [32, 32],
         iconAnchor: [16, 16],
       });
-      const baseHtml = `<b>DX - Target</b><br>${esc(calculateGridSquare(dxLocation.lat, dxLocation.lon))}<br>${dxLocation.lat.toFixed(4)}°, ${dxLocation.lon.toFixed(4)}°`;
+      const baseHtml = `<b>DX - Target</b><br>${esc(latLonToMaidenhead({ lat: dxLocation.lat, lon: dxLocation.lon }))}<br>${dxLocation.lat.toFixed(4)}°, ${dxLocation.lon.toFixed(4)}°`;
       const m = L.marker([lat, lon], { icon: dxIcon, zIndexOffset: 19000 }).addTo(map);
       attachPopupWeather(m, lat, lon, baseHtml);
       dxMarkerRef.current.push(m);
