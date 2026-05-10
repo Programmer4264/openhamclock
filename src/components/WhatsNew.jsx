@@ -37,7 +37,7 @@ const CHANGELOG = [
       {
         icon: '🛰️',
         title: 'NEW: MeshCom LoRa Mesh Integration',
-        desc: "OpenHamClock now talks to MeshCom, the LoRa-based VHF/UHF mesh network popular in Europe. Set up the new MeshCom plugin in rig-bridge and OHC will plot every node it hears on the map, list them in a tab with whatever weather or telemetry they're broadcasting, and let you read and reply to chat traffic right from the panel. Click any message to pop up reply buttons (broadcast, group, or direct), or type any callsign or group name into the To field — known nodes auto-suggest as you go. Works whether your rig-bridge talks straight to your browser or routes through Cloud Relay. Translated into all 16 languages. Big thanks to Joe Lukowski (DH1OK) for building this.",
+        desc: "OpenHamClock now talks to MeshCom, the LoRa-based VHF/UHF mesh network popular in Europe. Set up the new MeshCom plugin in rig-bridge and OHC will plot every node it hears on the map, list them in a tab with whatever weather or telemetry they're broadcasting, and let you read and reply to chat traffic right from the panel. Click any message to pop up reply buttons (broadcast, group, or direct), or type any callsign or group name into the To field — known nodes auto-suggest as you go. Works whether your rig-bridge talks straight to your browser or routes through Cloud Relay. Translated into all 16 languages. Big thanks to Jörg (DO1HOZ) for building this.",
       },
       {
         icon: '🐛',
@@ -52,7 +52,7 @@ const CHANGELOG = [
       {
         icon: '🥧',
         title: 'Smoother update.sh on Pi and Self-Hosted Installs',
-        desc: "The update.sh script now does a fully clean Node-modules reinstall on each update instead of layering new packages on top of old ones. That fixes a few reported cases where a fresh dependency added in a recent release didn't actually land on disk after running update.sh, leading to a 'Cannot find module' error on next start. Thanks ceotjoe.",
+        desc: "The update.sh script now does a fully clean Node-modules reinstall on each update instead of layering new packages on top of old ones. That fixes a few reported cases where a fresh dependency added in a recent release didn't actually land on disk after running update.sh, leading to a 'Cannot find module' error on next start. Thanks Jörg (DO1HOZ).",
       },
       {
         icon: '🛰️',
