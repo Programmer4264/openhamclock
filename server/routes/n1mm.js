@@ -4,6 +4,7 @@
  */
 
 const dgram = require('dgram');
+const { maidenheadToLatLon } = require('../utils/grid');
 
 module.exports = function (app, ctx) {
   const {
@@ -14,7 +15,6 @@ module.exports = function (app, ctx) {
     logErrorOnce,
     writeLimiter,
     requireWriteAuth,
-    maidenheadToLatLon,
     extractBaseCallsign,
     estimateLocationFromPrefix,
     extractGridFromComment,

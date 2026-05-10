@@ -14,7 +14,6 @@ module.exports = function (app, ctx) {
     logWarn,
     logErrorOnce,
     upstream,
-    maidenheadToLatLon,
     n0nbhCache,
     maintainCache,
   } = ctx;

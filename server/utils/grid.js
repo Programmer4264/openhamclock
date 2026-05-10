@@ -1,63 +1,140 @@
 /**
  * Grid locator (Maidenhead) and frequency/band utilities.
- * Consolidates duplicate grid conversion functions that were scattered across server.js.
  */
 
 /**
- * Convert Maidenhead grid locator to lat/lon.
- * Supports 4-char and 6-char grids. Case-insensitive.
- * @param {string} grid - Grid locator (e.g., 'DM79' or 'DM79lv')
- * @returns {{ lat: number, lon: number } | null}
+ * Validate Maidenhead grid locator, can be 2, 4, 6, or 8 characters long, e.g. DM, DM12, DM12kv, or DM12kv99 are all valid locators.
+ * @param gridLocator Maidenhead grid locator
+ * @returns true if the grid locator is valid, else false
  */
-function gridToLatLon(grid) {
-  if (!grid) return null;
-  const g = String(grid).trim().toUpperCase();
-  if (g.length < 4) return null;
+const validateGridLocator = (gridLocator) => {
+  if (!gridLocator || typeof gridLocator !== 'string') return false;
+  if (gridLocator.length < 2 || gridLocator.length > 8) return false;
+  if (gridLocator.length % 2 !== 0) return false;
+  const regex = /^[A-R]{2}([0-9]{2}([A-Xa-x]{2}([0-9]{2})?)?)?$/;
+  return regex.test(gridLocator);
+};
 
-  const A = 'A'.charCodeAt(0);
+/**
+ * Convert Maidenhead grid locator to latitude/longitude coordinates
+ * @param grid Maidenhead grid locator
+ * @returns Latitude and longitude coordinates
+ */
+const maidenheadToLatLon = (grid) => {
+  const bbox = maidenheadToBoundingBox(grid);
+  if (!bbox || bbox.length !== 2 || bbox[0].length !== 2 || bbox[1].length !== 2) return null;
+  const lat = (bbox[0][0] + bbox[1][0]) / 2;
+  const lon = (bbox[0][1] + bbox[1][1]) / 2;
+  return { lat, lon };
+};
 
-  const lonField = g.charCodeAt(0) - A;
-  const latField = g.charCodeAt(1) - A;
-  const lonSquare = parseInt(g[2], 10);
-  const latSquare = parseInt(g[3], 10);
-  if (!Number.isFinite(lonSquare) || !Number.isFinite(latSquare)) return null;
+/**
+ * Convert Maidenhead grid square to lat/lon bounding box coordinates, [SW, NE] corners
+ * @param grid Maidenhead grid locator
+ * @returns A two-dimensional array containing two diagonal coordinates of bounds
+ */
+const maidenheadToBoundingBox = (grid) => {
+  if (!grid || !validateGridLocator(grid)) return null;
 
-  let lon = -180 + lonField * 20 + lonSquare * 2;
-  let lat = -90 + latField * 10 + latSquare * 1;
+  const gridUpper = grid.toUpperCase();
+  let minLat = -90;
+  let maxLat = 90;
+  let minLon = -180;
+  let maxLon = 180;
 
-  if (g.length >= 6) {
-    const lonSub = g.charCodeAt(4) - A;
-    const latSub = g.charCodeAt(5) - A;
-    lon += lonSub * (2 / 24);
-    lat += latSub * (1 / 24);
-    lon += 1 / 24;
-    lat += 0.5 / 24;
-  } else {
-    lon += 1.0;
-    lat += 0.5;
+  // Field (2 chars): 20° lon x 10° lat
+  if (gridUpper.length >= 2) {
+    const fieldLat = gridUpper.charCodeAt(1) - 65; // A-R
+    const fieldLon = gridUpper.charCodeAt(0) - 65; // A-R
+
+    minLat += fieldLat * 10;
+    maxLat = minLat + 10;
+    minLon += fieldLon * 20;
+    maxLon = minLon + 20;
   }
 
-  return { lat, lon };
-}
+  // Square (2 digits): 2° lon x 1° lat
+  if (gridUpper.length >= 4) {
+    const sqLon = parseInt(gridUpper[2]);
+    const sqLat = parseInt(gridUpper[3]);
+
+    minLon += sqLon * 2;
+    maxLon = minLon + 2;
+    minLat += sqLat * 1;
+    maxLat = minLat + 1;
+  }
+
+  // Subsquare (2 chars): 5' lon x 2.5' lat
+  if (gridUpper.length >= 6) {
+    const subLat = gridUpper.charCodeAt(5) - 65; // A thru X
+    const subLon = gridUpper.charCodeAt(4) - 65; // A thru X
+
+    minLat += (subLat * 2.5) / 60;
+    maxLat = minLat + 2.5 / 60;
+    minLon += (subLon * 5) / 60;
+    maxLon = minLon + 5 / 60;
+  }
+
+  // Extended square (2 digits): 0.5' lon x 0.25' lat
+  if (gridUpper.length >= 8) {
+    const subLat = parseInt(gridUpper[7]);
+    const subLon = parseInt(gridUpper[6]);
+
+    minLat += (subLat * 0.25) / 60;
+    maxLat = minLat + 0.25 / 60;
+    minLon += (subLon * 0.5) / 60;
+    maxLon = minLon + 0.5 / 60;
+  }
+
+  return [
+    [minLat, minLon],
+    [maxLat, maxLon],
+  ];
+};
 
 /**
- * Convert lat/lon to Maidenhead grid locator (6-character).
+ * Convert latitude/longitude coordinates to Maidenhead grid locator of specified precision (character length)
+ * @param Latitude and longitude coordinates
+ * @param precision Precision (character length) of the grid locator returned, can be 2, 4, 6, or 8. (default if not specified is 6)
+ * @returns Maidenhead grid locator
  */
-function latLonToGrid(lat, lon) {
-  if (!isFinite(lat) || !isFinite(lon)) return null;
+const latLonToMaidenhead = ({ lat, lon }, precision = 6) => {
+  if (lat < -90 || lat > 90) throw new Error('invalid latitude, it should be between -90 and 90');
+  if (lon < -180 || lon > 180) throw new Error('invalid longitude, it should be between -180 and 180');
 
-  let adjLon = lon + 180;
-  let adjLat = lat + 90;
+  const latNorm = lat + 90;
+  const lonNorm = lon + 180;
 
-  const field1 = String.fromCharCode(65 + Math.floor(adjLon / 20));
-  const field2 = String.fromCharCode(65 + Math.floor(adjLat / 10));
-  const square1 = Math.floor((adjLon % 20) / 2);
-  const square2 = Math.floor((adjLat % 10) / 1);
-  const subsq1 = String.fromCharCode(65 + Math.floor(((adjLon % 2) * 60) / 5));
-  const subsq2 = String.fromCharCode(65 + Math.floor(((adjLat % 1) * 60) / 2.5));
+  // Field (2 chars): 20° lon x 10° lat
+  const field1 = String.fromCharCode(65 + Math.floor(lonNorm / 20)); // A-R
+  const field2 = String.fromCharCode(65 + Math.floor(latNorm / 10)); // A-R
 
-  return `${field1}${field2}${square1}${square2}${subsq1}${subsq2}`.toUpperCase();
-}
+  if (precision === 2) {
+    return `${field1}${field2}`;
+  } else {
+    // Square (2 digits): 2° lon x 1° lat
+    const square1 = Math.floor((lonNorm % 20) / 2);
+    const square2 = Math.floor((latNorm % 10) / 1);
+
+    if (precision === 4) {
+      return `${field1}${field2}${square1}${square2}`;
+    } else {
+      // Subsquare (2 chars): 5' lon x 2.5' lat
+      const subsq1 = String.fromCharCode(97 + Math.floor(((lonNorm % 2) * 60) / 5)); // a-x
+      const subsq2 = String.fromCharCode(97 + Math.floor(((latNorm % 1) * 60) / 2.5)); // a-x
+
+      if (precision === 6) {
+        return `${field1}${field2}${square1}${square2}${subsq1}${subsq2}`;
+      } else if (precision === 8) {
+        // Extended square (2 digits): 0.5' lon x 0.25' lat
+        const extSq1 = Math.floor((((lonNorm % 2) * 60) % 5) / 0.5);
+        const extSq2 = Math.floor((((latNorm % 1) * 60) % 2.5) / 0.25);
+
+        return `${field1}${field2}${square1}${square2}${subsq1}${subsq2}${extSq1}${extSq2}`;
+      } else return null; // Invalid precision
+    }
+  }
+};
 
 /**
  * Get amateur radio band name from frequency in Hz.
@@ -103,4 +180,12 @@ function haversineDistance(lat1, lon1, lat2, lon2) {
   return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 }
 
-module.exports = { gridToLatLon, latLonToGrid, getBandFromHz, getBandFromKHz, haversineDistance };
+module.exports = {
+  validateGridLocator,
+  maidenheadToLatLon,
+  latLonToMaidenhead,
+  maidenheadToBoundingBox,
+  getBandFromHz,
+  getBandFromKHz,
+  haversineDistance,
+};

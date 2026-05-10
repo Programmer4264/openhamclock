@@ -11,7 +11,7 @@
  */
 import { useEffect, useRef, useState, useCallback } from 'react';
 import { esc } from '../../utils/escapeHtml.js';
-import { parseGridSquare, replicatePoint } from '../../utils/geo.js';
+import { maidenheadToLatLon, replicatePoint } from '../../utils/geo.js';
 import { apiFetch } from '../../utils/apiFetch.js';
 import {
   WINLINK_MODE_FAMILIES,
@@ -51,7 +51,7 @@ function aggregateByCallsign(rows) {
   const byCall = new Map();
   for (const r of rows) {
     if (!r.callsign || !r.gridsquare) continue;
-    const pos = parseGridSquare(r.gridsquare);
+    const pos = maidenheadToLatLon(r.gridsquare);
     if (!pos) continue;
     let entry = byCall.get(r.callsign);
     if (!entry) {

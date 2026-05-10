@@ -7,7 +7,7 @@ const dgram = require('dgram');
 const fs = require('fs');
 const path = require('path');
 const { initCtyData, getCtyData, lookupCall } = require('../../src/server/ctydat.js');
-const { gridToLatLon, getBandFromHz } = require('../utils/grid');
+const { maidenheadToLatLon, getBandFromHz } = require('../utils/grid.js');
 
 module.exports = function (app, ctx) {
   const {
@@ -21,7 +21,6 @@ module.exports = function (app, ctx) {
     logErrorOnce,
     writeLimiter,
     requireWriteAuth,
-    maidenheadToLatLon,
     extractBaseCallsign,
     estimateLocationFromPrefix,
     extractGridFromComment,
@@ -412,7 +411,7 @@ module.exports = function (app, ctx) {
 
       // Cache this callsign's grid for future lookups
       if (result.caller && result.grid) {
-        const coords = gridToLatLon(result.grid);
+        const coords = maidenheadToLatLon(result.grid);
         if (coords) {
           wsjtxGridCache.set(result.caller.toUpperCase(), {
             grid: result.grid,
@@ -440,13 +439,13 @@ module.exports = function (app, ctx) {
       if (gridMatch && isGrid(gridMatch[1])) {
         result.grid = gridMatch[1];
         // Cache grid — in exchange it typically belongs to the calling station (dxCall)
-        const coords = gridToLatLon(result.grid);
+        const coords = maidenheadToLatLon(result.grid);
         if (coords) {
           const call = (result.deCall == CONFIG.callsign ? result.dxCall : result.deCall).toUpperCase();
           wsjtxGridCache.set(call, {
             grid: result.grid,
-            lat: coords.latitude,
-            lon: coords.longitude,
+            lat: coords.lat,
+            lon: coords.lon,
             timestamp: Date.now(),
           });
         }
@@ -522,7 +521,7 @@ module.exports = function (app, ctx) {
         if (dxCall) {
           // 1. Try dxGrid from WSJT-X (if it knows the DX station's grid)
           if (dxGrid) {
-            const coords = gridToLatLon(dxGrid);
+            const coords = maidenheadToLatLon(dxGrid);
             if (coords !== null) {
               dxLat = coords.lat;
               dxLon = coords.lon;
@@ -622,10 +621,10 @@ module.exports = function (app, ctx) {
 
         // Resolve grid to lat/lon for map plotting
         if (parsed.grid) {
-          const coords = gridToLatLon(parsed.grid);
+          const coords = maidenheadToLatLon(parsed.grid);
           if (coords) {
-            decode.lat = coords.latitude;
-            decode.lon = coords.longitude;
+            decode.lat = coords.lat;
+            decode.lon = coords.lon;
           }
         }
 
@@ -751,10 +750,10 @@ module.exports = function (app, ctx) {
         };
         // Resolve grid to lat/lon
         if (msg.dxGrid) {
-          const coords = gridToLatLon(msg.dxGrid);
+          const coords = maidenheadToLatLon(msg.dxGrid);
           if (coords) {
-            qso.lat = coords.latitude;
-            qso.lon = coords.longitude;
+            qso.lat = coords.lat;
+            qso.lon = coords.lon;
           }
         }
         // Deduplicate: skip if same call + freq + mode within 60 seconds
@@ -789,10 +788,10 @@ module.exports = function (app, ctx) {
         };
         // Resolve grid to lat/lon for map plotting
         if (msg.grid) {
-          const coords = gridToLatLon(msg.grid);
+          const coords = maidenheadToLatLon(msg.grid);
           if (coords) {
-            wsprDecode.lat = coords.latitude;
-            wsprDecode.lon = coords.longitude;
+            wsprDecode.lat = coords.lat;
+            wsprDecode.lon = coords.lon;
           }
         }
         if (msg.isNew) {

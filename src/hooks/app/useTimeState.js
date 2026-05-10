@@ -1,7 +1,7 @@
 'use strict';
 
 import { useState, useEffect, useMemo, useCallback } from 'react';
-import { calculateGridSquare, calculateSunTimes } from '../../utils';
+import { latLonToMaidenhead, calculateSunTimes } from '../../utils';
 
 function convertTimeUTCtoLocal(sunTimes, tz, currentTime) {
   // We are only ever going to be doing this for local timezone
@@ -98,8 +98,8 @@ export default function useTimeState(configLocation, dxLocation, timezone) {
     return () => clearTimeout(timeout);
   }, [startTime]);
 
-  const deGrid = useMemo(() => calculateGridSquare(configLocation.lat, configLocation.lon), [configLocation]);
-  const dxGrid = useMemo(() => calculateGridSquare(dxLocation.lat, dxLocation.lon), [dxLocation]);
+  const deGrid = useMemo(() => latLonToMaidenhead(configLocation.lat, configLocation.lon), [configLocation]);
+  const dxGrid = useMemo(() => latLonToMaidenhead(dxLocation.lat, dxLocation.lon), [dxLocation]);
 
   // Validate the timezone once per changed value, not on every render.
   // new Intl.DateTimeFormat throws a RangeError for invalid values such as

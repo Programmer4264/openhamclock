@@ -4,7 +4,13 @@
  */
 
 const net = require('net');
-const { gridToLatLon, latLonToGrid, getBandFromHz, getBandFromKHz, haversineDistance } = require('../utils/grid');
+const {
+  maidenheadToLatLon,
+  latLonToMaidenhead,
+  getBandFromHz,
+  getBandFromKHz,
+  haversineDistance,
+} = require('../utils/grid');
 
 module.exports = function (app, ctx) {
   const {
@@ -16,7 +22,6 @@ module.exports = function (app, ctx) {
     logWarn,
     logErrorOnce,
     upstream,
-    maidenheadToLatLon,
     extractBaseCallsign,
     hamqthLookup,
     callsignLookupCache,
@@ -27,29 +32,6 @@ module.exports = function (app, ctx) {
   // ============================================
   // REVERSE BEACON NETWORK (RBN) API
   // ============================================
-
-  // Convert lat/lon to Maidenhead grid (6-character)
-  function latLonToGrid(lat, lon) {
-    if (!isFinite(lat) || !isFinite(lon)) return null;
-
-    // Adjust longitude to 0-360 range
-    let adjLon = lon + 180;
-    let adjLat = lat + 90;
-
-    // Field (2 chars): 20° lon x 10° lat
-    const field1 = String.fromCharCode(65 + Math.floor(adjLon / 20));
-    const field2 = String.fromCharCode(65 + Math.floor(adjLat / 10));
-
-    // Square (2 digits): 2° lon x 1° lat
-    const square1 = Math.floor((adjLon % 20) / 2);
-    const square2 = Math.floor((adjLat % 10) / 1);
-
-    // Subsquare (2 chars): 5' lon x 2.5' lat
-    const subsq1 = String.fromCharCode(65 + Math.floor(((adjLon % 2) * 60) / 5));
-    const subsq2 = String.fromCharCode(65 + Math.floor(((adjLat % 1) * 60) / 2.5));
-
-    return `${field1}${field2}${square1}${square2}${subsq1}${subsq2}`.toUpperCase();
-  }
 
   // Persistent RBN connection and spot storage
   let rbnConnection = null;
@@ -334,7 +316,7 @@ module.exports = function (app, ctx) {
                 logDebug(
                   `[RBN] Location sanity check FAILED for ${skimmerCall}: lookup=${locationData.lat.toFixed(1)},${locationData.lon.toFixed(1)} vs prefix=${prefixCoords.lat.toFixed(1)},${prefixCoords.lon.toFixed(1)} (${Math.round(dist)} km apart) — using prefix`,
                 );
-                const grid = latLonToGrid(prefixCoords.lat, prefixCoords.lon);
+                const grid = latLonToMaidenhead({ lat: prefixCoords.lat, lon: prefixCoords.lon });
                 const location = {
                   callsign: skimmerCall,
                   grid: grid,
@@ -354,7 +336,7 @@ module.exports = function (app, ctx) {
             }
           }
 
-          const grid = latLonToGrid(locationData.lat, locationData.lon);
+          const grid = latLonToMaidenhead({ lat: locationData.lat, lon: locationData.lon });
 
           const location = {
             callsign: skimmerCall,
@@ -418,7 +400,7 @@ module.exports = function (app, ctx) {
           Math.abs(locationData.lat) <= 90 &&
           Math.abs(locationData.lon) <= 180
         ) {
-          const grid = latLonToGrid(locationData.lat, locationData.lon);
+          const grid = latLonToMaidenhead({ lat: locationData.lat, lon: locationData.lon });
           const location = {
             callsign: dxCall,
             grid: grid,
@@ -575,7 +557,7 @@ module.exports = function (app, ctx) {
       const response = await fetch(`http://localhost:${PORT}/api/callsign/${encodeURIComponent(callsign)}`);
       if (response.ok) {
         const locationData = await response.json();
-        const grid = latLonToGrid(locationData.lat, locationData.lon);
+        const grid = latLonToMaidenhead({ lat: locationData.lat, lon: locationData.lon });
 
         const result = {
           callsign: callsign,
@@ -854,8 +836,8 @@ module.exports = function (app, ctx) {
 
             if (band !== 'all' && spotBand !== band) continue;
 
-            const senderLoc = gridToLatLon(senderLocator);
-            const receiverLoc = gridToLatLon(receiverLocator);
+            const senderLoc = maidenheadToLatLon(senderLocator);
+            const receiverLoc = maidenheadToLatLon(receiverLocator);
 
             if (senderLoc && receiverLoc) {
               const powerWatts = power ? parseFloat(power) : null;

@@ -10,7 +10,7 @@
 import { useRef, useEffect, useState, useCallback, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { getBandColor, getBandFromFreq } from '../utils/callsign.js';
-import { calculateGridSquare } from '../utils/geo.js';
+import { latLonToMaidenhead } from '../utils/geo.js';
 import { MAP_STYLES } from '../utils/config.js';
 import { createTileReprojector } from '../utils/tileReproject.js';
 import { createAzimuthalCRS } from '../utils/azimuthalCRS.js';
@@ -232,7 +232,7 @@ export default function AzimuthalMap({
       setTooltip({
         x: e.containerPoint.x,
         y: e.containerPoint.y,
-        text: `${e.latlng.lat.toFixed(1)}°, ${e.latlng.lng.toFixed(1)}°  ${calculateGridSquare(e.latlng.lat, e.latlng.lng)}  ${Math.round(p.dist)} km  ${Math.round(bearing)}°`,
+        text: `${e.latlng.lat.toFixed(1)}°, ${e.latlng.lng.toFixed(1)}°  ${latLonToMaidenhead({ lat: e.latlng.lat, lon: e.latlng.lng })}  ${Math.round(p.dist)} km  ${Math.round(bearing)}°`,
       });
     });
     map.on('mouseout', () => setTooltip(null));
@@ -822,7 +822,7 @@ export default function AzimuthalMap({
       ctx.font = '11px "JetBrains Mono", monospace';
       ctx.textAlign = 'left';
       ctx.textBaseline = 'middle';
-      const grid = calculateGridSquare(lat0, lon0);
+      const grid = latLonToMaidenhead({ lat: lat0, lon: lon0 });
       ctx.fillText(`Azimuthal Equidistant · ${grid} · ${lat0.toFixed(2)}°, ${lon0.toFixed(2)}°`, 14, size.h - 19);
     }
   }, [

@@ -4,7 +4,7 @@
  */
 import React from 'react';
 import {
-  calculateGridSquare,
+  latLonToMaidenhead,
   calculateBearing,
   calculateDistance,
   formatDistance,
@@ -21,8 +21,8 @@ export const LocationPanel = ({
   dxLocked,
   onToggleDxLock,
 }) => {
-  const deGrid = calculateGridSquare(config.location.lat, config.location.lon);
-  const dxGrid = calculateGridSquare(dxLocation.lat, dxLocation.lon);
+  const deGrid = latLonToMaidenhead({ lat: config.location.lat, lon: config.location.lon });
+  const dxGrid = latLonToMaidenhead({ lat: dxLocation.lat, lon: dxLocation.lon });
   const bearing = calculateBearing(config.location.lat, config.location.lon, dxLocation.lat, dxLocation.lon);
   const distance = calculateDistance(config.location.lat, config.location.lon, dxLocation.lat, dxLocation.lon);
   const moonPhase = getMoonPhase(currentTime);

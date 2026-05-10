@@ -411,7 +411,6 @@ src/plugins/layers/
 
 ### Key Functions
 
-- `gridToLatLon(grid)`: Converts Maidenhead grid to coordinates
 - `getSNRColor(snr)`: Maps SNR to color gradient
 - `getLineWeight(snr)`: Maps SNR to line thickness
 - `useLayer()`: Main plugin hook (called by PluginLayer.jsx)

@@ -5,6 +5,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const { maidenheadToLatLon } = require('../server/utils/grid');
 
 const ROOT_DIR = path.join(__dirname, '..');
 
@@ -44,30 +45,6 @@ if (fs.existsSync(envPath)) {
   console.log('[Config] Loaded configuration from .env file');
 }
 
-// Convert Maidenhead grid locator to lat/lon (used only during config init)
-function gridToLatLon(grid) {
-  if (!grid || grid.length < 4) return null;
-
-  grid = grid.toUpperCase();
-  const lon = (grid.charCodeAt(0) - 65) * 20 - 180;
-  const lat = (grid.charCodeAt(1) - 65) * 10 - 90;
-  const lon2 = parseInt(grid[2]) * 2;
-  const lat2 = parseInt(grid[3]);
-
-  let longitude = lon + lon2 + 1; // Center of grid
-  let latitude = lat + lat2 + 0.5;
-
-  // 6-character grid for more precision
-  if (grid.length >= 6) {
-    const lon3 = (grid.charCodeAt(4) - 65) * (2 / 24);
-    const lat3 = (grid.charCodeAt(5) - 65) * (1 / 24);
-    longitude = lon + lon2 + lon3 + 1 / 24;
-    latitude = lat + lat2 + lat3 + 0.5 / 24;
-  }
-
-  return { latitude, longitude };
-}
-
 const PORT = Number(process.env.PORT) || 3000;
 const HOST = process.env.HOST || '0.0.0.0';
 
@@ -104,10 +81,10 @@ let stationLat = parseFloat(process.env.LATITUDE);
 let stationLon = parseFloat(process.env.LONGITUDE);
 
 if ((!Number.isFinite(stationLat) || !Number.isFinite(stationLon)) && locator) {
-  const coords = gridToLatLon(locator);
+  const coords = maidenheadToLatLon(locator);
   if (coords) {
-    stationLat = Number.isFinite(stationLat) ? stationLat : coords.latitude;
-    stationLon = Number.isFinite(stationLon) ? stationLon : coords.longitude;
+    stationLat = Number.isFinite(stationLat) ? stationLat : coords.lat;
+    stationLon = Number.isFinite(stationLon) ? stationLon : coords.lon;
   }
 }
 

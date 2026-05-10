@@ -5,7 +5,7 @@
 import { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { WorldMap } from '../components';
-import { calculateDistance, formatDistance, parseGridSquare } from '../utils/geo.js';
+import { calculateDistance, formatDistance, maidenheadToLatLon } from '../utils/geo.js';
 import { esc } from '../utils/escapeHtml.js';
 import { apiFetch } from '../utils/apiFetch.js';
 import { winlinkModeLabel, winlinkModeColor } from '../utils/winlinkModes.js';
@@ -255,7 +255,7 @@ export default function EmcommLayout(props) {
       if (!r.callsign || !r.gridsquare) continue;
       let entry = byCall.get(r.callsign);
       if (!entry) {
-        const pos = parseGridSquare(r.gridsquare);
+        const pos = maidenheadToLatLon(r.gridsquare);
         if (!pos) continue;
         entry = {
           callsign: r.callsign,

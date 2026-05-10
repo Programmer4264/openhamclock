@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { esc } from '../../utils/escapeHtml.js';
 import { addMinimizeToggle } from './addMinimizeToggle.js';
 import { makeDraggable } from './makeDraggable.js';
+import { maidenheadToLatLon } from '../../utils/geo.js';
 
 /**
  * Reverse Beacon Network (RBN) Plugin v1.0.0
@@ -32,29 +33,6 @@ export const metadata = {
   defaultOpacity: 0.7,
   version: '1.0.0',
 };
-
-// Convert grid square to lat/lon
-function gridToLatLon(grid) {
-  if (!grid || grid.length < 4) return null;
-
-  grid = grid.toUpperCase();
-  const lon = (grid.charCodeAt(0) - 65) * 20 - 180;
-  const lat = (grid.charCodeAt(1) - 65) * 10 - 90;
-  const lon2 = parseInt(grid[2]) * 2;
-  const lat2 = parseInt(grid[3]);
-
-  let longitude = lon + lon2 + 1;
-  let latitude = lat + lat2 + 0.5;
-
-  if (grid.length >= 6) {
-    const lon3 = (grid.charCodeAt(4) - 65) * (2 / 24);
-    const lat3 = (grid.charCodeAt(5) - 65) * (1 / 24);
-    longitude = lon + lon2 + lon3 + 1 / 24;
-    latitude = lat + lat2 + lat3 + 0.5 / 24;
-  }
-
-  return { lat: latitude, lon: longitude };
-}
 
 // Get color based on SNR (signal-to-noise ratio)
 function getSNRColor(snr) {
@@ -435,7 +413,7 @@ export function useLayer({
       if (first.skimmerLat != null && first.skimmerLon != null) {
         spotterOrigin = { lat: first.skimmerLat, lon: first.skimmerLon };
       } else if (first.grid) {
-        spotterOrigin = gridToLatLon(first.grid);
+        spotterOrigin = maidenheadToLatLon(first.grid);
       }
     }
 
@@ -510,7 +488,7 @@ export function useLayer({
         if (spot.skimmerLat != null && spot.skimmerLon != null) {
           skimmerLoc = { lat: spot.skimmerLat, lon: spot.skimmerLon };
         } else {
-          skimmerLoc = gridToLatLon(skimmerGrid);
+          skimmerLoc = maidenheadToLatLon(skimmerGrid);
         }
 
         if (!skimmerLoc) return;

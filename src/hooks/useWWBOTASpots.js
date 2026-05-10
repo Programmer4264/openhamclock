@@ -6,7 +6,7 @@
  * Handles spot data with frequency, callsign, bunker reference, and coordinates
  */
 import { useState, useEffect, useRef } from 'react';
-import { WGS84ToMaidenhead } from '@hamset/maidenhead-locator';
+import { latLonToMaidenhead } from '../utils/geo';
 import { getBandFromFreq } from '../utils';
 
 export const useWWBOTASpots = () => {
@@ -144,7 +144,7 @@ export const useWWBOTASpots = () => {
                 time: time ? time.substring(11, 16) + 'z' : '', // Extract HH:MM from ISO string
                 isoTime: time, // Store the original ISO time
                 type: spot.type || 'Live', // Live, QRT, or Test
-                grid: WGS84ToMaidenhead({ lat: lat, lng: lon }),
+                grid: latLonToMaidenhead({ lat, lon }),
               };
 
               // Skip QRT spots

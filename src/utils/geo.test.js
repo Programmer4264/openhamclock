@@ -1,5 +1,4 @@
 import { describe, it, expect } from 'vitest';
-import { parseGridSquare, calculateGridSquare } from './geo.js';
 import { validateGridLocator, latLonToMaidenhead, maidenheadToLatLon, maidenheadToBoundingBox } from './geo.js';
 
 describe('Maidenhead Grid tests', () => {
@@ -134,36 +133,5 @@ describe('Maidenhead Grid tests', () => {
         expect(result[1][1]).toBeCloseTo(latLonNECornerGrid6[1], 3);
       },
     );
-  }
-});
-
-describe('Maidenhead Grid tests - legacy functions', () => {
-  // legacy functions
-  // export const parseGridSquare = (grid) => { return { lat, lon }; }
-  // export const calculateGridSquare = (lat, lon) => { return string; }
-
-  const gridCases = [
-    {
-      grid2: 'DM',
-      grid4: 'DM12',
-      grid6: 'DM12kv',
-      actualLatLon: [32.91254, -117.08409],
-      latlonCenter: [32.896, -117.125],
-      latlonSWCorner: [32.875, -117.167],
-      latlonNECorner: [32.917, -117.083],
-    },
-  ];
-
-  for (const { grid2, grid4, grid6, actualLatLon, latlonCenter, latlonSWCorner, latlonNECorner } of gridCases) {
-    it('should convert Lat/Lon to Maidenhead precision 6', () => {
-      const result = calculateGridSquare(actualLatLon[0], actualLatLon[1]);
-      expect(result).toBe(grid6);
-    });
-
-    it('should convert Maidenhead to Lat/Lon', () => {
-      const { lat, lon } = parseGridSquare(grid6);
-      expect(lat).toBeCloseTo(actualLatLon[0], 1);
-      expect(lon).toBeCloseTo(actualLatLon[1], 1);
-    });
   }
 });

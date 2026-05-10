@@ -5,31 +5,8 @@
 import { useState, useEffect, useRef } from 'react';
 import { useVisibilityRefresh } from './useVisibilityRefresh';
 import { apiFetch } from '../utils/apiFetch';
-import { WGS84ToMaidenhead } from '@hamset/maidenhead-locator';
+import { latLonToMaidenhead, maidenheadToLatLon } from '../utils/geo';
 import { getBandFromFreq } from '../utils/callsign';
-
-// Convert grid square to lat/lon
-function gridToLatLon(grid) {
-  if (!grid || grid.length < 4) return null;
-
-  const g = grid.toUpperCase();
-  const lon = (g.charCodeAt(0) - 65) * 20 - 180;
-  const lat = (g.charCodeAt(1) - 65) * 10 - 90;
-  const lonMin = parseInt(g[2]) * 2;
-  const latMin = parseInt(g[3]) * 1;
-
-  let finalLon = lon + lonMin + 1;
-  let finalLat = lat + latMin + 0.5;
-
-  if (grid.length >= 6) {
-    const lonSec = (g.charCodeAt(4) - 65) * (2 / 24);
-    const latSec = (g.charCodeAt(5) - 65) * (1 / 24);
-    finalLon = lon + lonMin + lonSec + 1 / 24;
-    finalLat = lat + latMin + latSec + 0.5 / 24;
-  }
-
-  return { lat: finalLat, lon: finalLon };
-}
 
 export const usePOTASpots = () => {
   const [data, setData] = useState([]);
@@ -99,14 +76,14 @@ export const usePOTASpots = () => {
               let lon = s.longitude != null ? parseFloat(s.longitude) : null;
 
               if ((lat == null || lon == null) && s.grid6) {
-                const loc = gridToLatLon(s.grid6);
+                const loc = maidenheadToLatLon(s.grid6);
                 if (loc) {
                   lat = loc.lat;
                   lon = loc.lon;
                 }
               }
               if ((lat == null || lon == null) && s.grid4) {
-                const loc = gridToLatLon(s.grid4);
+                const loc = maidenheadToLatLon(s.grid4);
                 if (loc) {
                   lat = loc.lat;
                   lon = loc.lon;
@@ -139,7 +116,7 @@ export const usePOTASpots = () => {
                     })()
                   : '',
                 expire: s.expire || 0,
-                grid: s.grid6 ? s.grid6 : s.grid4 ? s.grid4 : WGS84ToMaidenhead({ lat: lat, lng: lon }),
+                grid: s.grid6 ? s.grid6 : s.grid4 ? s.grid4 : latLonToMaidenhead({ lat, lon }),
               };
             }),
           );

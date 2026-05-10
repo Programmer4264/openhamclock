@@ -138,24 +138,6 @@ export const latLonToMaidenhead = ({ lat, lon }, precision = 6) => {
 };
 
 /**
- * Parse a Maidenhead grid square string into lat/lon coordinates.
- * Supports 4-character (e.g. "JN58") and 6-character (e.g. "JN58sm") locators.
- * Returns { lat, lon } of the grid square center, or null if input is invalid.
- * Deprecated, use maidenheadToLatLon(grid)
- */
-export const parseGridSquare = (grid) => {
-  return maidenheadToLatLon(grid);
-};
-
-/**
- * Calculate Maidenhead grid square (size 6) from coordinates.
- * Deprecated, use latLonToMaidenhead({lat, lon}) which defaults to size 6.
- */
-export const calculateGridSquare = (lat, lon) => {
-  return latLonToMaidenhead({ lat, lon }, 6);
-};
-
-/**
  * Calculate bearing between two points
  */
 export const calculateBearing = (lat1, lon1, lat2, lon2) => {
@@ -555,8 +537,6 @@ export default {
   maidenheadToLatLon,
   latLonToMaidenhead,
   maidenheadToBoundingBox,
-  parseGridSquare,
-  calculateGridSquare,
   calculateBearing,
   calculateDistance,
   getSunPosition,

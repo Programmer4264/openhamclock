@@ -5,7 +5,7 @@
 
 const dgram = require('dgram');
 const net = require('net');
-const { gridToLatLon, getBandFromKHz } = require('../utils/grid');
+const { maidenheadToLatLon } = require('../utils/grid.js');
 const { areDXPathsDuplicate } = require('../utils/dxClusterPathIdentity');
 const { isPrivateIP, validateCustomHost } = require('../utils/ssrf');
 
@@ -21,10 +21,8 @@ module.exports = function (app, ctx) {
     extractBaseCallsign,
     extractOperatingPrefix,
     estimateLocationFromPrefix,
-    maidenheadToLatLon,
     extractGridFromComment,
     extractGridsFromComment,
-    isValidGrid,
     getCountryFromPrefix,
     cacheCallsignLookup,
     callsignLookupCache,

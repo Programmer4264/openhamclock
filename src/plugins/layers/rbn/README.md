@@ -322,7 +322,6 @@ src/plugins/layers/
 
 ### Key Functions
 
-- `gridToLatLon(grid)`: Converts Maidenhead grid to coordinates
 - `getSNRColor(snr)`: Maps SNR to color gradient
 - `getMarkerSize(snr)`: Maps SNR to marker size
 - `getGreatCirclePath()`: Calculates curved paths

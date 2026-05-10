@@ -4,7 +4,7 @@
  */
 
 const mqttLib = require('mqtt');
-const { gridToLatLon, getBandFromHz } = require('../utils/grid');
+const { maidenheadToLatLon, getBandFromHz } = require('../utils/grid');
 
 module.exports = function (app, ctx) {
   const {
@@ -15,7 +15,6 @@ module.exports = function (app, ctx) {
     logWarn,
     logErrorOnce,
     upstream,
-    maidenheadToLatLon,
     extractBaseCallsign,
     estimateLocationFromPrefix,
     cacheCallsignLookup,
@@ -165,30 +164,6 @@ module.exports = function (app, ctx) {
 
   // NOTE: PSKReporter spots are now handled entirely through the MQTT proxy system
   // (pskMqtt.recentSpots and pskMqtt.spotBuffer), not this legacy cache.
-
-  // Convert grid square to lat/lon
-  function gridToLatLonSimple(grid) {
-    if (!grid || grid.length < 4) return null;
-
-    const g = grid.toUpperCase();
-    const lon = (g.charCodeAt(0) - 65) * 20 - 180;
-    const lat = (g.charCodeAt(1) - 65) * 10 - 90;
-    const lonMin = parseInt(g[2]) * 2;
-    const latMin = parseInt(g[3]) * 1;
-
-    let finalLon = lon + lonMin + 1;
-    let finalLat = lat + latMin + 0.5;
-
-    // If 6-character grid, add more precision
-    if (grid.length >= 6) {
-      const lonSec = (g.charCodeAt(4) - 65) * (2 / 24);
-      const latSec = (g.charCodeAt(5) - 65) * (1 / 24);
-      finalLon = lon + lonMin + lonSec + 1 / 24;
-      finalLat = lat + latMin + latSec + 0.5 / 24;
-    }
-
-    return { lat: finalLat, lon: finalLon };
-  }
 
   // Get band name from frequency in Hz
   function getBandFromHz(freqHz) {
@@ -367,8 +342,8 @@ module.exports = function (app, ctx) {
         };
 
         // Add lat/lon based on grid for both directions
-        const senderLoc = gridToLatLonSimple(sl);
-        const receiverLoc = gridToLatLonSimple(rl);
+        const senderLoc = maidenheadToLatLon(sl);
+        const receiverLoc = maidenheadToLatLon(rl);
 
         pskMqtt.stats.spotsReceived++;
         pskMqtt.stats.lastSpotTime = now;

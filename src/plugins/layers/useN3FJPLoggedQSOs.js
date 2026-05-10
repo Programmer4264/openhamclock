@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from 'react';
 import { esc } from '../../utils/escapeHtml.js';
 import { addMinimizeToggle } from './addMinimizeToggle.js';
 import { makeDraggable } from './makeDraggable.js';
-import { getGreatCirclePoints, replicatePath } from '../../utils/geo.js';
+import { getGreatCirclePoints, replicatePath, maidenheadToLatLon } from '../../utils/geo.js';
 
 export const metadata = {
   id: 'n3fjp_logged_qsos',

@@ -10,7 +10,7 @@
  */
 import { useState, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
-import { parseGridSquare } from '../utils/geo.js';
+import { maidenheadToLatLon } from '../utils/geo.js';
 
 export function DXGridInput({ dxGrid, onDXChange, dxLocked, style }) {
   const { t } = useTranslation();
@@ -26,7 +26,7 @@ export function DXGridInput({ dxGrid, onDXChange, dxLocked, style }) {
 
   const commit = (value) => {
     const trimmed = value.trim();
-    const parsed = parseGridSquare(trimmed);
+    const parsed = maidenheadToLatLon(trimmed);
     if (parsed) {
       onDXChange({ lat: parsed.lat, lon: parsed.lon });
     } else {

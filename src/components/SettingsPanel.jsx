@@ -3,7 +3,7 @@
  * Full settings modal with map layer controls
  */
 import { useState, useEffect, useRef } from 'react';
-import { calculateGridSquare, parseGridSquare } from '../utils/geo.js';
+import { latLonToMaidenhead, maidenheadToLatLon } from '../utils/geo.js';
 import { useTranslation, Trans } from 'react-i18next';
 import { LANGUAGES } from '../lang/i18n.js';
 import {
@@ -205,7 +205,7 @@ export const SettingsPanel = ({
       setAutoMode(config.rigControl?.autoMode !== false);
       setRigApiToken(config.rigControl?.apiToken || '');
       if (config.location?.lat != null && config.location?.lon != null) {
-        const grid = calculateGridSquare(config.location.lat, config.location.lon);
+        const grid = latLonToMaidenhead({ lat: config.location.lat, lon: config.location.lon });
         setGridSquare(grid);
         setConfigLocator(grid);
       }
@@ -324,7 +324,7 @@ export const SettingsPanel = ({
     gridEditingRef.current = true;
     setGridSquare(grid.toUpperCase());
     if (grid.length >= 4) {
-      const parsed = parseGridSquare(grid);
+      const parsed = maidenheadToLatLon(grid);
       if (parsed) {
         setLat(parsed.lat);
         setLon(parsed.lon);
@@ -337,7 +337,7 @@ export const SettingsPanel = ({
     gridEditingRef.current = false;
     // Now recalculate full 6-char grid from lat/lon
     if (lat != null && lon != null) {
-      const grid = calculateGridSquare(lat, lon);
+      const grid = latLonToMaidenhead({ lat, lon });
       setGridSquare(grid);
       setConfigLocator(grid);
     }
@@ -347,7 +347,7 @@ export const SettingsPanel = ({
     // Skip auto-completion while user is actively typing in the grid field
     if (gridEditingRef.current) return;
     if (lat != null && lon != null) {
-      const grid = calculateGridSquare(lat, lon);
+      const grid = latLonToMaidenhead({ lat, lon });
       setGridSquare(grid);
       setConfigLocator(grid);
     }

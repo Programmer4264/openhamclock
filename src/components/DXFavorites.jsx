@@ -4,7 +4,7 @@
  * Stores favorites in localStorage as openhamclock_dxFavorites.
  */
 import { useState, useEffect, useLayoutEffect, useRef, useCallback } from 'react';
-import { parseGridSquare, calculateGridSquare } from '../utils/geo.js';
+import { latLonToMaidenhead } from '../utils/geo.js';
 import { syncAllSettingsToServer } from '../utils';
 
 const STORAGE_KEY = 'openhamclock_dxFavorites';
@@ -74,7 +74,7 @@ export function DXFavorites({ dxLocation, dxGrid, onDXChange, dxLocked }) {
 
   const addCurrent = () => {
     if (!dxLocation || favorites.length >= MAX_FAVORITES) return;
-    const grid = dxGrid || calculateGridSquare(dxLocation.lat, dxLocation.lon);
+    const grid = dxGrid || latLonToMaidenhead({ lat: dxLocation.lat, lon: dxLocation.lon });
     // Don't add duplicates (same grid)
     if (favorites.some((f) => f.grid === grid)) return;
     const newFav = {
@@ -115,7 +115,7 @@ export function DXFavorites({ dxLocation, dxGrid, onDXChange, dxLocked }) {
   };
 
   const hasFavorites = favorites.length > 0;
-  const currentGrid = dxGrid || (dxLocation ? calculateGridSquare(dxLocation.lat, dxLocation.lon) : '');
+  const currentGrid = dxGrid || (dxLocation ? latLonToMaidenhead({ lat: dxLocation.lat, lon: dxLocation.lon }) : '');
   const isCurrentSaved = favorites.some((f) => f.grid === currentGrid);
 
   return (
