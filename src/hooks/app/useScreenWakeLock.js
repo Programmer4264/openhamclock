@@ -22,11 +22,19 @@ import { useEffect, useRef, useState, useCallback } from 'react';
  *   'error'       – API available but request failed (e.g. Low Power Mode)
  *   'electron'    – running in Electron (handled by powerSaveBlocker, no web sentinel)
  *
- * @param {object} config - app config object; reads config.preventSleep (boolean)
- * @param {boolean} [displaySleeping=false] - when true, release wake lock (display schedule override)
+ * @param {object} config - app config object; reads config.preventSleep (boolean) and
+ *   config.displaySchedule.keepSignalActive (boolean — when true, hold the lock through
+ *   the sleep window so the HDMI signal stays alive and TVs don't enter standby, #901)
+ * @param {boolean} [displaySleeping=false] - when true, the display schedule says we
+ *   should be in the sleep window. Whether we release the lock depends on keepSignalActive.
  * @returns {{ wakeLockStatus: { active: boolean, reason: string|null } }}
  */
 export default function useScreenWakeLock(config, displaySleeping = false) {
+  // #901: when the user has opted to keep the HDMI signal alive during scheduled sleep,
+  // we hold the wake lock even while the black overlay is showing. Otherwise the OS will
+  // DPMS-off the display, the TV sees signal loss, and standby latches until manual wake.
+  const keepSignalDuringSleep = config?.displaySchedule?.keepSignalActive !== false;
+  const effectiveSleeping = displaySleeping && !keepSignalDuringSleep;
   const wakeLockRef = useRef(null);
   const [wakeLockStatus, setWakeLockStatus] = useState({ active: false, reason: 'disabled' });
 
@@ -74,7 +82,7 @@ export default function useScreenWakeLock(config, displaySleeping = false) {
   }, []);
 
   useEffect(() => {
-    if (!config.preventSleep || displaySleeping) {
+    if (!config.preventSleep || effectiveSleeping) {
       // Release web wake lock if currently held
       if (wakeLockRef.current) {
         wakeLockRef.current.release().catch(() => {});
@@ -111,7 +119,7 @@ export default function useScreenWakeLock(config, displaySleeping = false) {
         wakeLockRef.current = null;
       }
     };
-  }, [config.preventSleep, displaySleeping, acquire]);
+  }, [config.preventSleep, effectiveSleeping, acquire]);
 
   return { wakeLockStatus };
 }

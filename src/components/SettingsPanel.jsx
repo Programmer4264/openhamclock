@@ -64,7 +64,7 @@ export const SettingsPanel = ({
   const [preventSleep, setPreventSleep] = useState(config?.preventSleep || false);
   const [sharePresence, setSharePresence] = useState(config?.sharePresence !== false);
   const [displaySchedule, setDisplaySchedule] = useState(
-    config?.displaySchedule || { enabled: false, sleepTime: '23:00', wakeTime: '07:00' },
+    config?.displaySchedule || { enabled: false, sleepTime: '23:00', wakeTime: '07:00', keepSignalActive: true },
   );
   const [distUnits, setDistUnits] = useState(config?.allUnits?.dist || config?.units || 'imperial');
   const [tempUnits, setTempUnits] = useState(config?.allUnits?.temp || config?.units || 'imperial');
@@ -2037,10 +2037,33 @@ export const SettingsPanel = ({
                   </div>
                 </div>
               )}
+              {displaySchedule.enabled && (
+                <label
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '10px',
+                    cursor: 'pointer',
+                    fontSize: '13px',
+                    color: 'var(--text-primary)',
+                    marginBottom: '8px',
+                  }}
+                >
+                  <input
+                    type="checkbox"
+                    checked={displaySchedule.keepSignalActive !== false}
+                    onChange={(e) => setDisplaySchedule({ ...displaySchedule, keepSignalActive: e.target.checked })}
+                    style={{ accentColor: 'var(--accent-amber)' }}
+                  />
+                  Keep HDMI signal active during sleep (recommended for TVs)
+                </label>
+              )}
               <div style={{ fontSize: '11px', color: 'var(--text-muted)' }}>
                 {displaySchedule.enabled
-                  ? `Display will go black at ${displaySchedule.sleepTime} and wake at ${displaySchedule.wakeTime} (local time). The wake lock will also be released so your TV or monitor can sleep.`
-                  : 'Set a daily schedule to automatically black out the display and release the wake lock. Ideal for shack TVs and kiosk displays.'}
+                  ? displaySchedule.keepSignalActive !== false
+                    ? `Display will go black at ${displaySchedule.sleepTime} and wake at ${displaySchedule.wakeTime} (local time). The HDMI signal stays alive so TVs don't latch into standby — turn this off only if you want the display to actually power down.`
+                    : `Display will go black at ${displaySchedule.sleepTime} and wake at ${displaySchedule.wakeTime} (local time). The wake lock will be released so your monitor can power off. Note: TVs that go to standby on signal loss will not wake automatically — enable "Keep HDMI signal active" above if this affects you.`
+                  : 'Set a daily schedule to automatically black out the display at night. Ideal for shack TVs and kiosk displays.'}
               </div>
             </div>
 
