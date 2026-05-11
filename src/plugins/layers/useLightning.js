@@ -317,7 +317,7 @@ export function useLayer({ enabled = false, opacity = 0.9, map = null, lowMemory
       const ageStr = ageMinutes < 1 ? `${Math.round(ageSeconds)}s` : `${Math.round(ageMinutes)}min`;
 
       marker.bindPopup(`
-        <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px;">
+        <div style="font-family: var(--font-mono); font-size: 12px;">
           <strong>⚡ ${t('plugins.layers.lightning.lightningStrike')}</strong><br>
           <strong>${t('plugins.layers.lightning.age')}:</strong> ${ageStr}<br>
           <strong>${t('plugins.layers.lightning.polarity')}:</strong> ${polarity === 'positive' ? '+' : '-'}${Math.round(intensity)}kA<br>

@@ -308,7 +308,7 @@ const PSKReporterPanel = ({
                     padding: '1px 4px',
                     borderRadius: '3px',
                     letterSpacing: '0.5px',
-                    fontFamily: "'JetBrains Mono', monospace",
+                    fontFamily: 'var(--font-mono)',
                   }}
                 >
                   ⊞ {identifier?.substring(0, 4)}
@@ -507,7 +507,7 @@ const PSKReporterPanel = ({
       </div>
 
       {/* ── Content area ── */}
-      <div style={{ flex: 1, overflow: 'auto', fontSize: '11px', fontFamily: "'JetBrains Mono', monospace" }}>
+      <div style={{ flex: 1, overflow: 'auto', fontSize: '11px', fontFamily: 'var(--font-mono)' }}>
         {/* === PSKReporter content === */}
         {panelMode === 'psk' && (
           <>

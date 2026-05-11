@@ -100,7 +100,7 @@ export default function DXCCSelect({ dxLocked, onDXChange, style }) {
             borderRadius: '4px',
             padding: '6px 8px',
             fontSize: '12px',
-            fontFamily: 'JetBrains Mono, monospace',
+            fontFamily: 'var(--font-mono)',
             outline: 'none',
             cursor: dxLocked ? 'not-allowed' : 'text',
           }}

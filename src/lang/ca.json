@@ -400,6 +400,8 @@
   "station.settings.locator": "Quadrícula (o introdueix Lat/Lon a sota)",
   "station.settings.locator.placeholder": "FN20nc",
   "station.settings.longitude": "Longitud",
+  "station.settings.monoFont": "Tipus de lletra monoespaiada",
+  "station.settings.monoFont.describe": "Utilitzada en pantalles de dades — llistes de punts, indicatius, freqüències. Tria una variant amb zero ratllat per distingir clarament el 0 del 8.",
   "station.settings.mouseZoom": "Sensibilitat de la roda del ratolí",
   "station.settings.mouseZoom.describeMax": "Més",
   "station.settings.mouseZoom.describeMin": "Menys",

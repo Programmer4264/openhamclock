@@ -72,7 +72,7 @@ const inputStyle = {
   borderRadius: '6px',
   color: 'var(--text-primary)',
   fontSize: '13px',
-  fontFamily: 'JetBrains Mono, monospace',
+  fontFamily: 'var(--font-mono)',
   boxSizing: 'border-box',
   marginBottom: '10px',
 };
@@ -167,7 +167,7 @@ function SetupView({ status, onConnect }) {
     <div
       style={{
         padding: '16px',
-        fontFamily: 'JetBrains Mono, monospace',
+        fontFamily: 'var(--font-mono)',
         overflowY: 'auto',
         height: '100%',
         boxSizing: 'border-box',
@@ -277,7 +277,7 @@ function SetupView({ status, onConnect }) {
           fontSize: '13px',
           fontWeight: 700,
           cursor: testing ? 'wait' : 'pointer',
-          fontFamily: 'JetBrains Mono, monospace',
+          fontFamily: 'var(--font-mono)',
         }}
       >
         {testing ? 'Testing connection...' : 'Connect'}
@@ -447,7 +447,7 @@ export default function MeshtasticPanel() {
     fontSize: '11px',
     fontWeight: active ? 700 : 400,
     cursor: 'pointer',
-    fontFamily: 'JetBrains Mono, monospace',
+    fontFamily: 'var(--font-mono)',
   });
 
   const modeLabel = activeMode === 'mqtt' ? '📡 MQTT' : '🖥️ Proxy';
@@ -455,7 +455,7 @@ export default function MeshtasticPanel() {
   return (
     <div
       className="panel"
-      style={{ display: 'flex', flexDirection: 'column', height: '100%', fontFamily: 'JetBrains Mono, monospace' }}
+      style={{ display: 'flex', flexDirection: 'column', height: '100%', fontFamily: 'var(--font-mono)' }}
     >
       {/* Status bar */}
       <div
@@ -669,7 +669,7 @@ export default function MeshtasticPanel() {
                       borderRadius: '3px',
                       color: sendTo ? 'var(--accent-cyan)' : 'var(--text-primary)',
                       fontSize: '10px',
-                      fontFamily: 'JetBrains Mono, monospace',
+                      fontFamily: 'var(--font-mono)',
                       minWidth: 0,
                     }}
                   >
@@ -695,7 +695,7 @@ export default function MeshtasticPanel() {
                       borderRadius: '3px',
                       color: sendChannel > 0 ? 'var(--accent-purple)' : 'var(--text-primary)',
                       fontSize: '10px',
-                      fontFamily: 'JetBrains Mono, monospace',
+                      fontFamily: 'var(--font-mono)',
                     }}
                   >
                     {[0, 1, 2, 3, 4, 5, 6, 7].map((ch) => (
@@ -738,7 +738,7 @@ export default function MeshtasticPanel() {
                       borderRadius: '4px',
                       color: 'var(--text-primary)',
                       fontSize: '11px',
-                      fontFamily: 'JetBrains Mono, monospace',
+                      fontFamily: 'var(--font-mono)',
                     }}
                   />
                   <button
@@ -812,7 +812,7 @@ export default function MeshtasticPanel() {
                 color: '#ff6666',
                 fontSize: '11px',
                 cursor: 'pointer',
-                fontFamily: 'JetBrains Mono, monospace',
+                fontFamily: 'var(--font-mono)',
               }}
             >
               Disconnect & Disable

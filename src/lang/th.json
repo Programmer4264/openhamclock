@@ -400,6 +400,8 @@
   "station.settings.locator": "กริดสี่เหลี่ยม หรือ กรอกเส้นตำแหน่งละติจูด ลองจิจูดด้านล่าง",
   "station.settings.locator.placeholder": "FN20nc",
   "station.settings.longitude": "เส้นลองจิจูด",
+  "station.settings.monoFont": "ฟอนต์ระยะห่างเท่ากัน",
+  "station.settings.monoFont.describe": "ใช้ในการแสดงข้อมูล — รายการสปอต รหัสเรียก ความถี่ เลือกรูปแบบเลขศูนย์มีขีดเพื่อแยก 0 จาก 8 ให้ชัดเจน",
   "station.settings.mouseZoom": "ความไวของเมาส์",
   "station.settings.mouseZoom.describeMax": "มาก",
   "station.settings.mouseZoom.describeMin": "น้อย",

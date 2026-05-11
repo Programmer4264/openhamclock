@@ -1,4 +1,14 @@
 /* ============================================
+   TYPOGRAPHY (theme-independent)
+   --font-mono is user-selectable in Settings → Display.
+   --font-body is reserved for future use (already read by useTheme.js).
+   ============================================ */
+:root {
+  --font-mono: 'JetBrains Mono', monospace;
+  --font-body: 'Space Grotesk', sans-serif;
+}
+
+/* ============================================
    THEME: DARK (Default)
    ============================================ */
 :root,

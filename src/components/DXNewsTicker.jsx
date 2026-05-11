@@ -165,7 +165,7 @@ export const DXNewsTicker = ({ sidebar = false }) => {
     color: disabled ? '#444' : '#ff8800',
     fontSize: `${BASE_LABEL_SIZE * textScale}px`,
     fontWeight: '700',
-    fontFamily: 'JetBrains Mono, monospace',
+    fontFamily: 'var(--font-mono)',
     padding: `0 ${6 * textScale}px`,
     height: '100%',
     cursor: disabled ? 'default' : 'pointer',
@@ -214,7 +214,7 @@ export const DXNewsTicker = ({ sidebar = false }) => {
           color: '#000',
           fontWeight: '700',
           fontSize: `${BASE_LABEL_SIZE * textScale}px`,
-          fontFamily: 'JetBrains Mono, monospace',
+          fontFamily: 'var(--font-mono)',
           padding: '0 8px',
           height: '100%',
           display: 'flex',
@@ -286,7 +286,7 @@ export const DXNewsTicker = ({ sidebar = false }) => {
                   color: '#ff8800',
                   fontWeight: '700',
                   fontSize: `${BASE_TEXT_SIZE * textScale}px`,
-                  fontFamily: 'JetBrains Mono, monospace',
+                  fontFamily: 'var(--font-mono)',
                   marginRight: '6px',
                 }}
               >
@@ -296,7 +296,7 @@ export const DXNewsTicker = ({ sidebar = false }) => {
                 style={{
                   color: '#aaa',
                   fontSize: `${BASE_TEXT_SIZE * textScale}px`,
-                  fontFamily: 'JetBrains Mono, monospace',
+                  fontFamily: 'var(--font-mono)',
                   marginRight: '12px',
                 }}
               >
@@ -336,7 +336,7 @@ export const DXNewsTicker = ({ sidebar = false }) => {
                   color: '#ff8800',
                   fontWeight: '700',
                   fontSize: `${BASE_TEXT_SIZE * textScale}px`,
-                  fontFamily: 'JetBrains Mono, monospace',
+                  fontFamily: 'var(--font-mono)',
                   marginRight: '6px',
                 }}
               >
@@ -346,7 +346,7 @@ export const DXNewsTicker = ({ sidebar = false }) => {
                 style={{
                   color: '#aaa',
                   fontSize: `${BASE_TEXT_SIZE * textScale}px`,
-                  fontFamily: 'JetBrains Mono, monospace',
+                  fontFamily: 'var(--font-mono)',
                   marginRight: '12px',
                 }}
               >

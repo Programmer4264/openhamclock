@@ -209,7 +209,7 @@ export const useLayer = ({ map, enabled, satellites, setSatellites, opacity, con
       <div class="sat-data-window-title" style="display:flex; justify-content:space-between; align-items:center;
                   cursor:grab; user-select:none;
                   padding: 8px 10px; border-bottom: 1px solid var(--border-color); background: var(--bg-tertiary);">
-        <span data-drag-handle="true" style="font-family: 'JetBrains Mono', monospace; font-size:13px; font-weight:700; color: var(--accent-blue); letter-spacing:0.05em;">
+        <span data-drag-handle="true" style="font-family: var(--font-mono); font-size:13px; font-weight:700; color: var(--accent-blue); letter-spacing:0.05em;">
           🛰 ${activeSats.length} ${activeSats.length !== 1 ? t('station.settings.satellites.name_plural') : t('station.settings.satellites.name')}
         </span>
         <button class="sat-data-window-minimize"
@@ -781,7 +781,7 @@ export const useLayer = ({ map, enabled, satellites, setSatellites, opacity, con
         overflow-y: auto;
         overflow-x: auto;
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-        font-family: 'JetBrains Mono', monospace;
+        font-family: var(--font-mono);
         color: var(--text-primary);
       `;
 

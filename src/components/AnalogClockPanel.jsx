@@ -93,7 +93,7 @@ export const AnalogClockPanel = ({ currentTime, sunTimes }) => {
         dominantBaseline="central"
         fill="var(--text-primary)"
         fontSize={size > 150 ? 14 : 10}
-        fontFamily="JetBrains Mono, monospace"
+        fontFamily="var(--font-mono)"
         fontWeight="600"
       >
         {i}
@@ -139,7 +139,7 @@ export const AnalogClockPanel = ({ currentTime, sunTimes }) => {
           display: 'flex',
           justifyContent: 'space-between',
           marginBottom: '4px',
-          fontFamily: 'JetBrains Mono, monospace',
+          fontFamily: 'var(--font-mono)',
           fontSize: size > 150 ? '12px' : '10px',
         }}
       >
@@ -173,7 +173,7 @@ export const AnalogClockPanel = ({ currentTime, sunTimes }) => {
           dominantBaseline="central"
           fill="var(--accent-amber)"
           fontSize={size > 150 ? 10 : 8}
-          fontFamily="JetBrains Mono, monospace"
+          fontFamily="var(--font-mono)"
           fontWeight="600"
         >
           LOCAL
@@ -200,7 +200,7 @@ export const AnalogClockPanel = ({ currentTime, sunTimes }) => {
             display: 'flex',
             justifyContent: 'space-between',
             marginTop: '4px',
-            fontFamily: 'JetBrains Mono, monospace',
+            fontFamily: 'var(--font-mono)',
             fontSize: size > 150 ? '12px' : '10px',
           }}
         >

@@ -81,7 +81,7 @@ export const WeatherPanel = ({
             style={{
               fontSize: '14px',
               color: 'var(--text-muted)',
-              fontFamily: 'JetBrains Mono, monospace',
+              fontFamily: 'var(--font-mono)',
               animation: 'pulse 1.5s ease-in-out infinite',
             }}
           >
@@ -125,7 +125,7 @@ export const WeatherPanel = ({
       >
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
           <span style={{ fontSize: '16px', lineHeight: 1 }}>⚠️</span>
-          <span style={{ fontSize: '11px', color: 'var(--text-muted)', fontFamily: 'JetBrains Mono, monospace' }}>
+          <span style={{ fontSize: '11px', color: 'var(--text-muted)', fontFamily: 'var(--font-mono)' }}>
             {getErrorMessage(error.message)}
             {error.retryIn ? t('weather.error.retry', { seconds: error.retryIn }) : ''}
           </span>
@@ -140,7 +140,7 @@ export const WeatherPanel = ({
               style={{
                 fontSize: '10px',
                 color: 'var(--accent-amber)',
-                fontFamily: 'JetBrains Mono, monospace',
+                fontFamily: 'var(--font-mono)',
                 textDecoration: 'underline',
               }}
             >
@@ -205,7 +205,7 @@ export const WeatherPanel = ({
           >
             {t(`weather.condition.${w.weatherCode}`, { defaultValue: w.description })}
           </span>
-          <span style={{ fontSize: '11px', color: 'var(--text-muted)', fontFamily: 'JetBrains Mono, monospace' }}>
+          <span style={{ fontSize: '11px', color: 'var(--text-muted)', fontFamily: 'var(--font-mono)' }}>
             💨{w.windSpeed}
           </span>
           <span
@@ -227,7 +227,7 @@ export const WeatherPanel = ({
           style={{
             fontSize: '9px',
             color: 'var(--accent-amber)',
-            fontFamily: 'JetBrains Mono, monospace',
+            fontFamily: 'var(--font-mono)',
             marginTop: '4px',
             opacity: 0.7,
           }}
@@ -277,7 +277,7 @@ export const WeatherPanel = ({
                   border: `1px solid ${alert.color}40`,
                   borderRadius: '4px',
                   fontSize: '10px',
-                  fontFamily: 'JetBrains Mono, monospace',
+                  fontFamily: 'var(--font-mono)',
                   lineHeight: 1.3,
                 }}
                 title={alert.headline || alert.event}
@@ -342,7 +342,7 @@ export const WeatherPanel = ({
               justifyContent: 'space-between',
               fontSize: '11px',
               marginBottom: '8px',
-              fontFamily: 'JetBrains Mono, monospace',
+              fontFamily: 'var(--font-mono)',
             }}
           >
             {w.feelsLike !== w.temp && (
@@ -365,7 +365,7 @@ export const WeatherPanel = ({
               gridTemplateColumns: '1fr 1fr',
               gap: '6px 12px',
               fontSize: '11px',
-              fontFamily: 'JetBrains Mono, monospace',
+              fontFamily: 'var(--font-mono)',
             }}
           >
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -463,7 +463,7 @@ export const WeatherPanel = ({
                       {i === 0 ? t('weather.today') : t('weather.dayName.' + day.date)}
                     </div>
                     <div style={{ fontSize: '16px', lineHeight: 1.2 }}>{day.icon}</div>
-                    <div style={{ fontFamily: 'JetBrains Mono, monospace', marginTop: '2px' }}>
+                    <div style={{ fontFamily: 'var(--font-mono)', marginTop: '2px' }}>
                       <span style={{ color: 'var(--accent-amber)' }}>{day.high}°</span>
                       <span style={{ color: 'var(--text-muted)' }}>/</span>
                       <span style={{ color: 'var(--accent-blue)' }}>{day.low}°</span>

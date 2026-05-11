@@ -90,7 +90,7 @@ export default function useVersionCheck() {
       borderRadius: '12px',
       padding: '14px 24px',
       color: '#e2e8f0',
-      fontFamily: 'JetBrains Mono, monospace',
+      fontFamily: 'var(--font-mono)',
       zIndex: '999999',
       boxShadow: '0 8px 32px rgba(0,0,0,0.5), 0 0 20px rgba(0,255,136,0.15)',
       animation: 'vcheck-slide-in 0.4s ease-out',

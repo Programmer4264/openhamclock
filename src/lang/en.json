@@ -404,6 +404,8 @@
   "station.settings.locator": "Grid Square (or enter Lat/Lon below)",
   "station.settings.locator.placeholder": "FN20nc",
   "station.settings.longitude": "Longitude",
+  "station.settings.monoFont": "Monospace font",
+  "station.settings.monoFont.describe": "Used in data displays — spot lists, callsigns, frequencies. Pick a slashed-zero variant to clearly distinguish 0 from 8.",
   "station.settings.mouseZoom": "Mouse Wheel Sensitivity",
   "station.settings.mouseZoom.describeMax": "More",
   "station.settings.mouseZoom.describeMin": "Less",

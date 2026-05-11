@@ -400,6 +400,8 @@
   "station.settings.locator": "Cuadrícula (o ingresa Lat/Lon abajo)",
   "station.settings.locator.placeholder": "FN20nc",
   "station.settings.longitude": "Longitud",
+  "station.settings.monoFont": "Fuente monoespaciada",
+  "station.settings.monoFont.describe": "Usada en visualizaciones de datos — listas de spots, indicativos, frecuencias. Elige una variante con cero barrado para distinguir claramente 0 de 8.",
   "station.settings.mouseZoom": "Sensibilidad de la rueda del ratón",
   "station.settings.mouseZoom.describeMax": "Más",
   "station.settings.mouseZoom.describeMin": "Menos",

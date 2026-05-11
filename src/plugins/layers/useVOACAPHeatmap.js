@@ -222,7 +222,7 @@ export function useLayer({ map, enabled, opacity, locator }) {
                   width: 100%; margin-top: 2px; padding: 4px;
                   background: var(--bg-tertiary); color: var(--text-primary);
                   border: 1px solid var(--border-color); border-radius: 3px;
-                  font-family: 'JetBrains Mono', monospace; font-size: 11px;
+                  font-family: var(--font-mono); font-size: 11px;
                 ">${bandOptions}</select>
               </div>
               <div style="display: flex; gap: 6px; margin-bottom: 6px;">
@@ -232,7 +232,7 @@ export function useLayer({ map, enabled, opacity, locator }) {
                     width: 100%; margin-top: 2px; padding: 4px;
                     background: var(--bg-tertiary); color: var(--text-primary);
                     border: 1px solid var(--border-color); border-radius: 3px;
-                    font-family: 'JetBrains Mono', monospace; font-size: 11px;
+                    font-family: var(--font-mono); font-size: 11px;
                   ">${modeOptions}</select>
                 </div>
                 <div style="flex: 1;">
@@ -241,7 +241,7 @@ export function useLayer({ map, enabled, opacity, locator }) {
                     width: 100%; margin-top: 2px; padding: 4px;
                     background: var(--bg-tertiary); color: var(--text-primary);
                     border: 1px solid var(--border-color); border-radius: 3px;
-                    font-family: 'JetBrains Mono', monospace; font-size: 11px;
+                    font-family: var(--font-mono); font-size: 11px;
                   ">${powerOptions}</select>
                 </div>
               </div>
@@ -251,7 +251,7 @@ export function useLayer({ map, enabled, opacity, locator }) {
                   width: 100%; margin-top: 2px; padding: 4px;
                   background: var(--bg-tertiary); color: var(--text-primary);
                   border: 1px solid var(--border-color); border-radius: 3px;
-                  font-family: 'JetBrains Mono', monospace; font-size: 11px;
+                  font-family: var(--font-mono); font-size: 11px;
                 ">${gridOptions}</select>
               </div>
               <div style="

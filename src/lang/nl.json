@@ -400,6 +400,8 @@
   "station.settings.locator": "Grid Square (or enter Lat/Lon below)",
   "station.settings.locator.placeholder": "FN20nc",
   "station.settings.longitude": "Longitude",
+  "station.settings.monoFont": "Monospace-lettertype",
+  "station.settings.monoFont.describe": "Gebruikt in datavensters — spotlijsten, roepnamen, frequenties. Kies een variant met doorgestreepte nul om 0 en 8 duidelijk te onderscheiden.",
   "station.settings.mouseZoom": "Gevoeligheid van het muiswiel",
   "station.settings.mouseZoom.describeMax": "Meer",
   "station.settings.mouseZoom.describeMin": "Minder",

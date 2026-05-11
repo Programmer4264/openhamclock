@@ -209,7 +209,7 @@ export const ContestPanel = ({ data, loading }) => {
           <div
             style={{
               fontSize: '10px',
-              fontFamily: 'JetBrains Mono, monospace',
+              fontFamily: 'var(--font-mono)',
             }}
           >
             {sortedContests.map((contest, i) => {

@@ -400,6 +400,8 @@
   "station.settings.locator": "グリッドスクエア（または下に緯度・経度）",
   "station.settings.locator.placeholder": "PM95",
   "station.settings.longitude": "経度",
+  "station.settings.monoFont": "等幅フォント",
+  "station.settings.monoFont.describe": "データ表示で使用 — スポットリスト、コールサイン、周波数。0 と 8 をはっきり区別するため、スラッシュ付きゼロのバリエーションを選択。",
   "station.settings.mouseZoom": "マウスホイールの感度",
   "station.settings.mouseZoom.describeMax": "高く",
   "station.settings.mouseZoom.describeMin": "低く",

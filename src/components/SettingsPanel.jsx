@@ -146,6 +146,15 @@ export const SettingsPanel = ({
       return '#3388ff';
     }
   });
+
+  // Monospace font for panels/data displays (#923 — 0/8 readability)
+  const [monoFont, setMonoFont] = useState(() => {
+    try {
+      return localStorage.getItem('openhamclock_monoFont') || "'JetBrains Mono', monospace";
+    } catch {
+      return "'JetBrains Mono', monospace";
+    }
+  });
   const { t, i18n } = useTranslation();
 
   // Layer controls
@@ -628,7 +637,7 @@ export const SettingsPanel = ({
               fontSize: '13px',
               cursor: 'pointer',
               fontWeight: activeTab === 'station' ? '700' : '400',
-              fontFamily: 'JetBrains Mono, monospace',
+              fontFamily: 'var(--font-mono)',
             }}
           >
             📻 {t('station.settings.tab.title.station')}
@@ -646,7 +655,7 @@ export const SettingsPanel = ({
               fontSize: '13px',
               cursor: 'pointer',
               fontWeight: activeTab === 'integrations' ? '700' : '400',
-              fontFamily: 'JetBrains Mono, monospace',
+              fontFamily: 'var(--font-mono)',
             }}
           >
             🔌 {t('station.settings.tab.title.integrations')}
@@ -664,7 +673,7 @@ export const SettingsPanel = ({
               fontSize: '13px',
               cursor: 'pointer',
               fontWeight: activeTab === 'display' ? '700' : '400',
-              fontFamily: 'JetBrains Mono, monospace',
+              fontFamily: 'var(--font-mono)',
             }}
           >
             🎨 {t('station.settings.tab.title.display')}
@@ -682,7 +691,7 @@ export const SettingsPanel = ({
               fontSize: '13px',
               cursor: 'pointer',
               fontWeight: activeTab === 'layers' ? '700' : '400',
-              fontFamily: 'JetBrains Mono, monospace',
+              fontFamily: 'var(--font-mono)',
             }}
           >
             🗺️ {t('station.settings.tab.title.mapLayers')}
@@ -700,7 +709,7 @@ export const SettingsPanel = ({
               fontSize: '13px',
               cursor: 'pointer',
               fontWeight: activeTab === 'satellites' ? '700' : '400',
-              fontFamily: 'JetBrains Mono, monospace',
+              fontFamily: 'var(--font-mono)',
             }}
           >
             🛰️ {t('station.settings.tab.title.satellites')}
@@ -721,7 +730,7 @@ export const SettingsPanel = ({
               fontSize: '13px',
               cursor: 'pointer',
               fontWeight: activeTab === 'profiles' ? '700' : '400',
-              fontFamily: 'JetBrains Mono, monospace',
+              fontFamily: 'var(--font-mono)',
             }}
           >
             👤 {t('station.settings.tab.title.profiles')}
@@ -739,7 +748,7 @@ export const SettingsPanel = ({
               fontSize: '13px',
               cursor: 'pointer',
               fontWeight: activeTab === 'community' ? '700' : '400',
-              fontFamily: 'JetBrains Mono, monospace',
+              fontFamily: 'var(--font-mono)',
             }}
           >
             🌐 {t('station.settings.tab.title.community')}
@@ -757,7 +766,7 @@ export const SettingsPanel = ({
               fontSize: '13px',
               cursor: 'pointer',
               fontWeight: activeTab === 'alerts' ? '700' : '400',
-              fontFamily: 'JetBrains Mono, monospace',
+              fontFamily: 'var(--font-mono)',
             }}
           >
             🔔 {t('station.settings.tab.title.alerts')}
@@ -775,7 +784,7 @@ export const SettingsPanel = ({
               fontSize: '13px',
               cursor: 'pointer',
               fontWeight: activeTab === 'rig-bridge' ? '700' : '400',
-              fontFamily: 'JetBrains Mono, monospace',
+              fontFamily: 'var(--font-mono)',
             }}
           >
             📻 {t('station.settings.tab.title.rig-bridge')}
@@ -849,7 +858,7 @@ export const SettingsPanel = ({
                   borderRadius: '6px',
                   color: 'var(--accent-amber)',
                   fontSize: '18px',
-                  fontFamily: 'JetBrains Mono, monospace',
+                  fontFamily: 'var(--font-mono)',
                   fontWeight: '700',
                   boxSizing: 'border-box',
                 }}
@@ -885,7 +894,7 @@ export const SettingsPanel = ({
                   borderRadius: '6px',
                   color: 'var(--accent-amber)',
                   fontSize: '18px',
-                  fontFamily: 'JetBrains Mono, monospace',
+                  fontFamily: 'var(--font-mono)',
                   fontWeight: '700',
                   boxSizing: 'border-box',
                 }}
@@ -919,7 +928,7 @@ export const SettingsPanel = ({
                     borderRadius: '6px',
                     color: 'var(--text-primary)',
                     fontSize: '14px',
-                    fontFamily: 'JetBrains Mono, monospace',
+                    fontFamily: 'var(--font-mono)',
                     boxSizing: 'border-box',
                   }}
                 />
@@ -949,7 +958,7 @@ export const SettingsPanel = ({
                     borderRadius: '6px',
                     color: 'var(--text-primary)',
                     fontSize: '14px',
-                    fontFamily: 'JetBrains Mono, monospace',
+                    fontFamily: 'var(--font-mono)',
                     boxSizing: 'border-box',
                   }}
                 />
@@ -1031,7 +1040,7 @@ export const SettingsPanel = ({
                   borderRadius: '6px',
                   color: timezone ? 'var(--accent-green)' : 'var(--text-muted)',
                   fontSize: '14px',
-                  fontFamily: 'JetBrains Mono, monospace',
+                  fontFamily: 'var(--font-mono)',
                   cursor: 'pointer',
                 }}
               >
@@ -1222,7 +1231,7 @@ export const SettingsPanel = ({
                     borderRadius: '4px',
                     color: wsjtxMulticastEnabled ? 'var(--text-primary)' : 'var(--text-secondary',
                     fontSize: '12px',
-                    fontFamily: 'JetBrains Mono, monospace',
+                    fontFamily: 'var(--font-mono)',
                     boxSizing: 'border-box',
                   }}
                 />
@@ -1370,7 +1379,7 @@ export const SettingsPanel = ({
                             borderRadius: '4px',
                             color: 'var(--accent-cyan)',
                             fontSize: '13px',
-                            fontFamily: 'JetBrains Mono',
+                            fontFamily: 'var(--font-mono)',
                             boxSizing: 'border-box',
                           }}
                         />
@@ -1399,7 +1408,7 @@ export const SettingsPanel = ({
                             borderRadius: '4px',
                             color: 'var(--accent-cyan)',
                             fontSize: '13px',
-                            fontFamily: 'JetBrains Mono',
+                            fontFamily: 'var(--font-mono)',
                             boxSizing: 'border-box',
                           }}
                         />
@@ -1649,7 +1658,7 @@ export const SettingsPanel = ({
                         fontSize: '11px',
                         cursor: 'pointer',
                         fontWeight: propMode === m.id ? '700' : '400',
-                        fontFamily: 'JetBrains Mono, monospace',
+                        fontFamily: 'var(--font-mono)',
                         lineHeight: 1.2,
                         textAlign: 'center',
                       }}
@@ -1692,7 +1701,7 @@ export const SettingsPanel = ({
                         fontSize: '11px',
                         cursor: 'pointer',
                         fontWeight: propPower === p.w ? '700' : '400',
-                        fontFamily: 'JetBrains Mono, monospace',
+                        fontFamily: 'var(--font-mono)',
                       }}
                       title={p.tip}
                     >
@@ -1707,7 +1716,7 @@ export const SettingsPanel = ({
                       marginTop: '4px',
                       fontSize: '10px',
                       color: 'var(--text-muted)',
-                      fontFamily: 'JetBrains Mono, monospace',
+                      fontFamily: 'var(--font-mono)',
                     }}
                   >
                     Custom: {propPower}W <span style={{ opacity: 0.7 }}>(set from Propagation panel)</span>
@@ -1855,7 +1864,7 @@ export const SettingsPanel = ({
                       padding: '3px 8px',
                       borderRadius: '4px',
                       fontSize: '11px',
-                      fontFamily: 'JetBrains Mono, monospace',
+                      fontFamily: 'var(--font-mono)',
                       fontWeight: '600',
                       marginBottom: '6px',
                       background: wakeLockStatus.active ? 'rgba(0,200,100,0.15)' : 'rgba(255,160,0,0.15)',
@@ -2001,7 +2010,7 @@ export const SettingsPanel = ({
                         color: 'var(--text-primary)',
                         padding: '6px 10px',
                         fontSize: '13px',
-                        fontFamily: 'JetBrains Mono, monospace',
+                        fontFamily: 'var(--font-mono)',
                       }}
                     />
                   </div>
@@ -2022,7 +2031,7 @@ export const SettingsPanel = ({
                         color: 'var(--text-primary)',
                         padding: '6px 10px',
                         fontSize: '13px',
-                        fontFamily: 'JetBrains Mono, monospace',
+                        fontFamily: 'var(--font-mono)',
                       }}
                     />
                   </div>
@@ -2059,7 +2068,7 @@ export const SettingsPanel = ({
                   borderRadius: '6px',
                   color: 'var(--accent-green)',
                   fontSize: '14px',
-                  fontFamily: 'JetBrains Mono, monospace',
+                  fontFamily: 'var(--font-mono)',
                   cursor: 'pointer',
                 }}
               >
@@ -2122,7 +2131,7 @@ export const SettingsPanel = ({
                       borderRadius: '6px',
                       color: 'var(--text-primary)',
                       fontSize: '14px',
-                      fontFamily: 'JetBrains Mono, monospace',
+                      fontFamily: 'var(--font-mono)',
                     }}
                   />
                 </div>
@@ -2146,7 +2155,7 @@ export const SettingsPanel = ({
                       borderRadius: '6px',
                       color: 'var(--text-primary)',
                       fontSize: '14px',
-                      fontFamily: 'JetBrains Mono, monospace',
+                      fontFamily: 'var(--font-mono)',
                     }}
                   />
                 </div>
@@ -2203,7 +2212,7 @@ export const SettingsPanel = ({
                       borderRadius: '6px',
                       color: 'var(--text-primary)',
                       fontSize: '14px',
-                      fontFamily: 'JetBrains Mono, monospace',
+                      fontFamily: 'var(--font-mono)',
                     }}
                   />
                 </div>
@@ -2228,7 +2237,7 @@ export const SettingsPanel = ({
                       borderRadius: '6px',
                       color: 'var(--text-primary)',
                       fontSize: '14px',
-                      fontFamily: 'JetBrains Mono, monospace',
+                      fontFamily: 'var(--font-mono)',
                     }}
                   />
                 </div>
@@ -2330,7 +2339,7 @@ export const SettingsPanel = ({
               </div>
               <div
                 style={{
-                  fontFamily: 'JetBrains Mono, monospace',
+                  fontFamily: 'var(--font-mono)',
                   fontSize: 11,
                   padding: '4px 10px',
                   borderRadius: 999,
@@ -2392,7 +2401,7 @@ export const SettingsPanel = ({
                       display: 'flex',
                       alignItems: 'center',
                       gap: 8,
-                      fontFamily: 'JetBrains Mono, monospace',
+                      fontFamily: 'var(--font-mono)',
                       fontSize: 12,
                     }}
                   >
@@ -2451,7 +2460,7 @@ export const SettingsPanel = ({
                     <ol style={{ margin: 0, paddingLeft: 18 }}>
                       <li>
                         Run OpenHamClock locally:
-                        <div style={{ fontFamily: 'JetBrains Mono', marginTop: 4 }}>npm start</div>
+                        <div style={{ fontFamily: 'var(--font-mono)', marginTop: 4 }}>npm start</div>
                         Open the local URL shown in your terminal (example: http://127.0.0.1:3001).
                       </li>
 
@@ -2462,9 +2471,9 @@ export const SettingsPanel = ({
 
                       <li style={{ marginTop: 6 }}>
                         In the OpenHamClock folder:
-                        <div style={{ fontFamily: 'JetBrains Mono', marginTop: 4 }}>copy .env.example → .env</div>
+                        <div style={{ fontFamily: 'var(--font-mono)', marginTop: 4 }}>copy .env.example → .env</div>
                         Then edit:
-                        <div style={{ fontFamily: 'JetBrains Mono', marginTop: 4 }}>
+                        <div style={{ fontFamily: 'var(--font-mono)', marginTop: 4 }}>
                           VITE_PSTROTATOR_TARGET=http://192.168.1.43:50004
                         </div>
                         (Replace with the IP and port of your PstRotatorAz machine.)
@@ -2518,7 +2527,7 @@ export const SettingsPanel = ({
                         display: 'flex',
                         alignItems: 'center',
                         gap: 8,
-                        fontFamily: 'JetBrains Mono, monospace',
+                        fontFamily: 'var(--font-mono)',
                         fontSize: 12,
                       }}
                     >
@@ -2581,7 +2590,7 @@ export const SettingsPanel = ({
                       display: 'flex',
                       alignItems: 'center',
                       gap: 8,
-                      fontFamily: 'JetBrains Mono, monospace',
+                      fontFamily: 'var(--font-mono)',
                       fontSize: 12,
                     }}
                   >
@@ -2657,7 +2666,7 @@ export const SettingsPanel = ({
                         borderRadius: '6px',
                         color: 'var(--text-primary)',
                         fontSize: '14px',
-                        fontFamily: 'JetBrains Mono, monospace',
+                        fontFamily: 'var(--font-mono)',
                       }}
                     >
                       {[15, 30, 60, 120, 240, 720, 1440].map((m) => (
@@ -2734,7 +2743,7 @@ export const SettingsPanel = ({
                     <ol style={{ margin: 0, paddingLeft: 18 }}>
                       <li>
                         Run OpenHamClock locally:
-                        <div style={{ fontFamily: 'JetBrains Mono', marginTop: 4 }}>npm start</div>
+                        <div style={{ fontFamily: 'var(--font-mono)', marginTop: 4 }}>npm start</div>
                         Open the local URL shown in your terminal (example: http://127.0.0.1:3001).
                       </li>
 
@@ -2744,7 +2753,7 @@ export const SettingsPanel = ({
 
                       <li style={{ marginTop: 6 }}>
                         Edit the bridge <b>config.json</b> file and set:
-                        <div style={{ fontFamily: 'JetBrains Mono', marginTop: 4 }}>
+                        <div style={{ fontFamily: 'var(--font-mono)', marginTop: 4 }}>
                           "OHC_BASE_URL": "http://127.0.0.1:3001"
                         </div>
                         (Use the exact URL printed by OpenHamClock.)
@@ -2752,7 +2761,7 @@ export const SettingsPanel = ({
 
                       <li style={{ marginTop: 6 }}>
                         Ensure:
-                        <div style={{ fontFamily: 'JetBrains Mono', marginTop: 4 }}>"ENABLE_OHC_HTTP": true</div>
+                        <div style={{ fontFamily: 'var(--font-mono)', marginTop: 4 }}>"ENABLE_OHC_HTTP": true</div>
                       </li>
 
                       <li style={{ marginTop: 6 }}>
@@ -2830,7 +2839,7 @@ export const SettingsPanel = ({
                 </span>
                 <span
                   style={{
-                    fontFamily: 'JetBrains Mono, monospace',
+                    fontFamily: 'var(--font-mono)',
                     fontWeight: 700,
                     color: 'var(--accent-cyan)',
                     fontSize: `${24 * headerSize}px`,
@@ -2842,7 +2851,7 @@ export const SettingsPanel = ({
                 </span>
                 <span
                   style={{
-                    fontFamily: 'JetBrains Mono, monospace',
+                    fontFamily: 'var(--font-mono)',
                     fontSize: `${13 * headerSize}px`,
                     color: 'var(--text-muted)',
                     whiteSpace: 'nowrap',
@@ -2872,7 +2881,7 @@ export const SettingsPanel = ({
                   fontSize: '12px',
                   color: 'var(--accent-amber)',
                   fontWeight: 600,
-                  fontFamily: 'JetBrains Mono, monospace',
+                  fontFamily: 'var(--font-mono)',
                   marginTop: '4px',
                 }}
               >
@@ -3064,6 +3073,66 @@ export const SettingsPanel = ({
                 />
               )}
             </div>
+
+            {/* Monospace font selector (#923 — 0/8 readability) */}
+            <div style={{ marginBottom: '8px' }}>
+              <label
+                htmlFor="mono-font-select"
+                style={{
+                  display: 'block',
+                  marginBottom: '8px',
+                  color: 'var(--text-muted)',
+                  fontSize: '11px',
+                  textTransform: 'uppercase',
+                  letterSpacing: '1px',
+                }}
+              >
+                {t('station.settings.monoFont')}
+              </label>
+              <select
+                id="mono-font-select"
+                value={monoFont}
+                onChange={(e) => {
+                  const next = e.target.value;
+                  setMonoFont(next);
+                  try {
+                    localStorage.setItem('openhamclock_monoFont', next);
+                  } catch {}
+                  document.documentElement.style.setProperty('--font-mono', next);
+                }}
+                style={{
+                  width: '100%',
+                  background: 'var(--bg-tertiary)',
+                  color: 'var(--text-primary)',
+                  border: '1px solid var(--border-color)',
+                  borderRadius: '4px',
+                  padding: '6px 8px',
+                  fontFamily: monoFont,
+                  fontSize: '12px',
+                }}
+              >
+                <option value="'JetBrains Mono', monospace">JetBrains Mono — default (dotted 0)</option>
+                <option value="'Fira Code', monospace">Fira Code — slashed 0</option>
+                <option value="'IBM Plex Mono', monospace">IBM Plex Mono — slashed 0, wider</option>
+              </select>
+              <div style={{ fontSize: '11px', color: 'var(--text-muted)', marginTop: '6px' }}>
+                {t('station.settings.monoFont.describe')}
+              </div>
+              <div
+                style={{
+                  fontFamily: monoFont,
+                  fontSize: '14px',
+                  marginTop: '8px',
+                  padding: '6px 10px',
+                  background: 'var(--bg-tertiary)',
+                  border: '1px solid var(--border-color)',
+                  borderRadius: '4px',
+                  letterSpacing: '0.05em',
+                }}
+              >
+                0 8 O 1 l I — 14.074 MHz — W1AW/0 K8O
+              </div>
+            </div>
           </div>
         )}
 
@@ -3155,7 +3224,7 @@ export const SettingsPanel = ({
                             color: item.checked ? 'var(--accent-amber)' : 'var(--text-primary)',
                             fontSize: '14px',
                             fontWeight: '600',
-                            fontFamily: 'JetBrains Mono, monospace',
+                            fontFamily: 'var(--font-mono)',
                           }}
                         >
                           {item.title}
@@ -3201,7 +3270,7 @@ export const SettingsPanel = ({
                               color: layer.enabled ? 'var(--accent-amber)' : 'var(--text-primary)',
                               fontSize: '14px',
                               fontWeight: '600',
-                              fontFamily: 'JetBrains Mono, monospace',
+                              fontFamily: 'var(--font-mono)',
                             }}
                           >
                             {layer.name.startsWith('plugins.') ? t(layer.name) : layer.name}
@@ -3356,7 +3425,7 @@ export const SettingsPanel = ({
                             color: layer.enabled ? 'var(--accent-amber)' : 'var(--text-primary)',
                             fontSize: '14px',
                             fontWeight: '600',
-                            fontFamily: 'JetBrains Mono, monospace',
+                            fontFamily: 'var(--font-mono)',
                           }}
                         >
                           {layer.name}
@@ -3444,7 +3513,7 @@ export const SettingsPanel = ({
                                 borderRadius: '6px',
                                 color: 'var(--text-primary)',
                                 fontSize: '14px',
-                                fontFamily: 'JetBrains Mono, monospace',
+                                fontFamily: 'var(--font-mono)',
                                 boxSizing: 'border-box',
                               }}
                             />
@@ -3476,7 +3545,7 @@ export const SettingsPanel = ({
                                 borderRadius: '6px',
                                 color: 'var(--text-primary)',
                                 fontSize: '14px',
-                                fontFamily: 'JetBrains Mono, monospace',
+                                fontFamily: 'var(--font-mono)',
                                 boxSizing: 'border-box',
                               }}
                             />
@@ -3549,7 +3618,7 @@ export const SettingsPanel = ({
                   padding: '6px 12px',
                   fontSize: '12px',
                   cursor: 'pointer',
-                  fontFamily: 'JetBrains Mono',
+                  fontFamily: 'var(--font-mono)',
                 }}
               >
                 {t('station.settings.satellites.selectAll')}
@@ -3564,7 +3633,7 @@ export const SettingsPanel = ({
                   padding: '6px 12px',
                   fontSize: '12px',
                   cursor: 'pointer',
-                  fontFamily: 'JetBrains Mono',
+                  fontFamily: 'var(--font-mono)',
                 }}
               >
                 {t('station.settings.satellites.clear')}
@@ -3597,7 +3666,7 @@ export const SettingsPanel = ({
                   border: '1px solid var(--border-color)',
                   borderRadius: '6px',
                   color: 'var(--text-primary)',
-                  fontFamily: 'JetBrains Mono',
+                  fontFamily: 'var(--font-mono)',
                   fontSize: '12px',
                   outline: 'none',
                 }}
@@ -3662,7 +3731,7 @@ export const SettingsPanel = ({
                         textAlign: 'left',
                         cursor: 'pointer',
                         color: 'var(--text-primary)',
-                        fontFamily: 'JetBrains Mono',
+                        fontFamily: 'var(--font-mono)',
                         fontSize: '12px',
                         display: 'flex',
                         alignItems: 'center',
@@ -3790,7 +3859,7 @@ export const SettingsPanel = ({
                     borderRadius: '4px',
                     color: 'var(--text-primary)',
                     fontSize: '12px',
-                    fontFamily: 'JetBrains Mono, monospace',
+                    fontFamily: 'var(--font-mono)',
                   }}
                 />
                 <button
@@ -3913,7 +3982,7 @@ export const SettingsPanel = ({
                                     borderRadius: '3px',
                                     color: 'var(--text-primary)',
                                     fontSize: '12px',
-                                    fontFamily: 'JetBrains Mono, monospace',
+                                    fontFamily: 'var(--font-mono)',
                                   }}
                                 />
                                 <button
@@ -4219,7 +4288,7 @@ export const SettingsPanel = ({
                         borderRadius: '4px',
                         color: 'var(--text-primary)',
                         fontSize: '12px',
-                        fontFamily: 'JetBrains Mono, monospace',
+                        fontFamily: 'var(--font-mono)',
                         boxSizing: 'border-box',
                       }}
                     />
@@ -4236,7 +4305,7 @@ export const SettingsPanel = ({
                         borderRadius: '4px',
                         color: 'var(--text-primary)',
                         fontSize: '12px',
-                        fontFamily: 'JetBrains Mono, monospace',
+                        fontFamily: 'var(--font-mono)',
                         boxSizing: 'border-box',
                       }}
                     />
@@ -4385,7 +4454,7 @@ export const SettingsPanel = ({
                   borderRadius: '4px',
                   color: 'var(--text-primary)',
                   fontSize: '12px',
-                  fontFamily: 'JetBrains Mono, monospace',
+                  fontFamily: 'var(--font-mono)',
                   boxSizing: 'border-box',
                 }}
               />
@@ -4654,7 +4723,7 @@ export const SettingsPanel = ({
                       fontSize: '11px',
                       color: 'var(--text-secondary)',
                       textDecoration: 'none',
-                      fontFamily: 'JetBrains Mono, monospace',
+                      fontFamily: 'var(--font-mono)',
                       border: '1px solid transparent',
                       transition: 'all 0.15s',
                     }}
@@ -4822,7 +4891,7 @@ export const SettingsPanel = ({
                           borderRadius: '4px',
                           color: 'var(--accent-cyan)',
                           fontSize: '13px',
-                          fontFamily: 'JetBrains Mono',
+                          fontFamily: 'var(--font-mono)',
                           boxSizing: 'border-box',
                         }}
                       />
@@ -4846,7 +4915,7 @@ export const SettingsPanel = ({
                           borderRadius: '4px',
                           color: 'var(--accent-cyan)',
                           fontSize: '13px',
-                          fontFamily: 'JetBrains Mono',
+                          fontFamily: 'var(--font-mono)',
                           boxSizing: 'border-box',
                         }}
                       />
@@ -5373,7 +5442,7 @@ function AudioAlertsTab() {
                   fontSize: '11px',
                   fontWeight: 600,
                   cursor: 'pointer',
-                  fontFamily: 'JetBrains Mono, monospace',
+                  fontFamily: 'var(--font-mono)',
                 }}
               >
                 {feedConf.enabled ? 'ON' : 'OFF'}
@@ -5397,7 +5466,7 @@ function AudioAlertsTab() {
                     borderRadius: '4px',
                     padding: '6px 8px',
                     fontSize: '12px',
-                    fontFamily: 'JetBrains Mono, monospace',
+                    fontFamily: 'var(--font-mono)',
                   }}
                 >
                   {Object.entries(TONE_PRESETS).map(([key, preset]) => (

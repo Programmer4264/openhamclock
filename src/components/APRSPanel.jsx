@@ -346,7 +346,7 @@ const APRSPanel = ({ aprsData, showOnMap, onToggleMap, onHoverSpot, deLocation, 
                   border: '1px solid var(--border-color)',
                   borderRadius: '3px',
                   color: 'var(--text-primary)',
-                  fontFamily: 'JetBrains Mono, monospace',
+                  fontFamily: 'var(--font-mono)',
                 }}
               />
               <select
@@ -434,7 +434,7 @@ const APRSPanel = ({ aprsData, showOnMap, onToggleMap, onHoverSpot, deLocation, 
                       background: 'var(--bg-secondary)',
                       border: '1px solid var(--border-color)',
                       color: 'var(--text-primary)',
-                      fontFamily: 'JetBrains Mono, monospace',
+                      fontFamily: 'var(--font-mono)',
                     }}
                   >
                     {call}
@@ -606,7 +606,7 @@ const APRSPanel = ({ aprsData, showOnMap, onToggleMap, onHoverSpot, deLocation, 
               }}
             >
               <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '4px' }}>
-                <span style={{ fontWeight: '700', fontFamily: 'JetBrains Mono, monospace', fontSize: '12px' }}>
+                <span style={{ fontWeight: '700', fontFamily: 'var(--font-mono)', fontSize: '12px' }}>
                   {s.ssid || s.call}
                 </span>
                 {s.source === 'local-tnc' && (

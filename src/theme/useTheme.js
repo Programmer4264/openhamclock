@@ -30,6 +30,14 @@ export function useTheme() {
         document.body.style.fontFamily = savedFont;
       }
     } catch {}
+
+    // Restore saved monospace font (#923 — readability of 0 vs 8)
+    try {
+      const savedMono = localStorage.getItem('openhamclock_monoFont');
+      if (savedMono) {
+        document.documentElement.style.setProperty('--font-mono', savedMono);
+      }
+    } catch {}
   }, []);
 
   /* Theme switching */

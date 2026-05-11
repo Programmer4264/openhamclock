@@ -630,7 +630,7 @@ export const PropagationPanel = ({
                 borderRadius: '3px',
                 padding: '2px 4px',
                 fontSize: '10px',
-                fontFamily: 'JetBrains Mono, monospace',
+                fontFamily: 'var(--font-mono)',
               }}
             >
               {MODES.map((m) => (
@@ -659,7 +659,7 @@ export const PropagationPanel = ({
                 borderRadius: '3px',
                 padding: '2px 4px',
                 fontSize: '10px',
-                fontFamily: 'JetBrains Mono, monospace',
+                fontFamily: 'var(--font-mono)',
               }}
             >
               {POWERS.map((p) => (
@@ -689,7 +689,7 @@ export const PropagationPanel = ({
                     borderRadius: '3px',
                     padding: '2px 4px',
                     fontSize: '10px',
-                    fontFamily: 'JetBrains Mono, monospace',
+                    fontFamily: 'var(--font-mono)',
                     textAlign: 'right',
                   }}
                 />
@@ -709,7 +709,7 @@ export const PropagationPanel = ({
                   borderRadius: '3px',
                   padding: '2px 4px',
                   fontSize: '10px',
-                  fontFamily: 'JetBrains Mono, monospace',
+                  fontFamily: 'var(--font-mono)',
                   maxWidth: '110px',
                 }}
               >
@@ -741,7 +741,7 @@ export const PropagationPanel = ({
                   gridTemplateRows: `repeat(${bands.length}, 12px)`,
                   gap: '1px',
                   fontSize: '12px',
-                  fontFamily: 'JetBrains Mono, monospace',
+                  fontFamily: 'var(--font-mono)',
                 }}
               >
                 {bands.map((band) => (
@@ -898,7 +898,7 @@ export const PropagationPanel = ({
                 >
                   <span
                     style={{
-                      fontFamily: 'JetBrains Mono, monospace',
+                      fontFamily: 'var(--font-mono)',
                       fontSize: '12px',
                       color: band.reliability >= 50 ? 'var(--accent-green)' : 'var(--text-muted)',
                     }}

@@ -400,6 +400,8 @@
   "station.settings.locator": "Grid Square (atau masukkan Lat/Lon)",
   "station.settings.locator.placeholder": "OJ11",
   "station.settings.longitude": "Longitud",
+  "station.settings.monoFont": "Fon monospace",
+  "station.settings.monoFont.describe": "Digunakan dalam paparan data — senarai spot, isyarat panggilan, frekuensi. Pilih varian sifar bergaris untuk membezakan 0 daripada 8 dengan jelas.",
   "station.settings.mouseZoom": "Sensitiviti Roda Tetikus",
   "station.settings.mouseZoom.describeMax": "Lebih",
   "station.settings.mouseZoom.describeMin": "Kurang",

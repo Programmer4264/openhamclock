@@ -130,7 +130,7 @@ export default function SidebarMenu({
     color: active ? 'var(--accent-green)' : 'var(--text-secondary)',
     fontSize: '12px',
     cursor: 'pointer',
-    fontFamily: 'JetBrains Mono, monospace',
+    fontFamily: 'var(--font-mono)',
     whiteSpace: 'nowrap',
     overflow: 'hidden',
   });
@@ -170,7 +170,7 @@ export default function SidebarMenu({
           zIndex: 9999,
           transition: 'width 0.2s ease',
           overflow: 'hidden',
-          fontFamily: 'JetBrains Mono, monospace',
+          fontFamily: 'var(--font-mono)',
           boxShadow: hoverExpanded && mode !== MODE_PINNED ? '4px 0 16px rgba(0,0,0,0.3)' : 'none',
         }}
       >
@@ -242,7 +242,7 @@ export default function SidebarMenu({
                 whiteSpace: 'nowrap',
                 overflow: 'hidden',
                 transition: 'background 0.15s ease',
-                fontFamily: 'JetBrains Mono, monospace',
+                fontFamily: 'var(--font-mono)',
               }}
               onMouseOver={(e) => (e.currentTarget.style.background = 'var(--bg-tertiary)')}
               onMouseOut={(e) => (e.currentTarget.style.background = 'none')}

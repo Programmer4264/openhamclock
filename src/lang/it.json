@@ -400,6 +400,8 @@
   "station.settings.locator": "Locatore (o inserisci Lat/Lon sotto)",
   "station.settings.locator.placeholder": "FN20nc",
   "station.settings.longitude": "Longitudine",
+  "station.settings.monoFont": "Font monospaziato",
+  "station.settings.monoFont.describe": "Usato nelle visualizzazioni dati — elenchi di spot, nominativi, frequenze. Scegli una variante con zero barrato per distinguere chiaramente 0 da 8.",
   "station.settings.mouseZoom": "Sensibilità della rotellina del mouse",
   "station.settings.mouseZoom.describeMax": "Più",
   "station.settings.mouseZoom.describeMin": "Meno",

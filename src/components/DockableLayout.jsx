@@ -235,7 +235,7 @@ export const DockableLayout = ({
             alignItems: 'center',
             gap: '6px',
             fontSize: '12px',
-            fontFamily: 'JetBrains Mono, monospace',
+            fontFamily: 'var(--font-mono)',
             zIndex: 1000,
             transition: 'all 0.15s ease',
           }}
@@ -286,7 +286,7 @@ export const DockableLayout = ({
               style={{
                 margin: '0 0 16px 0',
                 color: '#00ffcc',
-                fontFamily: 'JetBrains Mono, monospace',
+                fontFamily: 'var(--font-mono)',
                 fontSize: '16px',
                 fontWeight: '600',
               }}
@@ -335,7 +335,7 @@ export const DockableLayout = ({
                     <span
                       style={{
                         color: '#e2e8f0',
-                        fontFamily: 'JetBrains Mono, monospace',
+                        fontFamily: 'var(--font-mono)',
                         fontSize: '13px',
                         fontWeight: '600',
                       }}
@@ -380,7 +380,7 @@ export const DockableLayout = ({
                 padding: '10px',
                 color: '#a0aec0',
                 cursor: 'pointer',
-                fontFamily: 'JetBrains Mono, monospace',
+                fontFamily: 'var(--font-mono)',
                 fontSize: '13px',
               }}
             >

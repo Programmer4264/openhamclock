@@ -400,6 +400,8 @@
   "station.settings.locator": "QTH-локатор (или введите координаты ниже)",
   "station.settings.locator.placeholder": "FN20nc",
   "station.settings.longitude": "Долгота",
+  "station.settings.monoFont": "Моноширинный шрифт",
+  "station.settings.monoFont.describe": "Используется в отображении данных — списки спотов, позывные, частоты. Выберите вариант с перечёркнутым нулём, чтобы чётко отличать 0 от 8.",
   "station.settings.mouseZoom": "Чувствительность колеса мыши",
   "station.settings.mouseZoom.describeMax": "Больше",
   "station.settings.mouseZoom.describeMin": "Меньше",

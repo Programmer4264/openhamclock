@@ -451,7 +451,7 @@ export default function EmcommLayout(props) {
           ? `<br><span style="color:#888">${formatDistance(gw.distance, config.allUnits?.dist || 'imperial')} away</span>`
           : '';
       const popupHtml = `
-        <div style="font-family:'JetBrains Mono',monospace;font-size:11px;min-width:180px">
+        <div style="font-family:var(--font-mono);font-size:11px;min-width:180px">
           <b style="color:#3b82f6">📬 ${esc(gw.callsign)}</b>
           ${gw.hasEmcomm ? ' <span style="color:#ef4444;font-size:9px;font-weight:700">EMCOMM</span>' : ''}
           <br><span style="color:#888;font-size:10px">Grid ${esc(gw.gridsquare)}</span>${distanceLine}
@@ -515,7 +515,7 @@ export default function EmcommLayout(props) {
         display: 'grid',
         gridTemplateRows: '44px 1fr',
         background: '#0a0a0a',
-        fontFamily: 'JetBrains Mono, monospace',
+        fontFamily: 'var(--font-mono)',
         overflow: 'hidden',
         color: '#ccc',
       }}
@@ -557,7 +557,7 @@ export default function EmcommLayout(props) {
           </span>
           {loading && <span style={{ color: '#888', fontSize: '11px', marginLeft: '8px' }}>Loading...</span>}
         </div>
-        <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '14px' }}>
+        <div style={{ fontFamily: 'var(--font-mono)', fontSize: '14px' }}>
           <span style={{ color: '#fff', fontWeight: 600 }}>
             {utcTime}:{seconds}
           </span>
@@ -858,7 +858,7 @@ export default function EmcommLayout(props) {
                   >
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                       <div>
-                        <span style={{ color: '#3b82f6', fontWeight: 600, fontFamily: 'JetBrains Mono, monospace' }}>
+                        <span style={{ color: '#3b82f6', fontWeight: 600, fontFamily: 'var(--font-mono)' }}>
                           {gw.callsign}
                         </span>
                         {gw.hasEmcomm && (
@@ -882,7 +882,7 @@ export default function EmcommLayout(props) {
                             borderRadius: '2px',
                             background: '#1a1f2e',
                             color: winlinkModeColor(c.mode),
-                            fontFamily: 'JetBrains Mono, monospace',
+                            fontFamily: 'var(--font-mono)',
                           }}
                         >
                           {(c.frequency / 1e6).toFixed(3)} {c.modeLabel}

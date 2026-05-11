@@ -478,7 +478,7 @@ export const DockableApp = ({
       <div style={{ fontSize: '14px', color: 'var(--accent-cyan)', fontWeight: '700', marginBottom: '10px' }}>
         📍 DE - YOUR LOCATION
       </div>
-      <div style={{ fontFamily: 'JetBrains Mono', fontSize: '14px' }}>
+      <div style={{ fontFamily: 'var(--font-mono)', fontSize: '14px' }}>
         <div style={{ color: 'var(--accent-amber)', fontSize: '22px', fontWeight: '700' }}>{deGrid}</div>
         <div style={{ color: 'var(--text-secondary)', fontSize: '13px', marginTop: '4px' }}>
           {config.location.lat.toFixed(4)}°, {config.location.lon.toFixed(4)}°
@@ -525,7 +525,7 @@ export const DockableApp = ({
                 borderRadius: '4px',
                 padding: '2px 6px',
                 fontSize: '10px',
-                fontFamily: 'JetBrains Mono, monospace',
+                fontFamily: 'var(--font-mono)',
                 cursor: 'pointer',
                 display: 'flex',
                 alignItems: 'center',
@@ -537,7 +537,7 @@ export const DockableApp = ({
           )}
         </div>
         <div style={{ display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
-          <div style={{ fontFamily: 'JetBrains Mono', fontSize: '14px', flex: '1 1 auto', minWidth: 0 }}>
+          <div style={{ fontFamily: 'var(--font-mono)', fontSize: '14px', flex: '1 1 auto', minWidth: 0 }}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px', minWidth: 0 }}>
                 <DXGridInput
@@ -554,7 +554,7 @@ export const DockableApp = ({
                 {dxCallsign && (
                   <span
                     style={{
-                      fontFamily: 'JetBrains Mono',
+                      fontFamily: 'var(--font-mono)',
                       fontSize: '22px',
                       fontWeight: '900',
                       color: 'var(--accent-amber)',
@@ -580,7 +580,7 @@ export const DockableApp = ({
                     borderRadius: '4px',
                     padding: '4px 8px',
                     fontSize: '12px',
-                    fontFamily: 'JetBrains Mono, monospace',
+                    fontFamily: 'var(--font-mono)',
                     cursor: 'pointer',
                     flex: '0 0 auto',
                   }}
@@ -1162,7 +1162,7 @@ export const DockableApp = ({
             style={{
               fontSize: '11px',
               fontWeight: '700',
-              fontFamily: 'JetBrains Mono, monospace',
+              fontFamily: 'var(--font-mono)',
               padding: '0 3px',
               opacity: currentZoom <= 0.7 ? 0.3 : 1,
             }}
@@ -1182,7 +1182,7 @@ export const DockableApp = ({
               }}
               style={{
                 fontSize: '9px',
-                fontFamily: 'JetBrains Mono, monospace',
+                fontFamily: 'var(--font-mono)',
                 padding: '0 2px',
                 color: 'var(--accent-amber)',
               }}
@@ -1203,7 +1203,7 @@ export const DockableApp = ({
             style={{
               fontSize: '11px',
               fontWeight: '700',
-              fontFamily: 'JetBrains Mono, monospace',
+              fontFamily: 'var(--font-mono)',
               padding: '0 3px',
               opacity: currentZoom >= 2.0 ? 0.3 : 1,
             }}
@@ -1380,7 +1380,7 @@ export const DockableApp = ({
             }}
             onClick={(e) => e.stopPropagation()}
           >
-            <h3 style={{ margin: '0 0 16px', color: '#00ffcc', fontFamily: 'JetBrains Mono', fontSize: '14px' }}>
+            <h3 style={{ margin: '0 0 16px', color: '#00ffcc', fontFamily: 'var(--font-mono)', fontSize: '14px' }}>
               Add Panel
             </h3>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px' }}>
@@ -1418,7 +1418,7 @@ export const DockableApp = ({
                         <span style={{ fontSize: '16px', marginRight: '8px', color: p.iconColor || 'inherit' }}>
                           {p.icon}
                         </span>
-                        <span style={{ color: '#e2e8f0', fontFamily: 'JetBrains Mono', fontSize: '12px' }}>
+                        <span style={{ color: '#e2e8f0', fontFamily: 'var(--font-mono)', fontSize: '12px' }}>
                           {p.name}
                         </span>
                       </button>
@@ -1430,7 +1430,7 @@ export const DockableApp = ({
                             gridColumn: '1 / -1',
                             fontSize: '10px',
                             color: '#718096',
-                            fontFamily: 'JetBrains Mono',
+                            fontFamily: 'var(--font-mono)',
                             marginTop: '6px',
                             borderTop: '1px solid #2d3748',
                             paddingTop: '8px',
@@ -1460,7 +1460,7 @@ export const DockableApp = ({
                             <span style={{ fontSize: '14px', marginRight: '6px', color: p.iconColor || 'inherit' }}>
                               {p.icon}
                             </span>
-                            <span style={{ color: '#cbd5e0', fontFamily: 'JetBrains Mono', fontSize: '11px' }}>
+                            <span style={{ color: '#cbd5e0', fontFamily: 'var(--font-mono)', fontSize: '11px' }}>
                               {p.name}
                             </span>
                           </button>

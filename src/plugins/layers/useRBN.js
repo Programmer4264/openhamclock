@@ -462,7 +462,7 @@ export function useLayer({
         });
 
         marker.bindPopup(`
-          <div style="font-family: 'JetBrains Mono', monospace;">
+          <div style="font-family: var(--font-mono);">
             <strong>${esc(dxCall)}</strong><br>
             Spotted by: <strong>${esc(skimmerCall)}</strong><br>
             SNR: <strong>${snr} dB</strong><br>
@@ -519,7 +519,7 @@ export function useLayer({
         });
 
         marker.bindPopup(`
-          <div style="font-family: 'JetBrains Mono', monospace;">
+          <div style="font-family: var(--font-mono);">
             <strong>📡 ${esc(skimmerCall)}</strong><br>
             Heard: <strong>${esc(callsign)}</strong><br>
             SNR: <strong>${snr} dB</strong><br>

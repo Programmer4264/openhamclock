@@ -213,7 +213,7 @@ export default function ModernLayout(props) {
       <div style={{ fontSize: '14px', color: 'var(--accent-cyan)', fontWeight: '700', marginBottom: '10px' }}>
         {t('app.dxLocation.deTitle')}
       </div>
-      <div style={{ fontFamily: 'JetBrains Mono', fontSize: '14px' }}>
+      <div style={{ fontFamily: 'var(--font-mono)', fontSize: '14px' }}>
         <div style={{ color: 'var(--accent-amber)', fontSize: '22px', fontWeight: '700', letterSpacing: '1px' }}>
           {deGrid}
         </div>
@@ -261,7 +261,7 @@ export default function ModernLayout(props) {
           {dxLocked ? '🔒' : '🔓'}
         </button>
       </div>
-      <div style={{ fontFamily: 'JetBrains Mono', fontSize: '14px' }}>
+      <div style={{ fontFamily: 'var(--font-mono)', fontSize: '14px' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
           <DXGridInput
             dxGrid={dxGrid}
@@ -278,7 +278,7 @@ export default function ModernLayout(props) {
           {dxCallsign && (
             <span
               style={{
-                fontFamily: 'JetBrains Mono',
+                fontFamily: 'var(--font-mono)',
                 fontSize: '22px',
                 fontWeight: '900',
                 color: 'var(--accent-amber)',
@@ -300,7 +300,7 @@ export default function ModernLayout(props) {
               borderRadius: '4px',
               padding: '4px 8px',
               fontSize: '12px',
-              fontFamily: 'JetBrains Mono, monospace',
+              fontFamily: 'var(--font-mono)',
               cursor: 'pointer',
               flex: '0 0 auto',
             }}

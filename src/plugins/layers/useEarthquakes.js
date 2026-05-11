@@ -237,7 +237,7 @@ export function useLayer({ enabled = false, opacity = 0.9, map = null, lowMemory
 
       // Add popup with details
       circle.bindPopup(`
-        <div style="font-family: 'JetBrains Mono', monospace; min-width: 200px;">
+        <div style="font-family: var(--font-mono); min-width: 200px;">
           <div style="font-size: 16px; font-weight: bold; color: ${color}; margin-bottom: 8px;">
             ${isNew ? '🆕 ' : ''}M${mag.toFixed(1)} ${esc(props.type) === 'earthquake' ? '🌋' : '⚡'}
           </div>

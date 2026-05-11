@@ -473,7 +473,7 @@ export function useLayer({ enabled = false, opacity = 0.5, map = null }) {
         dashArray: '10, 5',
       });
       terminatorLine.bindPopup(`
-        <div style="font-family: 'JetBrains Mono', monospace;">
+        <div style="font-family: var(--font-mono);">
           <b>🌅 Solar Terminator</b><br>
           Sun altitude: 0°<br>
           Enhanced HF propagation zone<br>
@@ -504,7 +504,7 @@ export function useLayer({ enabled = false, opacity = 0.5, map = null }) {
           opacity: opacity * 0.3,
         });
         enhancedPoly.bindPopup(`
-          <div style="font-family: 'JetBrains Mono', monospace;">
+          <div style="font-family: var(--font-mono);">
             <b>⭐ Enhanced DX Zone</b><br>
             Best HF propagation window<br>
             ±${BAND_WIDTH}° from terminator<br>
@@ -562,7 +562,7 @@ export function useLayer({ enabled = false, opacity = 0.5, map = null }) {
               dashArray: tw.weight >= 2 ? '5, 5' : tw.weight >= 1.5 ? '3, 3' : '2, 2',
             });
             line.bindPopup(`
-              <div style="font-family: 'JetBrains Mono', monospace;">
+              <div style="font-family: var(--font-mono);">
                 <b>${tw.icon} ${tw.name}</b><br>
                 Sun altitude: ${tw.alt}°<br>
                 ${tw.desc}

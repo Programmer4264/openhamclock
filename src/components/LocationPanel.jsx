@@ -54,7 +54,7 @@ export const LocationPanel = ({
           <span
             style={{
               color: 'var(--accent-green)',
-              fontFamily: 'JetBrains Mono, monospace',
+              fontFamily: 'var(--font-mono)',
               fontSize: '12px',
             }}
           >
@@ -65,7 +65,7 @@ export const LocationPanel = ({
           style={{
             fontSize: '11px',
             color: 'var(--text-muted)',
-            fontFamily: 'JetBrains Mono, monospace',
+            fontFamily: 'var(--font-mono)',
           }}
         >
           {config.location.lat.toFixed(4)}°, {config.location.lon.toFixed(4)}°
@@ -112,7 +112,7 @@ export const LocationPanel = ({
                   borderRadius: '4px',
                   padding: '2px 6px',
                   fontSize: '10px',
-                  fontFamily: 'JetBrains Mono, monospace',
+                  fontFamily: 'var(--font-mono)',
                   cursor: 'pointer',
                   display: 'flex',
                   alignItems: 'center',
@@ -126,7 +126,7 @@ export const LocationPanel = ({
           <span
             style={{
               color: 'var(--accent-green)',
-              fontFamily: 'JetBrains Mono, monospace',
+              fontFamily: 'var(--font-mono)',
               fontSize: '12px',
             }}
           >
@@ -137,7 +137,7 @@ export const LocationPanel = ({
           style={{
             fontSize: '11px',
             color: 'var(--text-muted)',
-            fontFamily: 'JetBrains Mono, monospace',
+            fontFamily: 'var(--font-mono)',
           }}
         >
           {dxLocation.lat.toFixed(4)}°, {dxLocation.lon.toFixed(4)}°

@@ -79,7 +79,7 @@ export function useLayer({ enabled = false, opacity = 0.85, map = null, callsign
           color: #fff;
           font-size: 9px;
           font-weight: 700;
-          font-family: 'JetBrains Mono', monospace;
+          font-family: var(--font-mono);
           padding: 2px 5px;
           border-radius: 4px;
           border: 1px solid ${border};
@@ -100,7 +100,7 @@ export function useLayer({ enabled = false, opacity = 0.85, map = null, callsign
       const ageStr = user.age < 1 ? 'just now' : `${user.age}min ago`;
       const popupColor = isMe ? '#22c55e' : '#6366f1';
       marker.bindPopup(`
-        <div style="font-family: 'JetBrains Mono', monospace; min-width: 140px;">
+        <div style="font-family: var(--font-mono); min-width: 140px;">
           <div data-qrz-call="${esc(user.call)}" style="font-size: 14px; font-weight: bold; color: ${popupColor}; margin-bottom: 4px;">
             👥 ${esc(user.call)}${isMe ? ' (you)' : ''}
           </div>

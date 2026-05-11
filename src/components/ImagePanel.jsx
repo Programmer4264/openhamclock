@@ -143,7 +143,7 @@ export const ImagePanel = () => {
           style={{
             color: 'var(--text-muted, #888)',
             fontSize: '12px',
-            fontFamily: 'JetBrains Mono, monospace',
+            fontFamily: 'var(--font-mono)',
             textAlign: 'center',
             lineHeight: 1.6,
           }}
@@ -156,7 +156,7 @@ export const ImagePanel = () => {
           style={{
             color: 'var(--text-muted, #666)',
             fontSize: '10px',
-            fontFamily: 'JetBrains Mono, monospace',
+            fontFamily: 'var(--font-mono)',
           }}
         >
           PNG, JPG, GIF, SVG · {MAX_SIZE_MB}MB max
@@ -166,7 +166,7 @@ export const ImagePanel = () => {
             style={{
               color: '#ff6b6b',
               fontSize: '11px',
-              fontFamily: 'JetBrains Mono, monospace',
+              fontFamily: 'var(--font-mono)',
               marginTop: '4px',
             }}
           >
@@ -229,7 +229,7 @@ export const ImagePanel = () => {
               borderRadius: '4px',
               padding: '4px 8px',
               fontSize: '10px',
-              fontFamily: 'JetBrains Mono, monospace',
+              fontFamily: 'var(--font-mono)',
               color: 'rgba(255, 255, 255, 0.8)',
               cursor: 'pointer',
               backdropFilter: 'blur(4px)',
@@ -246,7 +246,7 @@ export const ImagePanel = () => {
               borderRadius: '4px',
               padding: '4px 8px',
               fontSize: '10px',
-              fontFamily: 'JetBrains Mono, monospace',
+              fontFamily: 'var(--font-mono)',
               color: 'rgba(255, 100, 100, 0.9)',
               cursor: 'pointer',
               backdropFilter: 'blur(4px)',
@@ -265,7 +265,7 @@ export const ImagePanel = () => {
             left: '8px',
             color: '#ff6b6b',
             fontSize: '10px',
-            fontFamily: 'JetBrains Mono, monospace',
+            fontFamily: 'var(--font-mono)',
             background: 'rgba(0, 0, 0, 0.7)',
             padding: '3px 6px',
             borderRadius: '3px',

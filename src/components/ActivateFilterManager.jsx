@@ -149,7 +149,7 @@ export const ActivateFilterManager = ({ filters, onFilterChange, isOpen, onClose
     color: selected ? '#000' : 'var(--text-secondary)',
     fontSize: '12px',
     cursor: 'pointer',
-    fontFamily: 'JetBrains Mono, monospace',
+    fontFamily: 'var(--font-mono)',
     fontWeight: selected ? '600' : '400',
   });
 
@@ -236,7 +236,7 @@ export const ActivateFilterManager = ({ filters, onFilterChange, isOpen, onClose
             borderRadius: '4px',
             color: 'var(--text-primary)',
             fontSize: '13px',
-            fontFamily: 'JetBrains Mono',
+            fontFamily: 'var(--font-mono)',
           }}
         />
         <button

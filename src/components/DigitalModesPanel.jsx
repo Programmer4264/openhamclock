@@ -201,7 +201,7 @@ const DigitalModesPanel = () => {
                 >
                   <div>
                     <span style={{ color: 'var(--text-muted)' }}>Freq: </span>
-                    <span style={{ color: 'var(--accent-cyan)', fontFamily: 'JetBrains Mono, monospace' }}>
+                    <span style={{ color: 'var(--accent-cyan)', fontFamily: 'var(--font-mono)' }}>
                       {formatFreq(s.lastFrequency)}
                     </span>
                   </div>
@@ -287,7 +287,7 @@ const DigitalModesPanel = () => {
                         border: '1px solid var(--border-color)',
                         borderRadius: '3px',
                         color: 'var(--text-primary)',
-                        fontFamily: 'JetBrains Mono, monospace',
+                        fontFamily: 'var(--font-mono)',
                       }}
                     />
                     <button

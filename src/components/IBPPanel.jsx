@@ -41,7 +41,7 @@ export const IBPPanel = ({ deLat = null, deLon = null, units = 'metric' }) => {
           title={t('ibp.cycleCountdown.tooltip', { secs: cycleSecondsLeft })}
           style={{
             fontSize: '10px',
-            fontFamily: 'JetBrains Mono, monospace',
+            fontFamily: 'var(--font-mono)',
             color: 'var(--text-muted)',
           }}
         >
@@ -101,13 +101,13 @@ export const IBPPanel = ({ deLat = null, deLon = null, units = 'metric' }) => {
                     fontSize: '11px',
                     fontWeight: '700',
                     color: bandColor,
-                    fontFamily: 'JetBrains Mono, monospace',
+                    fontFamily: 'var(--font-mono)',
                     lineHeight: 1.2,
                   }}
                 >
                   {band.label}
                 </div>
-                <div style={{ fontSize: '9px', color: 'var(--text-muted)', fontFamily: 'JetBrains Mono, monospace' }}>
+                <div style={{ fontSize: '9px', color: 'var(--text-muted)', fontFamily: 'var(--font-mono)' }}>
                   {band.mhz.toFixed(3)}
                 </div>
               </div>
@@ -119,7 +119,7 @@ export const IBPPanel = ({ deLat = null, deLon = null, units = 'metric' }) => {
                     fontSize: '12px',
                     fontWeight: '700',
                     color: 'var(--text-primary)',
-                    fontFamily: 'JetBrains Mono, monospace',
+                    fontFamily: 'var(--font-mono)',
                     whiteSpace: 'nowrap',
                     overflow: 'hidden',
                     textOverflow: 'ellipsis',
@@ -144,7 +144,7 @@ export const IBPPanel = ({ deLat = null, deLon = null, units = 'metric' }) => {
                     style={{
                       fontSize: '9px',
                       color: 'var(--accent-green, #4caf50)',
-                      fontFamily: 'JetBrains Mono, monospace',
+                      fontFamily: 'var(--font-mono)',
                       whiteSpace: 'nowrap',
                     }}
                   >
@@ -164,7 +164,7 @@ export const IBPPanel = ({ deLat = null, deLon = null, units = 'metric' }) => {
                       fontSize: '10px',
                       fontWeight: '600',
                       color: 'var(--text-secondary)',
-                      fontFamily: 'JetBrains Mono, monospace',
+                      fontFamily: 'var(--font-mono)',
                       whiteSpace: 'nowrap',
                     }}
                   >

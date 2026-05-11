@@ -225,7 +225,7 @@ export default function ClassicLayout(props) {
     fontSize: '11px',
     cursor: 'pointer',
     borderRadius: '2px',
-    fontFamily: 'JetBrains Mono, monospace',
+    fontFamily: 'var(--font-mono)',
     fontWeight: '700',
   });
 
@@ -606,7 +606,7 @@ export default function ClassicLayout(props) {
                 gridTemplateRows: `repeat(${bands.length}, 1fr)`,
                 gap: '1px',
                 fontSize: '11px',
-                fontFamily: 'JetBrains Mono, monospace',
+                fontFamily: 'var(--font-mono)',
                 flex: 1,
                 minHeight: 0,
               }}
@@ -792,7 +792,7 @@ export default function ClassicLayout(props) {
         display: 'grid',
         gridTemplateRows: '1fr 210px 28px',
         background: '#000',
-        fontFamily: 'JetBrains Mono, monospace',
+        fontFamily: 'var(--font-mono)',
         overflow: 'hidden',
         color: '#ccc',
       }}
@@ -833,7 +833,7 @@ export default function ClassicLayout(props) {
                   fontSize: '44px',
                   fontWeight: '700',
                   color: '#00ff00',
-                  fontFamily: 'JetBrains Mono, monospace',
+                  fontFamily: 'var(--font-mono)',
                   lineHeight: 1,
                 }}
               >
@@ -1059,7 +1059,7 @@ export default function ClassicLayout(props) {
               gap: '3px',
               alignItems: 'center',
               fontSize: '11px',
-              fontFamily: 'JetBrains Mono, monospace',
+              fontFamily: 'var(--font-mono)',
               fontWeight: '700',
             }}
           >
@@ -1202,7 +1202,7 @@ export default function ClassicLayout(props) {
         display: 'flex',
         flexDirection: 'column',
         background: 'var(--bg-primary)',
-        fontFamily: 'JetBrains Mono, monospace',
+        fontFamily: 'var(--font-mono)',
         overflow: 'hidden',
       }}
     >
@@ -1502,7 +1502,7 @@ export default function ClassicLayout(props) {
               gap: '3px',
               alignItems: 'center',
               fontSize: '11px',
-              fontFamily: 'JetBrains Mono, monospace',
+              fontFamily: 'var(--font-mono)',
               fontWeight: '700',
             }}
           >
@@ -1786,7 +1786,7 @@ export default function ClassicLayout(props) {
         display: 'flex',
         flexDirection: 'column',
         background: 'var(--bg-primary)',
-        fontFamily: 'JetBrains Mono, monospace',
+        fontFamily: 'var(--font-mono)',
         overflow: 'hidden',
       }}
     >
@@ -2169,7 +2169,7 @@ export default function ClassicLayout(props) {
                   style={{
                     color: 'var(--accent-amber)',
                     fontSize: '14px',
-                    fontFamily: 'JetBrains Mono',
+                    fontFamily: 'var(--font-mono)',
                     fontWeight: '900',
                     whiteSpace: 'nowrap',
                   }}
@@ -2212,7 +2212,7 @@ export default function ClassicLayout(props) {
               gap: '3px',
               alignItems: 'center',
               fontSize: '11px',
-              fontFamily: 'JetBrains Mono, monospace',
+              fontFamily: 'var(--font-mono)',
               fontWeight: '700',
             }}
           >

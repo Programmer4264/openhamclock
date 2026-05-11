@@ -456,7 +456,7 @@ export function useLayer({ enabled = false, map = null, callsign, locator, lowMe
               placeholder="${gridFilter || 'e.g. FN03'}"
               value="${gridFilter || ''}"
               maxlength="6"
-              style="width: 100%; padding: 4px; background: var(--bg-tertiary); color: var(--text-primary); border: 1px solid var(--border-color); border-radius: 3px; font-family: 'JetBrains Mono', monospace; text-transform: uppercase;" />
+              style="width: 100%; padding: 4px; background: var(--bg-tertiary); color: var(--text-primary); border: 1px solid var(--border-color); border-radius: 3px; font-family: var(--font-mono); text-transform: uppercase;" />
             <div style="font-size: 9px; color: var(--text-muted); margin-top: 2px;">
               Prefix match: FN matches FN03, FN21, etc.
             </div>
@@ -881,7 +881,7 @@ export function useLayer({ enabled = false, map = null, callsign, locator, lowMe
       const spotQStr = spot.snr && spot.distance ? Math.round(spot.distance / Math.pow(10, spot.snr / 10)) : null;
 
       path.bindPopup(`
-        <div style="font-family: 'JetBrains Mono', monospace; min-width: 240px;">
+        <div style="font-family: var(--font-mono); min-width: 240px;">
           <div style="font-size: 13px; font-weight: bold; color: ${getSNRColor(spot.snr)}; margin-bottom: 8px; text-align: center;">
             ${esc(spot.sender)} ⇢ ${esc(spot.receiver)}
           </div>
@@ -935,7 +935,7 @@ export function useLayer({ enabled = false, map = null, callsign, locator, lowMe
         });
         // Build detailed tooltip for TX
         let txDetails = `
-          <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; min-width: 220px;">
+          <div style="font-family: var(--font-mono); font-size: 11px; min-width: 220px;">
             <div style="font-weight: bold; color: #ff6600; margin-bottom: 6px; font-size: 12px;">📡 TX Station</div>
             <div style="margin-bottom: 6px;"><b style="font-size: 13px;">${esc(spot.sender)}</b> ⇢ <b style="font-size: 13px;">${esc(spot.receiver)}</b></div>
             <div style="opacity: 0.7; margin-bottom: 8px;">Grid: ${esc(spot.senderGrid)}</div>
@@ -1002,7 +1002,7 @@ export function useLayer({ enabled = false, map = null, callsign, locator, lowMe
         });
         // Build detailed tooltip for RX
         let rxDetails = `
-          <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; min-width: 220px;">
+          <div style="font-family: var(--font-mono); font-size: 11px; min-width: 220px;">
             <div style="font-weight: bold; color: #0088ff; margin-bottom: 6px; font-size: 12px;">📻 RX Station</div>
             <div style="margin-bottom: 6px;"><b style="font-size: 13px;">${esc(spot.sender)}</b> ⇢ <b style="font-size: 13px;">${esc(spot.receiver)}</b></div>
             <div style="opacity: 0.7; margin-bottom: 8px;">Grid: ${esc(spot.receiverGrid)}</div>
@@ -1351,7 +1351,7 @@ export function useLayer({ enabled = false, map = null, callsign, locator, lowMe
         if (i === 0) {
           const popupContent = point.grid
             ? `
-            <div style="font-family: 'JetBrains Mono', monospace;">
+            <div style="font-family: var(--font-mono);">
               <b>🔥 Grid: ${point.grid}</b><br>
               Total Activity: ${point.count}<br>
               ${point.stationCount ? `Stations: ${point.stationCount}<br>` : ''}
@@ -1360,7 +1360,7 @@ export function useLayer({ enabled = false, map = null, callsign, locator, lowMe
             </div>
           `
             : `
-            <div style="font-family: 'JetBrains Mono', monospace;">
+            <div style="font-family: var(--font-mono);">
               <b>🔥 Activity Hot Spot</b><br>
               Stations: ${point.count}<br>
               Lat: ${point.lat.toFixed(2)}<br>

@@ -53,7 +53,7 @@ export const Header = ({
         borderRadius: '6px',
         padding: isMobile ? '4px 6px' : '6px 12px',
         minHeight: isMobile ? '38px' : '46px',
-        fontFamily: 'JetBrains Mono, monospace',
+        fontFamily: 'var(--font-mono)',
         boxSizing: 'border-box',
       }}
     >

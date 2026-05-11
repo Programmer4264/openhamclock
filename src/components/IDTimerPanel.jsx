@@ -144,7 +144,7 @@ export const IDTimerPanel = ({ callsign }) => {
               padding: '1px 6px',
               borderRadius: '3px',
               fontSize: '9px',
-              fontFamily: 'JetBrains Mono',
+              fontFamily: 'var(--font-mono)',
               cursor: 'pointer',
             }}
           >
@@ -160,7 +160,7 @@ export const IDTimerPanel = ({ callsign }) => {
               padding: '1px 6px',
               borderRadius: '3px',
               fontSize: '9px',
-              fontFamily: 'JetBrains Mono',
+              fontFamily: 'var(--font-mono)',
               cursor: 'pointer',
             }}
           >
@@ -218,7 +218,7 @@ export const IDTimerPanel = ({ callsign }) => {
           />
         </div>
 
-        <div style={{ fontSize: '9px', color: 'var(--text-muted, #888)', fontFamily: 'JetBrains Mono, monospace' }}>
+        <div style={{ fontSize: '9px', color: 'var(--text-muted, #888)', fontFamily: 'var(--font-mono)' }}>
           {expired ? 'TIME TO ID!' : !active ? 'Stopped — press Start when on the air' : 'Next station ID'}
         </div>
       </div>
@@ -273,7 +273,7 @@ export const IDTimerPanel = ({ callsign }) => {
             >
               {callsign || 'N0CALL'}
             </div>
-            <div style={{ fontSize: '13px', color: '#888', fontFamily: 'JetBrains Mono, monospace' }}>
+            <div style={{ fontSize: '13px', color: '#888', fontFamily: 'var(--font-mono)' }}>
               Click anywhere to reset timer
             </div>
           </div>

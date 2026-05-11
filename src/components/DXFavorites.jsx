@@ -206,7 +206,7 @@ export function DXFavorites({ dxLocation, dxGrid, onDXChange, dxLocked }) {
                 <span
                   onClick={() => selectFavorite(fav)}
                   style={{
-                    fontFamily: 'JetBrains Mono, monospace',
+                    fontFamily: 'var(--font-mono)',
                     fontSize: '13px',
                     fontWeight: '600',
                     color: fav.grid === currentGrid ? 'var(--accent-green)' : 'var(--text-primary)',

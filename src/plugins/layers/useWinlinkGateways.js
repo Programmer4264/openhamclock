@@ -99,7 +99,7 @@ function popupHtml(gw) {
   const services = [...new Set(gw.channels.map((c) => c.serviceCode))].join(' / ');
 
   return `
-    <div style="font-family:'JetBrains Mono',monospace;font-size:11px;min-width:200px;">
+    <div style="font-family:var(--font-mono);font-size:11px;min-width:200px;">
       <div style="font-weight:700;font-size:13px;margin-bottom:2px;">${esc(gw.callsign)}</div>
       <div style="color:var(--text-muted);font-size:10px;margin-bottom:6px;">Grid ${esc(gw.gridsquare)} • ${esc(services)}${hours ? ` • ${esc(hours)} UTC` : ''}</div>
       <table style="border-collapse:collapse;font-size:10px;">${rows}</table>
@@ -229,7 +229,7 @@ export function useLayer({ enabled = false, opacity = 0.85, map = null }) {
         div.innerHTML = `
           <div class="floating-panel-header">📬 Winlink Gateways</div>
           <div id="winlink-stats" style="
-            font-family:'JetBrains Mono',monospace;
+            font-family:var(--font-mono);
             font-size:11px;color:var(--text-secondary);
             margin-bottom:8px;
           ">Loading…</div>

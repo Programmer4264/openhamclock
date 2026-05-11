@@ -95,7 +95,7 @@ export const PotaSotaPanel = ({
     borderBottom: activeTab === tab ? `2px solid ${tabColors[tab]}` : '2px solid transparent',
     color: activeTab === tab ? tabColors[tab] : '#666',
     fontSize: tab === 'wwbota' ? '9px' : '10px',
-    fontFamily: 'JetBrains Mono, monospace',
+    fontFamily: 'var(--font-mono)',
     fontWeight: activeTab === tab ? '700' : '400',
     cursor: 'pointer',
     transition: 'all 0.15s ease',

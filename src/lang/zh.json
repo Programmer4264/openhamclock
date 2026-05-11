@@ -400,6 +400,8 @@
   "station.settings.locator": "网格座标 (或在下方输入经纬度)",
   "station.settings.locator.placeholder": "例如 FN20nc",
   "station.settings.longitude": "经度",
+  "station.settings.monoFont": "等宽字体",
+  "station.settings.monoFont.describe": "用于数据显示 — 频谱点列表、呼号、频率。选择带斜线零的变体以清晰区分 0 和 8。",
   "station.settings.mouseZoom": "鼠标滚轮灵敏度",
   "station.settings.mouseZoom.describeMax": "较高",
   "station.settings.mouseZoom.describeMin": "较低",

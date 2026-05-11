@@ -113,7 +113,7 @@ export const useLayer = ({ map, enabled, opacity }) => {
         : '';
 
       marker.bindPopup(
-        `<div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; min-width: 160px;">
+        `<div style="font-family: var(--font-mono); font-size: 11px; min-width: 160px;">
           <div style="font-weight:700; color:#fff; font-size:13px; margin-bottom:4px;">
             📡 ${esc(node.longName || node.shortName || node.id)}
           </div>

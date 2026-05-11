@@ -241,7 +241,7 @@ function MessagesTab({ messages, nodes, sendMessage }) {
     borderRadius: '3px',
     color: 'var(--accent-red)',
     cursor: 'pointer',
-    fontFamily: 'JetBrains Mono, monospace',
+    fontFamily: 'var(--font-mono)',
   };
 
   return (
@@ -278,7 +278,7 @@ function MessagesTab({ messages, nodes, sendMessage }) {
                       style={{
                         fontWeight: '700',
                         color: 'var(--accent-cyan)',
-                        fontFamily: 'JetBrains Mono, monospace',
+                        fontFamily: 'var(--font-mono)',
                       }}
                     >
                       {src}
@@ -338,7 +338,7 @@ function MessagesTab({ messages, nodes, sendMessage }) {
             borderTop: '1px solid var(--border-color)',
             fontSize: '10px',
             color: 'var(--accent-red)',
-            fontFamily: 'JetBrains Mono, monospace',
+            fontFamily: 'var(--font-mono)',
           }}
         >
           <span>{t('meshcomPanel.replyingTo', { call: primaryCall(selectedMsg.src) })}</span>
@@ -386,7 +386,7 @@ function MessagesTab({ messages, nodes, sendMessage }) {
               border: '1px solid var(--border-color)',
               borderRadius: '3px',
               color: 'var(--text-primary)',
-              fontFamily: 'JetBrains Mono, monospace',
+              fontFamily: 'var(--font-mono)',
             }}
           />
           <datalist id="meshcom-to-suggestions">
@@ -608,7 +608,7 @@ const MeshComPanel = ({ showOnMap, onToggleMap, onSpotClick, onHoverSpot }) => {
             padding: '2px 8px',
             borderRadius: '4px',
             fontSize: '10px',
-            fontFamily: 'JetBrains Mono',
+            fontFamily: 'var(--font-mono)',
             cursor: 'pointer',
           }}
         >

@@ -263,7 +263,7 @@ export function useLayer({ enabled = false, opacity = 0.7, map = null, lowMemory
       const certainty = props.certainty || '';
 
       marker.bindPopup(`
-        <div style="font-family: 'JetBrains Mono', monospace; min-width: 250px; max-width: 350px;">
+        <div style="font-family: var(--font-mono); min-width: 250px; max-width: 350px;">
           <div style="font-size: 14px; font-weight: bold; color: ${style.color}; margin-bottom: 6px;">
             ${isNew ? '🆕 ' : ''}${style.icon} ${esc(event)}
           </div>

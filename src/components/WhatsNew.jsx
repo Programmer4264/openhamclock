@@ -1380,7 +1380,7 @@ export default function WhatsNew({ showWhatsNew }) {
           <div
             style={{
               fontSize: '13px',
-              fontFamily: "'JetBrains Mono', monospace",
+              fontFamily: 'var(--font-mono)',
               color: 'var(--accent-cyan, #00ffcc)',
               letterSpacing: '0.1em',
               textTransform: 'uppercase',
@@ -1520,7 +1520,7 @@ export default function WhatsNew({ showWhatsNew }) {
               padding: '10px 32px',
               fontSize: '14px',
               fontWeight: '700',
-              fontFamily: "'JetBrains Mono', monospace",
+              fontFamily: 'var(--font-mono)',
               cursor: 'pointer',
               transition: 'opacity 0.15s',
             }}

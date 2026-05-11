@@ -91,7 +91,7 @@ export function DXGridInput({ dxGrid, onDXChange, dxLocked, style }) {
         width: '7ch',
         padding: 0,
         margin: 0,
-        fontFamily: 'JetBrains Mono, monospace',
+        fontFamily: 'var(--font-mono)',
         ...style,
       }}
     />

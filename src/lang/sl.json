@@ -400,6 +400,8 @@
   "station.settings.locator": "Lokator (ali vnesite širino/dolžino spodaj)",
   "station.settings.locator.placeholder": "FN20nc",
   "station.settings.longitude": "Zemljepisna dolžina",
+  "station.settings.monoFont": "Enopresledna pisava",
+  "station.settings.monoFont.describe": "Uporabljena pri prikazih podatkov — seznami točk, klicni znaki, frekvence. Izberi različico s prečrtano ničlo za jasno razlikovanje 0 od 8.",
   "station.settings.mouseZoom": "Občutljivost miškinega kolesca",
   "station.settings.mouseZoom.describeMax": "Več",
   "station.settings.mouseZoom.describeMin": "Manj",

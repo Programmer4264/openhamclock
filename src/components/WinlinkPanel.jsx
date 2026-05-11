@@ -288,7 +288,7 @@ const WinlinkPanel = () => {
                         fontSize: '11px',
                         color: 'var(--text-secondary)',
                         whiteSpace: 'pre-wrap',
-                        fontFamily: 'JetBrains Mono, monospace',
+                        fontFamily: 'var(--font-mono)',
                         maxHeight: '200px',
                         overflow: 'auto',
                       }}
@@ -361,7 +361,7 @@ const WinlinkPanel = () => {
                     border: '1px solid var(--border-color)',
                     borderRadius: '3px',
                     color: 'var(--text-primary)',
-                    fontFamily: 'JetBrains Mono, monospace',
+                    fontFamily: 'var(--font-mono)',
                   }}
                 />
                 <input
@@ -452,7 +452,7 @@ const WinlinkPanel = () => {
                           style={{
                             fontWeight: '700',
                             color: 'var(--text-primary)',
-                            fontFamily: 'JetBrains Mono, monospace',
+                            fontFamily: 'var(--font-mono)',
                           }}
                         >
                           {callsign}
@@ -520,7 +520,7 @@ const WinlinkPanel = () => {
                   border: '1px solid var(--border-color)',
                   borderRadius: '3px',
                   color: 'var(--text-primary)',
-                  fontFamily: 'JetBrains Mono, monospace',
+                  fontFamily: 'var(--font-mono)',
                   boxSizing: 'border-box',
                 }}
               />
@@ -541,7 +541,7 @@ const WinlinkPanel = () => {
                   border: '1px solid var(--border-color)',
                   borderRadius: '3px',
                   color: 'var(--text-primary)',
-                  fontFamily: 'JetBrains Mono, monospace',
+                  fontFamily: 'var(--font-mono)',
                   boxSizing: 'border-box',
                 }}
               />

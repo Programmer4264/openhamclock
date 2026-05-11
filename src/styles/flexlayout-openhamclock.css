@@ -54,7 +54,7 @@
   border: none !important;
   border-bottom: 2px solid transparent !important;
   color: #a0aec0 !important;
-  font-family: 'JetBrains Mono', monospace !important;
+  font-family: var(--font-mono) !important;
   font-size: 12px !important;
   font-weight: 500 !important;
   padding: 6px 12px !important;
@@ -225,7 +225,7 @@
   color: #e2e8f0 !important;
   padding: 8px 12px !important;
   border-radius: 4px !important;
-  font-family: 'JetBrains Mono', monospace !important;
+  font-family: var(--font-mono) !important;
   font-size: 12px !important;
 }
 
@@ -256,7 +256,7 @@
   padding: 8px 12px;
   background: rgba(0, 0, 0, 0.3);
   border-bottom: 1px solid var(--border-color);
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--font-mono);
   font-size: 13px;
   font-weight: 600;
 }

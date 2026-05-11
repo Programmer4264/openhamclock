@@ -919,7 +919,7 @@ export default function AzimuthalMap({
             padding: '3px 8px',
             color: '#00ffcc',
             fontSize: '11px',
-            fontFamily: '"JetBrains Mono", monospace',
+            fontFamily: 'var(--font-mono)',
             pointerEvents: 'none',
             whiteSpace: 'nowrap',
             zIndex: 2000,
@@ -979,5 +979,5 @@ const zoomBtnStyle = {
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  fontFamily: '"JetBrains Mono", monospace',
+  fontFamily: 'var(--font-mono)',
 };

@@ -54,7 +54,7 @@ export const DXpeditionPanel = ({ data, loading }) => {
                   borderLeft: `2px solid ${style.border}`,
                   borderRadius: '3px',
                   fontSize: '11px',
-                  fontFamily: 'JetBrains Mono, monospace',
+                  fontFamily: 'var(--font-mono)',
                 }}
               >
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>

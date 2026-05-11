@@ -126,7 +126,7 @@ export const DXClusterPanel = ({
               padding: '2px 8px',
               borderRadius: '4px',
               fontSize: '10px',
-              fontFamily: 'JetBrains Mono',
+              fontFamily: 'var(--font-mono)',
               cursor: 'pointer',
             }}
           >
@@ -143,7 +143,7 @@ export const DXClusterPanel = ({
               padding: '2px 8px',
               borderRadius: '4px',
               fontSize: '10px',
-              fontFamily: 'JetBrains Mono',
+              fontFamily: 'var(--font-mono)',
               cursor: 'pointer',
             }}
           >
@@ -168,7 +168,7 @@ export const DXClusterPanel = ({
             borderRadius: '3px',
             color: 'var(--text-primary)',
             fontSize: '11px',
-            fontFamily: 'JetBrains Mono',
+            fontFamily: 'var(--font-mono)',
           }}
         />
       </div>
@@ -195,7 +195,7 @@ export const DXClusterPanel = ({
             flex: 1,
             overflow: 'auto',
             fontSize: '12px',
-            fontFamily: 'JetBrains Mono, monospace',
+            fontFamily: 'var(--font-mono)',
           }}
         >
           {spots.slice(0, 25).map((spot, i) => {

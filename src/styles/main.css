@@ -20,7 +20,7 @@ body {
 /* Legacy theme uses monospace font */
 [data-theme='legacy'] body,
 [data-theme='legacy'] * {
-  font-family: 'JetBrains Mono', monospace !important;
+  font-family: var(--font-mono) !important;
 }
 
 /* Classic theme uses system fonts */
@@ -386,7 +386,7 @@ body::before {
   border: 1px solid rgba(255, 255, 255, 0.3) !important;
   border-radius: 4px !important;
   padding: 4px 8px !important;
-  font-family: 'JetBrains Mono', monospace !important;
+  font-family: var(--font-mono) !important;
   font-size: 12px !important;
   font-weight: 600 !important;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4) !important;
@@ -412,7 +412,7 @@ body::before {
   border-radius: 4px;
   padding: 3px 8px;
   font-size: 11px;
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--font-mono);
   cursor: pointer;
   margin: 1em auto;
 }
@@ -435,7 +435,7 @@ body::before {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--font-mono);
   font-weight: 700;
   font-size: 12px;
   border-radius: 50%;
@@ -494,7 +494,7 @@ body::before {
   border: 1px solid var(--border-color);
   color: var(--text-secondary);
   padding: 8px 12px;
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--font-mono);
   font-size: 12px;
   cursor: pointer;
   transition: all 0.2s;
@@ -531,7 +531,7 @@ body::before {
 }
 
 .leaflet-popup-content {
-  font-family: 'JetBrains Mono', monospace !important;
+  font-family: var(--font-mono) !important;
   font-size: 12px !important;
   margin: 10px 12px !important;
 }
@@ -562,7 +562,7 @@ body::before {
   transition: all 0.3s ease;
   background: var(--bg-panel);
   border-radius: 5px;
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--font-mono);
   font-size: 11px;
   color: var(--text-primary);
   border: 1px solid var(--border-color);
@@ -577,7 +577,7 @@ body::before {
 
 .panel-wrapper > div .floating-panel-header {
   user-select: none;
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--font-mono);
   font-weight: 700;
   margin: 0;
   padding: 10px;
@@ -608,7 +608,7 @@ body::before {
   border: 1px solid rgba(0, 170, 255, 0.5) !important;
   border-radius: 4px !important;
   padding: 4px 8px !important;
-  font-family: 'JetBrains Mono', monospace !important;
+  font-family: var(--font-mono) !important;
   font-size: 11px !important;
   color: #00aaff !important;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5) !important;
@@ -690,7 +690,7 @@ body::before {
 }
 
 .font-mono {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--font-mono);
 }
 .font-display {
   font-family: 'Orbitron', monospace;
@@ -1244,8 +1244,9 @@ pre,
 .band-label,
 .callsign,
 [style*='JetBrains Mono'],
+[style*='--font-mono'],
 [style*='monospace'] {
   font-family:
-    'JetBrains Mono', 'Courier New', monospace, 'Noto Color Emoji', 'Segoe UI Emoji', 'Apple Color Emoji',
-    'Twemoji Mozilla', 'Noto Emoji';
+    var(--font-mono), 'Courier New', 'Noto Color Emoji', 'Segoe UI Emoji', 'Apple Color Emoji', 'Twemoji Mozilla',
+    'Noto Emoji';
 }

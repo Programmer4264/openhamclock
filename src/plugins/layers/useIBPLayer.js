@@ -80,7 +80,7 @@ function activeIcon(color, label) {
         color:${color};
         white-space:nowrap;
         text-shadow:0 0 3px #000,0 0 3px #000;
-        font-family:'JetBrains Mono',monospace;
+        font-family:var(--font-mono);
         pointer-events:none;
       ">${esc(label)}</div>
     </div>`;
@@ -109,7 +109,7 @@ function buildPopup(beacon, activeBands, secondsLeft) {
   const nextIn = slotsUntil === 0 ? secondsLeft : slotsUntil + secondsLeft;
 
   return `
-    <div style="font-family:'JetBrains Mono',monospace;font-size:12px;min-width:170px;">
+    <div style="font-family:var(--font-mono);font-size:12px;min-width:170px;">
       <div style="font-weight:700;font-size:13px;margin-bottom:4px;">${esc(beacon.callsign)}</div>
       <div style="color:var(--text-muted);margin-bottom:4px;">${esc(beacon.location)}</div>
       <div style="color:var(--text-muted);font-size:10px;margin-bottom:6px;">Grid: ${esc(beacon.grid)}</div>
@@ -273,7 +273,7 @@ export function useLayer({ enabled = false, opacity = 0.85, map = null, deLat = 
         div.innerHTML = `
           <div class="floating-panel-header">📡 IBP Beacons</div>
           <div id="ibp-countdown" style="
-            font-family:'JetBrains Mono',monospace;
+            font-family:var(--font-mono);
             font-size:11px;color:var(--text-secondary);
             margin-bottom:8px;
           ">Slot: — / ${SLOT_SECONDS}s</div>

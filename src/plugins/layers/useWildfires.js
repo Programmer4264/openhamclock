@@ -158,7 +158,7 @@ export function useLayer({ enabled = false, opacity = 0.9, map = null, lowMemory
         .join(' · ');
 
       marker.bindPopup(`
-        <div style="font-family: 'JetBrains Mono', monospace; min-width: 220px;">
+        <div style="font-family: var(--font-mono); min-width: 220px;">
           <div style="font-size: 14px; font-weight: bold; color: ${color}; margin-bottom: 8px;">
             ${isNew ? '🆕 ' : ''}🔥 ${esc(title)}
           </div>

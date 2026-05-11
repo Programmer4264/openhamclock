@@ -1455,7 +1455,7 @@ export const WorldMap = ({
           if (showDXLabels || isHovered) {
             const labelIcon = L.divIcon({
               className: '',
-              html: `<span style="display:inline-block;background:${isHovered ? '#fff' : color};color:${isHovered ? color : '#000'};padding:${isHovered ? '3px 6px' : '2px 5px'};border-radius:3px;font-family:'JetBrains Mono',monospace;font-size:${isHovered ? '12px' : '11px'};font-weight:700;white-space:nowrap;border:1px solid ${isHovered ? color : 'rgba(0,0,0,0.5)'};box-shadow:0 1px ${isHovered ? '4px' : '2px'} rgba(0,0,0,${isHovered ? '0.5' : '0.3'});line-height:1.1;">${esc(dxCall)}</span>`,
+              html: `<span style="display:inline-block;background:${isHovered ? '#fff' : color};color:${isHovered ? color : '#000'};padding:${isHovered ? '3px 6px' : '2px 5px'};border-radius:3px;font-family:var(--font-mono);font-size:${isHovered ? '12px' : '11px'};font-weight:700;white-space:nowrap;border:1px solid ${isHovered ? color : 'rgba(0,0,0,0.5)'};box-shadow:0 1px ${isHovered ? '4px' : '2px'} rgba(0,0,0,${isHovered ? '0.5' : '0.3'});line-height:1.1;">${esc(dxCall)}</span>`,
               iconSize: [0, 0],
               iconAnchor: [0, 0],
             });
@@ -1624,7 +1624,7 @@ export const WorldMap = ({
           if (showLabels) {
             const labelIcon = L.divIcon({
               className: '',
-              html: `<span style="display:inline-block;background:${mapDefaults.color};color:#000;padding:2px 5px;border-radius:3px;font-size:11px;font-family:'JetBrains Mono',monospace;font-weight:700;white-space:nowrap;border:1px solid rgba(0,0,0,0.5);box-shadow:0 1px 2px rgba(0,0,0,0.3);line-height:1.1;">${esc(spot.call)}</span>`,
+              html: `<span style="display:inline-block;background:${mapDefaults.color};color:#000;padding:2px 5px;border-radius:3px;font-size:11px;font-family:var(--font-mono);font-weight:700;white-space:nowrap;border:1px solid rgba(0,0,0,0.5);box-shadow:0 1px 2px rgba(0,0,0,0.3);line-height:1.1;">${esc(spot.call)}</span>`,
               iconSize: [0, 0],
               iconAnchor: [0, -2],
             });
@@ -2364,7 +2364,7 @@ export const WorldMap = ({
               padding: '6px 8px',
               borderRadius: '4px',
               minHeight: '42px',
-              fontFamily: 'JetBrains Mono, monospace',
+              fontFamily: 'var(--font-mono)',
               cursor: 'pointer',
               lineHeight: 1,
             }}
@@ -2395,7 +2395,7 @@ export const WorldMap = ({
                   border: `1px solid ${mapLocked ? 'rgba(255, 80, 80, 0.7)' : '#444'}`,
                   borderRadius: '4px',
                   color: mapLocked ? '#ff5050' : '#ccc',
-                  fontFamily: 'JetBrains Mono, monospace',
+                  fontFamily: 'var(--font-mono)',
                   cursor: 'pointer',
                   lineHeight: 1,
                   textAlign: 'center',
@@ -2415,7 +2415,7 @@ export const WorldMap = ({
                     color: showDXLabels ? '#ffaa00' : '#888',
                     padding: '6px 8px',
                     borderRadius: '4px',
-                    fontFamily: 'JetBrains Mono, monospace',
+                    fontFamily: 'var(--font-mono)',
                     cursor: 'pointer',
                     textAlign: 'center',
                     minHeight: '30px',
@@ -2436,7 +2436,7 @@ export const WorldMap = ({
                   border: '1px solid #444',
                   borderRadius: '4px',
                   color: '#ccc',
-                  fontFamily: 'JetBrains Mono, monospace',
+                  fontFamily: 'var(--font-mono)',
                   cursor: mapLocked ? 'not-allowed' : 'pointer',
                   opacity: mapLocked ? 0.45 : 1,
                   textAlign: 'center',
@@ -2457,7 +2457,7 @@ export const WorldMap = ({
                   border: '1px solid #444',
                   borderRadius: '4px',
                   color: '#ccc',
-                  fontFamily: 'JetBrains Mono, monospace',
+                  fontFamily: 'var(--font-mono)',
                   cursor: mapLocked ? 'not-allowed' : 'pointer',
                   opacity: mapLocked ? 0.45 : 1,
                   textAlign: 'center',
@@ -2477,7 +2477,7 @@ export const WorldMap = ({
                   gap: '5px',
                   color: '#999',
                   fontSize: '12px',
-                  fontFamily: 'JetBrains Mono, monospace',
+                  fontFamily: 'var(--font-mono)',
                   textAlign: 'center',
                 }}
               >
@@ -2523,7 +2523,7 @@ export const WorldMap = ({
             style={{
               color: '#00ffcc',
               fontSize: '10px',
-              fontFamily: 'JetBrains Mono',
+              fontFamily: 'var(--font-mono)',
             }}
           >
             {gibsOffset === 0 ? 'LATEST IMAGERY' : `${gibsOffset} DAYS AGO`}
@@ -2575,7 +2575,7 @@ export const WorldMap = ({
                   border: 'none',
                   padding: '5px 8px',
                   fontSize: '10px',
-                  fontFamily: 'JetBrains Mono, monospace',
+                  fontFamily: 'var(--font-mono)',
                   cursor: 'pointer',
                   fontWeight: mapProjection === key ? 'bold' : 'normal',
                 }}
@@ -2597,7 +2597,7 @@ export const WorldMap = ({
               padding: '6px 10px',
               borderRadius: '4px',
               fontSize: '11px',
-              fontFamily: 'JetBrains Mono',
+              fontFamily: 'var(--font-mono)',
               cursor: 'pointer',
               outline: 'none',
             }}
@@ -2641,7 +2641,7 @@ export const WorldMap = ({
             zIndex: 1001,
             cursor: 'pointer',
             fontSize: '10px',
-            fontFamily: 'JetBrains Mono, monospace',
+            fontFamily: 'var(--font-mono)',
             color: '#888',
             lineHeight: 1.2,
           }}
@@ -2667,7 +2667,7 @@ export const WorldMap = ({
             gap: '8px',
             alignItems: 'center',
             fontSize: '11px',
-            fontFamily: 'JetBrains Mono, monospace',
+            fontFamily: 'var(--font-mono)',
             flexWrap: 'nowrap',
           }}
         >
@@ -2748,7 +2748,7 @@ export const WorldMap = ({
             display: 'flex',
             alignItems: 'center',
             gap: '6px',
-            fontFamily: 'JetBrains Mono, monospace',
+            fontFamily: 'var(--font-mono)',
             fontSize: '11px',
           }}
         >
@@ -2774,7 +2774,7 @@ export const WorldMap = ({
               border: '1px solid #444',
               borderRadius: '3px',
               padding: '2px 5px',
-              fontFamily: 'JetBrains Mono, monospace',
+              fontFamily: 'var(--font-mono)',
             }}
           >
             {editingColor}

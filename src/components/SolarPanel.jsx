@@ -294,14 +294,7 @@ export const SolarPanel = ({ solarIndices, bandConditions, forcedMode }) => {
                   strokeDasharray="3,3"
                   opacity={0.5}
                 />
-                <text
-                  x={padL + 2}
-                  y={y - 2}
-                  fill={t.color}
-                  fontSize="8"
-                  fontWeight="600"
-                  fontFamily="JetBrains Mono, monospace"
-                >
+                <text x={padL + 2} y={y - 2} fill={t.color} fontSize="8" fontWeight="600" fontFamily="var(--font-mono)">
                   {t.label}
                 </text>
               </g>
@@ -321,7 +314,7 @@ export const SolarPanel = ({ solarIndices, bandConditions, forcedMode }) => {
           <path d={pathD} fill="none" stroke={currentClass.color} strokeWidth="1.5" />
 
           {/* Time axis labels */}
-          <text x={padL} y={H - 2} fill="var(--text-muted, #888)" fontSize="8" fontFamily="JetBrains Mono, monospace">
+          <text x={padL} y={H - 2} fill="var(--text-muted, #888)" fontSize="8" fontFamily="var(--font-mono)">
             {fmt(firstTime)}
           </text>
           <text
@@ -329,7 +322,7 @@ export const SolarPanel = ({ solarIndices, bandConditions, forcedMode }) => {
             y={H - 2}
             fill="var(--text-muted, #888)"
             fontSize="8"
-            fontFamily="JetBrains Mono, monospace"
+            fontFamily="var(--font-mono)"
             textAnchor="middle"
           >
             {fmt(midTime)}
@@ -339,7 +332,7 @@ export const SolarPanel = ({ solarIndices, bandConditions, forcedMode }) => {
             y={H - 2}
             fill="var(--text-muted, #888)"
             fontSize="8"
-            fontFamily="JetBrains Mono, monospace"
+            fontFamily="var(--font-mono)"
             textAnchor="end"
           >
             {fmt(lastTime)} UTC
@@ -593,7 +586,7 @@ export const SolarPanel = ({ solarIndices, bandConditions, forcedMode }) => {
             gap: '8px',
             justifyContent: 'center',
             fontSize: '10px',
-            fontFamily: 'JetBrains Mono, monospace',
+            fontFamily: 'var(--font-mono)',
           }}
         >
           <div

@@ -76,7 +76,7 @@ export const BandConditionsPanel = ({ data, loading, extras }) => {
                     fontSize: '12px',
                     fontWeight: '700',
                     color: 'var(--text-primary)',
-                    fontFamily: 'JetBrains Mono, monospace',
+                    fontFamily: 'var(--font-mono)',
                   }}
                 >
                   {band}

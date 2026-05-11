@@ -103,7 +103,7 @@ export const DXFilterManager = ({ filters, onFilterChange, isOpen, onClose, onCl
     color: selected ? '#000' : 'var(--text-secondary)',
     fontSize: '12px',
     cursor: 'pointer',
-    fontFamily: 'JetBrains Mono, monospace',
+    fontFamily: 'var(--font-mono)',
     fontWeight: selected ? '600' : '400',
   });
 
@@ -119,7 +119,7 @@ export const DXFilterManager = ({ filters, onFilterChange, isOpen, onClose, onCl
     color: selected ? '#000' : 'var(--text-secondary)',
     fontSize: '12px',
     cursor: 'pointer',
-    fontFamily: 'JetBrains Mono, monospace',
+    fontFamily: 'var(--font-mono)',
     fontWeight: selected ? '600' : '400',
   });
 
@@ -406,7 +406,7 @@ export const DXFilterManager = ({ filters, onFilterChange, isOpen, onClose, onCl
               borderRadius: '4px',
               color: 'var(--text-primary)',
               fontSize: '13px',
-              fontFamily: 'JetBrains Mono',
+              fontFamily: 'var(--font-mono)',
             }}
           />
           <button
@@ -643,7 +643,7 @@ export const DXFilterManager = ({ filters, onFilterChange, isOpen, onClose, onCl
                 borderRadius: '4px',
                 color: 'var(--text-primary)',
                 fontSize: '13px',
-                fontFamily: 'JetBrains Mono',
+                fontFamily: 'var(--font-mono)',
               }}
             />
             <button
@@ -723,7 +723,7 @@ export const DXFilterManager = ({ filters, onFilterChange, isOpen, onClose, onCl
                 borderRadius: '4px',
                 color: 'var(--text-primary)',
                 fontSize: '13px',
-                fontFamily: 'JetBrains Mono',
+                fontFamily: 'var(--font-mono)',
               }}
             />
             <button
@@ -802,7 +802,7 @@ export const DXFilterManager = ({ filters, onFilterChange, isOpen, onClose, onCl
               borderRadius: '4px',
               color: 'var(--text-primary)',
               fontSize: '13px',
-              fontFamily: 'JetBrains Mono',
+              fontFamily: 'var(--font-mono)',
             }}
           />
           <button
@@ -898,7 +898,7 @@ export const DXFilterManager = ({ filters, onFilterChange, isOpen, onClose, onCl
                 padding: '8px 12px',
                 background: 'var(--bg-tertiary)',
                 borderRadius: '4px',
-                fontFamily: 'JetBrains Mono',
+                fontFamily: 'var(--font-mono)',
                 fontSize: '14px',
                 fontWeight: '600',
                 color: 'var(--accent-cyan)',
@@ -938,7 +938,7 @@ export const DXFilterManager = ({ filters, onFilterChange, isOpen, onClose, onCl
                   color: retentionMinutes === mins ? 'var(--accent-cyan)' : 'var(--text-secondary)',
                   fontSize: '13px',
                   cursor: 'pointer',
-                  fontFamily: 'JetBrains Mono',
+                  fontFamily: 'var(--font-mono)',
                 }}
               >
                 {mins} min

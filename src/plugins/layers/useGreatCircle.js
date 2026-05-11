@@ -97,7 +97,7 @@ export function useLayer({ enabled = false, opacity = 0.8, map = null }) {
     })();
 
     const popupContent = `
-      <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px;">
+      <div style="font-family: var(--font-mono); font-size: 12px;">
         <b>Great Circle Path</b><br>
         SP: ${sp}° &nbsp; LP: ${lp}°<br>
         Distance: ${distStr}

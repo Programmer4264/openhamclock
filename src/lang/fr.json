@@ -400,6 +400,8 @@
   "station.settings.locator": "Carré de grille (ou entrez Lat/Lon ci-dessous)",
   "station.settings.locator.placeholder": "FN20nc",
   "station.settings.longitude": "Longitude",
+  "station.settings.monoFont": "Police monospace",
+  "station.settings.monoFont.describe": "Utilisée dans les affichages de données — listes de spots, indicatifs, fréquences. Choisis une variante avec zéro barré pour distinguer clairement 0 de 8.",
   "station.settings.mouseZoom": "Sensibilité de la molette de la souris",
   "station.settings.mouseZoom.describeMax": "Plus",
   "station.settings.mouseZoom.describeMin": "Moins",

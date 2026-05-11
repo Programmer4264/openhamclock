@@ -288,7 +288,7 @@ export function useLayer({ enabled = false, opacity = 0.9, map = null }) {
       });
 
       dxMarker.bindPopup(
-        `<div style="font-family: JetBrains Mono, monospace;">
+        `<div style="font-family: var(--font-mono);">
           <b>${esc(dxCall)}</b><br/>
           ${mode ? `Mode: ${esc(mode)}<br/>` : ''}
           ${freqMhz ? `Freq: ${esc(freqMhz)} MHz<br/>` : ''}

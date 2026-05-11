@@ -110,10 +110,8 @@ function ThemeMockup({ customTheme, fontFamily }) {
           <span style={{ color: c('--text-muted'), fontSize: '10px' }}>v15.6</span>
         </div>
         <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
-          <span style={{ color: c('--accent-cyan'), fontWeight: 700, fontFamily: "'JetBrains Mono', monospace" }}>
-            UTC 14:32
-          </span>
-          <span style={{ color: c('--accent-amber'), fontWeight: 700, fontFamily: "'JetBrains Mono', monospace" }}>
+          <span style={{ color: c('--accent-cyan'), fontWeight: 700, fontFamily: 'var(--font-mono)' }}>UTC 14:32</span>
+          <span style={{ color: c('--accent-amber'), fontWeight: 700, fontFamily: 'var(--font-mono)' }}>
             LOCAL 08:32
           </span>
           <div style={{ display: 'flex', gap: '8px', fontSize: '10px' }}>
@@ -345,7 +343,7 @@ export default function CustomThemeEditor({ id, customTheme, updateCustomVar }) 
               color: 'var(--text-muted)',
               textTransform: 'uppercase',
               letterSpacing: '1px',
-              fontFamily: 'JetBrains Mono, monospace',
+              fontFamily: 'var(--font-mono)',
             }}
           >
             Live Preview
@@ -374,7 +372,7 @@ export default function CustomThemeEditor({ id, customTheme, updateCustomVar }) 
               color: 'var(--text-muted)',
               textTransform: 'uppercase',
               letterSpacing: '1px',
-              fontFamily: 'JetBrains Mono, monospace',
+              fontFamily: 'var(--font-mono)',
             }}
           >
             Font
@@ -405,7 +403,7 @@ export default function CustomThemeEditor({ id, customTheme, updateCustomVar }) 
                 color: 'var(--text-muted)',
                 textTransform: 'uppercase',
                 letterSpacing: '1px',
-                fontFamily: 'JetBrains Mono, monospace',
+                fontFamily: 'var(--font-mono)',
               }}
             >
               {group.label}
@@ -444,7 +442,7 @@ export default function CustomThemeEditor({ id, customTheme, updateCustomVar }) 
                       background: 'none',
                       border: 'none',
                       cursor: 'pointer',
-                      fontFamily: 'JetBrains Mono, monospace',
+                      fontFamily: 'var(--font-mono)',
                       textAlign: 'left',
                     }}
                   >
@@ -505,7 +503,7 @@ export default function CustomThemeEditor({ id, customTheme, updateCustomVar }) 
                             fontSize: '11px',
                             color: 'var(--text-muted)',
                             marginTop: '4px',
-                            fontFamily: 'JetBrains Mono, monospace',
+                            fontFamily: 'var(--font-mono)',
                           }}
                         >
                           {color}

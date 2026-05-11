@@ -38,7 +38,7 @@ const OnAirPanel = () => {
           style={{
             marginTop: '1rem',
             fontSize: '0.8rem',
-            fontFamily: 'JetBrains Mono, monospace',
+            fontFamily: 'var(--font-mono)',
             opacity: 0.5,
           }}
         >

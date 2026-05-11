@@ -400,6 +400,8 @@
   "station.settings.locator": "QTH-ლოკატორი (ან შეიყვანეთ კოორდინატები ქვემოთ)",
   "station.settings.locator.placeholder": "FN20nc",
   "station.settings.longitude": "გრძედი",
+  "station.settings.monoFont": "მონოსიერი ფონტი",
+  "station.settings.monoFont.describe": "გამოიყენება მონაცემთა ჩვენებაში — სპოტების სიები, საკონტროლო ნიშნები, სიხშირეები. აირჩიე ხაზგასმული ნულის ვერსია 0-ისა და 8-ის ცხადი განსასხვავებლად.",
   "station.settings.mouseZoom": "მაუსის ბორბლის მგრძნობელობა",
   "station.settings.mouseZoom.describeMax": "მეტი",
   "station.settings.mouseZoom.describeMin": "ნაკლები",

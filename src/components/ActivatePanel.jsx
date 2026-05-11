@@ -127,7 +127,7 @@ export const ActivatePanel = ({
                 padding: '1px 6px',
                 borderRadius: '3px',
                 fontSize: '9px',
-                fontFamily: 'JetBrains Mono',
+                fontFamily: 'var(--font-mono)',
                 cursor: 'pointer',
               }}
             >
@@ -146,7 +146,7 @@ export const ActivatePanel = ({
               padding: '1px 6px',
               borderRadius: '3px',
               fontSize: '9px',
-              fontFamily: 'JetBrains Mono',
+              fontFamily: 'var(--font-mono)',
               cursor: 'pointer',
             }}
           >
@@ -161,7 +161,7 @@ export const ActivatePanel = ({
             <div className="loading-spinner" />
           </div>
         ) : spots && spots.length > 0 ? (
-          <div style={{ fontSize: '10px', fontFamily: 'JetBrains Mono, monospace' }}>
+          <div style={{ fontSize: '10px', fontFamily: 'var(--font-mono)' }}>
             {spots.map((spot, i) => (
               <div
                 key={`${spot.call}-${spot.ref}-${i}`}
