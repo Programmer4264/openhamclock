@@ -701,7 +701,7 @@ export const useLayer = ({ map, enabled, satellites, setSatellites, opacity, con
                     }
 
                     const timeFromNow = isVisibleNow
-                      ? 'VISIBLE'
+                      ? `${t('station.settings.satellites.visible')}`
                       : secsFromNow > 3600
                         ? `${String(Math.floor(secsFromNow / 3600)).padStart(2, '0')}:${String(Math.floor((secsFromNow % 3600) / 60)).padStart(2, '0')}:${String(secsFromNow % 60).padStart(2, '0')}`
                         : secsFromNow > 60
