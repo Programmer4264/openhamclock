@@ -28,6 +28,7 @@ import * as MeshtasticPlugin from './layers/useMeshtastic.js';
 import * as ActiveUsersPlugin from './layers/useActiveUsers.js';
 import * as IBPLayerPlugin from './layers/useIBPLayer.js';
 import * as WinlinkGatewaysPlugin from './layers/useWinlinkGateways.js';
+import * as AircraftPlugin from './layers/useAircraft.js';
 
 // Auto-discover local/custom plugins (gitignored — survive updates)
 const localPluginModules = import.meta.glob('./local/*.js', { eager: true });
@@ -69,6 +70,7 @@ const layerPlugins = [
   ActiveUsersPlugin,
   IBPLayerPlugin,
   WinlinkGatewaysPlugin,
+  AircraftPlugin,
   ...localPlugins,
 ];
 
@@ -99,6 +101,7 @@ const PINNED_SHORTCUTS = {
   floods: 'i',
   'active-users': 'u',
   'winlink-gateways': 'k',
+  aircraft: 'x',
 };
 
 export function getAllLayers() {
