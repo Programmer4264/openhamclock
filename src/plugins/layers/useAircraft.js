@@ -20,16 +20,13 @@ export const metadata = {
   version: '1.0.0',
 };
 
-// Max markers to render per refresh. Server returns the global state vector
-// list (3000–7000 typical), but plotting all of them tanks the map. We pick
-// the ones currently in view and cap at MAX_VIEWPORT_MARKERS.
+// Max markers to render per refresh. Server returns the global aircraft list
+// (~6000 typical), but plotting all of them tanks the map. We pick the ones
+// currently in view and cap at MAX_VIEWPORT_MARKERS.
 const MAX_VIEWPORT_MARKERS = 400;
 const MAX_VIEWPORT_MARKERS_LOW = 80;
-const POLL_MS = 20_000; // server caches for 30 s; 20 s polls keep us mostly cache-hit
+const POLL_MS = 30_000; // server caches for 60 s; 30 s polls keep us cache-warm
 const POLL_MS_LOW = 60_000;
-
-const M_PER_S_TO_KNOTS = 1.94384;
-const M_TO_FEET = 3.28084;
 
 function planeSvg(heading, color) {
   // Heading 0 = north; SVG plane points up natively, so rotation is direct.
@@ -110,12 +107,15 @@ export function useLayer({ enabled = false, opacity = 0.9, map = null, lowMemory
     // op is most likely scanning for in the first place.
     const subset =
       inView.length > maxMarkers
-        ? [...inView].sort((a, b) => (b.alt || 0) - (a.alt || 0)).slice(0, maxMarkers)
+        ? [...inView].sort((a, b) => (b.alt_ft || 0) - (a.alt_ft || 0)).slice(0, maxMarkers)
         : inView;
 
     const newMarkers = [];
     for (const a of subset) {
-      const color = a.onGround ? '#888' : a.alt && a.alt > 9000 ? '#4fc3f7' : '#ffeb3b';
+      // 30,000 ft is roughly the cruise floor for big jets — color-code so
+      // higher altitudes (where aircraft scatter / OTH reflections are most
+      // likely) stand out from ground/low-altitude clutter.
+      const color = a.onGround ? '#888' : a.alt_ft && a.alt_ft > 30000 ? '#4fc3f7' : '#ffeb3b';
       const icon = L.divIcon({
         className: 'aircraft-icon',
         html: planeSvg(a.heading, color),
@@ -124,8 +124,8 @@ export function useLayer({ enabled = false, opacity = 0.9, map = null, lowMemory
       });
       const marker = L.marker([a.lat, a.lon], { icon, opacity, keyboard: false });
 
-      const altFt = a.alt != null ? Math.round(a.alt * M_TO_FEET) : null;
-      const speedKn = a.speed != null ? Math.round(a.speed * M_PER_S_TO_KNOTS) : null;
+      const altFt = a.alt_ft != null ? Math.round(a.alt_ft) : null;
+      const speedKn = a.speed_kn != null ? Math.round(a.speed_kn) : null;
       const headingDeg = a.heading != null ? Math.round(a.heading) : null;
       const popup = `
         <div style="font-family: var(--font-mono); min-width: 180px; font-size: 12px;">
@@ -133,7 +133,9 @@ export function useLayer({ enabled = false, opacity = 0.9, map = null, lowMemory
             ✈️ ${esc(a.call || a.id || '?')}
           </div>
           <table style="font-size: 11px; width: 100%; border-collapse: collapse;">
-            ${a.country ? `<tr><td>Country:</td><td>${esc(a.country)}</td></tr>` : ''}
+            ${a.desc ? `<tr><td>Type:</td><td>${esc(a.desc)}</td></tr>` : a.type ? `<tr><td>Type:</td><td>${esc(a.type)}</td></tr>` : ''}
+            ${a.operator ? `<tr><td>Operator:</td><td>${esc(a.operator)}</td></tr>` : ''}
+            ${a.registration ? `<tr><td>Reg:</td><td>${esc(a.registration)}</td></tr>` : ''}
             ${altFt != null ? `<tr><td>Altitude:</td><td>${altFt.toLocaleString()} ft</td></tr>` : ''}
             ${speedKn != null ? `<tr><td>Speed:</td><td>${speedKn} kn</td></tr>` : ''}
             ${headingDeg != null ? `<tr><td>Heading:</td><td>${headingDeg}°</td></tr>` : ''}
@@ -141,7 +143,7 @@ export function useLayer({ enabled = false, opacity = 0.9, map = null, lowMemory
             ${a.onGround ? '<tr><td colspan="2" style="color: #888; font-style: italic;">On ground</td></tr>' : ''}
           </table>
           <div style="font-size: 9px; color: var(--text-muted); margin-top: 4px;">
-            Source: OpenSky Network
+            Source: adsb.lol (community)
           </div>
         </div>
       `;

@@ -1,90 +1,80 @@
 /**
- * Aircraft tracking route — OpenSky Network state vectors (#996).
+ * Aircraft tracking route — community ADS-B aggregator (#996).
  *
- * Shared server-side cache, one upstream fetch per refresh interval regardless
- * of how many users are connected. OpenSky anonymous quota is 400 req/day, so
- * per-user fetches would blow the cap instantly on a public instance — see
- * [[feedback_no_gma_integration]] for the same lesson applied to cqgma.
+ * Originally proxied OpenSky's /api/states/all, but their anonymous quota is
+ * 400 req/day per source IP, which is exhausted within minutes on shared-
+ * egress hosting like Railway (where dozens of unrelated services hit the
+ * same endpoint from the same IP). Authenticated OpenSky requires per-account
+ * setup that was friction for deployers.
+ *
+ * Switched (2026-05-19) to adsb.lol's community feed — same data, free, no
+ * auth, no quota, supports very large radius queries. A single
+ * `/v2/lat/0/lon/0/dist/10000` query returns the entire flying world in
+ * ~3 MB / ~1 s. We cache that response shared-server-side so all OHC users
+ * share a single upstream pull.
+ *
+ * Wire format to the client deliberately uses adsb.lol's natural aviation
+ * units (feet, knots) rather than OpenSky's metric (meters, m/s) so the
+ * client doesn't have to round-trip-convert for display.
  */
 
 module.exports = function (app, ctx) {
   const { fetch, logDebug, logInfo, logWarn, logErrorOnce, APP_VERSION } = ctx;
 
-  // OpenSky's anonymous quota is ~400 req/day per source IP. On a shared-egress
-  // host (Railway, Fly, etc.) that quota is exhausted within minutes by other
-  // unrelated services on the same IP. Set OPENSKY_USERNAME / OPENSKY_PASSWORD
-  // in .env to use HTTP Basic auth against a free OpenSky account — bumps the
-  // limit to ~4000 req/day and is far more reliable. Without credentials the
-  // route still works on local installs (where the home IP is unloaded) but
-  // will frequently fail on hosted production deployments.
-  const OPENSKY_USER = process.env.OPENSKY_USERNAME || '';
-  const OPENSKY_PASS = process.env.OPENSKY_PASSWORD || '';
-  const hasAuth = !!(OPENSKY_USER && OPENSKY_PASS);
-
-  // 60 s cache — anonymous quota is 400/day, so even at one fetch/min we'd burn
-  // ~1440/day. With auth the quota is 4000/day. Either way 30 s was too eager
-  // on hosted egress IPs; 60 s is the sweet spot. Stale-on-error up to 5 min.
+  // 60 s cache balances freshness against being a good neighbour to a free
+  // community feed. Stale-on-error up to 5 min so a transient outage doesn't
+  // blank the map for everyone.
   const AIRCRAFT_CACHE_TTL = 60 * 1000;
   const AIRCRAFT_STALE_TTL = 5 * 60 * 1000;
-  const AIRCRAFT_FETCH_TIMEOUT_MS = 25000; // bumped from 15 — Railway↔OpenSky has been seen >15 s
+  const AIRCRAFT_FETCH_TIMEOUT_MS = 25000;
+  // 10000 nm radius from (0,0) covers the entire globe (great-circle 5400 nm
+  // pole-to-pole), with margin for transpolar flights at higher latitudes.
+  const UPSTREAM_URL = 'https://api.adsb.lol/v2/lat/0/lon/0/dist/10000';
+
   let aircraftCache = { data: null, timestamp: 0 };
   let inFlight = null;
-  let lastError = null; // surface in the 503 body so deployers can diagnose
-
-  // OpenSky state vector array indices (per their API docs)
-  const I = {
-    icao24: 0,
-    callsign: 1,
-    country: 2,
-    timePosition: 3,
-    lastContact: 4,
-    lon: 5,
-    lat: 6,
-    baroAltitude: 7,
-    onGround: 8,
-    velocity: 9,
-    heading: 10,
-    verticalRate: 11,
-    geoAltitude: 13,
-    squawk: 14,
-    positionSource: 16,
-  };
+  let lastError = null;
 
   async function fetchAircraft() {
-    const url = 'https://opensky-network.org/api/states/all';
-    const headers = { 'User-Agent': `OpenHamClock/${APP_VERSION}` };
-    if (hasAuth) {
-      headers.Authorization = 'Basic ' + Buffer.from(`${OPENSKY_USER}:${OPENSKY_PASS}`).toString('base64');
-    }
-    const res = await fetch(url, {
-      headers,
+    const res = await fetch(UPSTREAM_URL, {
+      headers: { 'User-Agent': `OpenHamClock/${APP_VERSION}` },
       signal: AbortSignal.timeout(AIRCRAFT_FETCH_TIMEOUT_MS),
     });
     if (!res.ok) {
       const text = await res.text().catch(() => '');
-      throw new Error(`OpenSky HTTP ${res.status}${text ? ': ' + text.slice(0, 120) : ''}`);
+      throw new Error(`adsb.lol HTTP ${res.status}${text ? ': ' + text.slice(0, 120) : ''}`);
     }
     const body = await res.json();
-    if (!body || !Array.isArray(body.states)) throw new Error('OpenSky returned unexpected payload');
+    if (!body || !Array.isArray(body.ac)) {
+      throw new Error('adsb.lol returned unexpected payload (missing `ac` array)');
+    }
 
-    // Filter + project to a compact wire format. Drop entries with no
-    // position fix; clients can't plot them anyway.
+    // Project to a compact wire format. Drop entries without a position fix
+    // — clients can't plot them anyway.
     const aircraft = [];
-    for (const s of body.states) {
-      const lat = s[I.lat];
-      const lon = s[I.lon];
-      if (typeof lat !== 'number' || typeof lon !== 'number') continue;
+    for (const a of body.ac) {
+      if (typeof a.lat !== 'number' || typeof a.lon !== 'number') continue;
+      // alt_geom (GPS) preferred; falls back to alt_baro (barometric). Some
+      // entries also use the string "ground" instead of a numeric altitude;
+      // treat that as on-ground with no altitude.
+      let alt = a.alt_geom ?? a.alt_baro;
+      const onGround = alt === 'ground' || a.alt_baro === 'ground';
+      if (typeof alt !== 'number') alt = null;
+
       aircraft.push({
-        id: s[I.icao24],
-        call: (s[I.callsign] || '').trim(),
-        country: s[I.country] || '',
-        lat,
-        lon,
-        alt: s[I.geoAltitude] ?? s[I.baroAltitude] ?? null, // meters
-        speed: s[I.velocity] ?? null, // m/s
-        heading: s[I.heading] ?? null, // degrees from north
-        onGround: !!s[I.onGround],
-        squawk: s[I.squawk] || null,
+        id: a.hex || '',
+        call: (a.flight || '').trim(),
+        lat: a.lat,
+        lon: a.lon,
+        alt_ft: alt, // feet — adsb.lol's native unit
+        speed_kn: typeof a.gs === 'number' ? a.gs : null, // knots
+        heading: typeof a.track === 'number' ? a.track : null,
+        onGround,
+        squawk: a.squawk || null,
+        type: a.t || null, // e.g. "B737", "A320", "C172"
+        desc: a.desc || null, // e.g. "BOEING 737-700"
+        operator: a.ownOp || null, // e.g. "UNITED AIRLINES INC"
+        registration: a.r || null,
       });
     }
     return aircraft;
@@ -114,7 +104,7 @@ module.exports = function (app, ctx) {
         .then((aircraft) => {
           aircraftCache = { data: aircraft, timestamp: Date.now() };
           lastError = null;
-          logDebug(`[Aircraft] OpenSky returned ${aircraft.length} state vectors with position`);
+          logDebug(`[Aircraft] adsb.lol returned ${aircraft.length} aircraft with position`);
           return aircraft;
         })
         .catch((e) => {
@@ -131,7 +121,7 @@ module.exports = function (app, ctx) {
     try {
       const data = await inFlight;
       if (data) {
-        return res.json({ aircraft: data, cached: false, age: 0, auth: hasAuth });
+        return res.json({ aircraft: data, cached: false, age: 0 });
       }
       // Refresh failed — serve stale if we have it and it's not too old, else empty
       if (aircraftCache.data && now - aircraftCache.timestamp < AIRCRAFT_STALE_TTL) {
@@ -142,14 +132,9 @@ module.exports = function (app, ctx) {
       return res.status(503).json({
         error: 'Aircraft feed unavailable',
         reason: lastError || 'unknown',
-        hint: hasAuth
-          ? 'Upstream OpenSky returned an error or timed out — try again in a minute.'
-          : 'No OPENSKY_USERNAME / OPENSKY_PASSWORD configured. Anonymous OpenSky quota is 400/day per source IP and is easily exhausted on shared-egress hosting. Register a free account at https://opensky-network.org/index.php and set credentials in .env.',
-        auth: hasAuth,
         aircraft: [],
       });
     } catch (e) {
-      // Shouldn't really hit this — fetchAircraft catches its own errors
       logErrorOnce('Aircraft', e.message);
       return res.status(500).json({ error: 'Aircraft feed error', reason: e.message, aircraft: [] });
     }
