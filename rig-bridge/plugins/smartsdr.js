@@ -6,7 +6,13 @@
  * TCP API (port 4992) without needing rigctld, SmartSDR CAT, or DAX.
  *
  * Protocol: line-based TCP. Radio sends version/handle on connect,
- * then push-based status updates after subscribing to slice changes.
+ * then push-based status updates after subscribing to slice and interlock changes.
+ *
+ * PTT/TX detection: the SmartSDR API reports live transmit state through the
+ * interlock object (S0|interlock state=TRANSMITTING …), not through the
+ * transmit settings object.  Interlock messages are part of the radio object
+ * and arrive via "sub radio all".  Watch for state=TRANSMITTING or
+ * PTT_REQUESTED (PTT on) vs RECEIVE/READY/UNKEY_REQUESTED (PTT off).
  */
 
 const net = require('net');
@@ -78,8 +84,12 @@ module.exports = {
       if (firstChar === 'H') {
         handle = line.slice(1).trim();
         console.log(`[SmartSDR] Session handle: ${handle}`);
-        // Subscribe to slice status updates
         sendCmd('sub slice all');
+        // Subscribe to radio-wide status so interlock (PTT/TX) state changes
+        // are delivered.  "sub interlock" does not exist as a standalone command;
+        // interlock messages (S0|interlock state=TRANSMITTING …) are part of the
+        // radio object and arrive via "sub radio all".
+        sendCmd('sub radio all');
         return;
       }
 
@@ -94,22 +104,43 @@ module.exports = {
         return;
       }
 
-      // Status line: S<handle>|slice <idx> key=value key=value...
+      // Status line: S<handle>|<object> key=value key=value...
       if (firstChar === 'S') {
         const pipeIdx = line.indexOf('|');
         if (pipeIdx < 0) return;
         const payload = line.slice(pipeIdx + 1);
 
-        // We only care about slice status
+        // Interlock status — primary source for PTT/TX state.
+        // Format: S0|interlock state=<STATE> [source=<SRC>] [tx_allowed=<0|1>] …
+        // TRANSMITTING / PTT_REQUESTED → on air; everything else → receive.
+        const interlockMatch = payload.match(/^interlock\s+(.*)/);
+        if (interlockMatch) {
+          const kvPairs = interlockMatch[1].split(/\s+/);
+          for (const kv of kvPairs) {
+            const eqIdx = kv.indexOf('=');
+            if (eqIdx < 0) continue;
+            if (kv.slice(0, eqIdx) === 'state') {
+              const interlockState = kv.slice(eqIdx + 1);
+              const ptt = interlockState === 'TRANSMITTING' || interlockState === 'PTT_REQUESTED';
+              if (state.ptt !== ptt) {
+                console.log(`[SmartSDR] PTT → ${ptt ? 'TX' : 'RX'} (interlock ${interlockState})`);
+                updateState('ptt', ptt);
+              }
+              break;
+            }
+          }
+          state.lastUpdate = Date.now();
+          return;
+        }
+
+        // Slice status — frequency and mode
         const sliceMatch = payload.match(/^slice (\d+)\s+(.*)/);
         if (!sliceMatch) return;
 
         const idx = parseInt(sliceMatch[1]);
         if (idx !== sliceIndex) return;
 
-        const kvStr = sliceMatch[2];
-        // Parse key=value pairs
-        const kvPairs = kvStr.split(/\s+/);
+        const kvPairs = sliceMatch[2].split(/\s+/);
         for (const kv of kvPairs) {
           const eqIdx = kv.indexOf('=');
           if (eqIdx < 0) continue;
@@ -128,12 +159,6 @@ module.exports = {
             if (state.mode !== ohcMode) {
               console.log(`[SmartSDR] mode → ${ohcMode}`);
               updateState('mode', ohcMode);
-            }
-          } else if (key === 'tx') {
-            const ptt = val === '1';
-            if (state.ptt !== ptt) {
-              console.log(`[SmartSDR] PTT → ${ptt ? 'TX' : 'RX'}`);
-              updateState('ptt', ptt);
             }
           }
         }
